@@ -1,7 +1,8 @@
+import { Fragment } from 'react'
+
 export default () => (
-    <>
+    <Fragment>
         <div>
-            Footer
         </div>
-    </>
+    </Fragment>
 )

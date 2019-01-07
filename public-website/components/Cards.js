@@ -7,8 +7,10 @@ export default (props) => (
         </div>
         <style jsx>{`
             div {
-                height: 96px;
-                width: 900px;
+                height: 6.5rem;
+                width: fit-content;
+                padding: 2rem;
+                margin: 0 auto;
                 display: flex;
                 align-items: center;
                 justify-content: center;

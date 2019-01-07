@@ -1,39 +1,64 @@
-import { Fragment } from 'react'
+import React from 'react'
+import Theme from '../components/Theme'
+import Button from '@material-ui/core/Button'
+
 import {Colors} from '../components/Colors'
 import Header from '../components/Header'
 import Fold from '../components/Fold'
-import {Type_H1, Type_H4} from '../components/Typography'
+import {Type_Styles} from '../components/Typography'
 import Card from '../components/Cards'
-import {Btn_Primary} from '../components/Buttons'
 import Footer from '../components/Footer'
+// import {Btn_Primary__Large} from '../components/Buttons'
 
-export default (props) => (
-    <Fragment>
-        <Header title="House Cleaning Services" />
-        <Fold hero="homepage-hero-woman-relaxing.jpg" height="100vh">
-            <div className="hero-title">                
-                <h1>That Clean Home Feeling!</h1>  
-            </div>
-            <div className="card-booking">          
-                <Card>
-                    <p className="h4 actionCard-text">You click. We clean. It's that simple.</p>
-                    <Btn_Primary type="book">Get a quote now</Btn_Primary>
-                </Card>
-            </div>
-        </Fold>
-        { props.children }
-        <Footer />
-        <style jsx>{ Type_H1 }</style>
-        <style jsx>{ Type_H4 }</style>
-        <style jsx>{`
-            .hero-title {
-                padding: 80px 0 64px 0;
-                text-align: center;
-            }
-            .actionCard-text {
-                padding: 0 32px 0 0;
-                color: ${ Colors.Primary };
-            }
-        `}</style>
-    </Fragment>   
-)
+//<Btn_Primary__Large type="book" height="52px">Get a quote now</Btn_Primary__Large>
+
+
+
+export default class extends React.Component {
+    render() {
+        return (
+            <React.Fragment>
+                <Theme>
+                    <Header title="House Cleaning Services" />
+                    <Fold hero="homepage-hero-woman-relaxing.jpg" height="fit-content">   
+                        <div id="fold">
+                            <div id="foldHead">                    
+                                <h1 id="foldHead-title">That Clean Home Feeling!</h1>                
+                                <p className="type-h5">Gold Coast's Premier Home Cleaning Company</p>
+                            </div>
+                            <div id="foldCard">
+                                <Card>
+                                    <p id="fold-card-text" className="type-h4">You click. We clean. It's that simple.</p>
+                                    <Button variant="contained" color="primary" size="large">Get a quote now</Button>
+                                </Card>
+                            </div>                
+                        </div> 
+                    </Fold>
+                    <Footer />   
+                </Theme>
+                <style jsx>{ Type_Styles }</style>
+                <style jsx>{`
+                    #fold {
+                        height: 100%;
+                    }
+                    #foldHead {
+                        padding: 7.5rem 0 3rem 0;
+                        text-align: center;
+                    }
+                    #foldHead-title { 
+                        margin: 0 0 1rem 0;
+                    }
+                    #foldCard {
+                        padding: 3rem 0 9rem 0;
+                        display: flex;
+                        align-items: center;
+                    }
+                    #fold-card-text {
+                        margin: 0 2rem 0 0;
+                        color: ${ Colors.Primary };
+                    }
+                `}</style>                
+            </React.Fragment>   
+        )           
+    }    
+}

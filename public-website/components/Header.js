@@ -11,6 +11,7 @@ export default ({title}) => (
             <title>{ title } | Gold Coast Maids</title>
             <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"></link>
             <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"></link>
+            <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet"></link>
         </Head>
         <style jsx global>{`
         ${ GlobalStyles }

@@ -7,8 +7,8 @@ export default (props) => (
         </div>
         <style jsx>{`
             div {
+                height: calc(100% - 64px);
                 width: 100%;
-                max-width: 960px;
                 margin: 0 auto;
             }
         `}</style>

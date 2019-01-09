@@ -1,161 +1,96 @@
 import React from 'react'
 import Link from 'next/link'
-import {NavbarLogo} from './Logo'
-import {Type_Styles} from './Typography'
-import {Colors} from './Colors'
-import {Btn_Primary} from './Buttons'
+import { makeStyles } from '@material-ui/styles'
+// Material components
+import Hidden from '@material-ui/core/Hidden'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
+// Icons
+import MenuIcon from '@material-ui/icons/Menu'
+import EventIcon from '@material-ui/icons/Event'
+import CallIcon from '@material-ui/icons/Call'
+// Custom components
+import Logo from './Logo'
 
-class NavMenu extends React.Component {
-    constructor() {
-        super()
-        this.state = [
-            { 
-                title: "How To Book",
-                href: "/about",                 
-                selected: false, 
-            },{ 
-                title: "What's Included",
-                href: "/services",                
-                selected: false,
-                subs: [
-                    { 
-                        title: "Home Cleaning",
-                        href: "/services/home-cleaning",                        
-                        selected: false,
-                    },{ 
-                        title: "Spring Cleaning",
-                        href: "/services/deep-cleaning",                         
-                        selected: false,
-                    },{ 
-                        title: "Bond Cleaning",
-                        href: "/services/bond-cleaning",
-                        selected: false,
-                    },{ 
-                        title: "Special Requests",
-                        href: "/services/custom-cleaning",
-                        selected: false,
-                    }
-                ]
-            },{ 
-                title: "Reviews & Testimonials",
-                href: "/reviews",
-                selected: false,
-            },{ 
-                title: "FAQs",
-                href: "/faq",
-                selected: false,
-            },{ 
-                title: "Contact",
-                href: "/contact",
-                selected: false,
-            }
+const useStyles = makeStyles(theme => ({
+    root: {
+        background: 'rgba(255,255,255,0.6)',
+        padding: '0 1rem'
+    },
+    logo: {
+        height: '2.75rem',
+    },
+    primaryLinkGroup: {
+        marginLeft: '1rem',
+        flexGrow: 1
+    },
+    primaryLinkItem: {
+        height: '2.25rem',
+        minHeight: 0,
+        padding: '0 1rem',
+        color: theme.palette.grey[800],
+        '&:hover': {
+            color: theme.palette.primary.main
+        }
+    },
+    menuButton: {
+        marginLeft: '-.75rem'
+    },
+    phone: {
+        padding: '0 1rem 0 .75rem',
+        marginRight: '1rem'
+    },
+    icon: {
+        marginRight: theme.spacing.unit,
+        fontSize: '1.125rem'
+    }
+}))
+
+export default function Navbar() {
+    const classes = useStyles()
+    function getPrimaryLinks() {
+        return [
+            { value: 1, href: "/about", title: "How To Book" },
+            { value: 2, href: "/services", title: "What's Included" },
+            { value: 3, href: "/reviews", title: "Reviews & Testimonials" },
+            { value: 4, href: "/faq", title: "FAQs" },
+            { value: 5, href: "/contact", title: "Contact" },
+            { value: 6, href: "/careers", title: "Careers" },
         ]
     }
+    return (
+        <AppBar className={classes.root} position='static' color='default'>
+            <Toolbar>
+                <Hidden implementation='css' lgUp>
+                    <IconButton className={classes.menuButton}>
+                        <MenuIcon />
+                    </IconButton>
+                </Hidden>   
+                <div className={classes.logo}>
+                    <Logo type='navbar' />   
+                </div>                             
+                <div className={classes.primaryLinkGroup}>
+                    <Hidden implementation='css' lgDown>
+                        { getPrimaryLinks().map((link) => (
+                            <Link href={link.href} key={link.value}>
+                                <Button className={classes.primaryLinkItem}  component='a'>
+                                    {link.title}
+                                </Button>
+                            </Link>                            
+                        ))}
+                    </Hidden>
+                </div>
+                <div>                     
+                    <Button className={classes.phone} color='primary' component='a' href='tel:+56465290'>
+                        <CallIcon className={classes.icon} /> (07) 5646 5290
+                    </Button>  
+                    <Button className={classes.book} variant='contained' color='primary'>
+                        <EventIcon className={classes.icon} fontSize='small' /> Book online now
+                    </Button>
+                </div>
+            </Toolbar>
+        </AppBar>
+    )
 }
-
-
-function getPrimaryLinks() {
-    return [
-        { 
-            href: "/about", 
-            title: "How To Book" 
-        },
-        { 
-            href: "/services", 
-            title: "What's Included", 
-            subs: [
-                { href: "/services/home-cleaning", title: "Home Cleaning" },
-                { href: "/services/deep-cleaning", title: "Spring Cleaning" },
-                { href: "/services/bond-cleaning", title: "Bond Cleaning" },
-                { href: "/services/custom-cleaning", title: "Special Requests" }
-            ]
-        },
-        { 
-            href: "/reviews",
-            title: "Reviews & Testimonials"
-        },
-        { 
-            href: "/faq", 
-            title: "FAQs" 
-        },
-        { 
-            href: "/contact", 
-            title: "Contact" 
-        }
-    ]
-}
-
-export default () => (
-    <React.Fragment>
-        <nav>        
-            <Link href="/">
-                <a id="logo-navbar"><NavbarLogo /></a>
-            </Link>
-            <ul>
-                { getPrimaryLinks().map((link) => (
-                    <li key={link.title}>
-                        <Link href={ link.href }>
-                            <a className="type-small">{ link.title }</a>
-                        </Link>        
-                    </li>
-                ))}
-            </ul>
-            <div>
-                <Link href="/contact">
-                    <a className="type-button">(07) 5646 5290</a>
-                </Link>        
-                    <Btn_Primary type="book" href="/book">
-                        Book Online
-                    </Btn_Primary>
-            </div>                     
-            <style jsx>{Type_Styles}</style>   
-            <style jsx>{`               
-                nav {
-                    height: 4rem;
-                    width: 100%;
-                    display: flex;
-                    align-items: center;
-                    background: rgba(250,250,250,0.95);
-                    box-shadow: 0 6px 6px -3px rgba(0,0,0,.2), 0 10px 14px 1px rgba(0,0,0,.14), 0 4px 18px 3px rgba(0,0,0,.12);
-                }                              
-                a {         
-                    text-align: center;
-                    text-decoration: none;
-                    text-transform: uppercase;
-                }
-                a:hover {
-                    color: ${ Colors.Primary };
-                }
-                #logo-navbar {
-                    height: 3rem;  
-                    padding: 0 1rem 0 2rem;      
-                }
-                ul, div {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-                ul {
-                    margin: 0;
-                    padding: 0;
-                }
-                li {
-                    list-style: none;
-                    padding: 0 1.25rem;
-                    text-align: center;
-                }
-                li:hover, div a:hover {
-                    margin-top: -1px;
-                    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-                }
-                div {
-                    margin-left: auto;
-                    padding: 0 2rem 0 1rem;
-                }
-                div a {
-                    margin: 0 2.5rem 0 1.25rem;
-                }
-            `}</style>            
-        </nav>
-    </React.Fragment>
-)

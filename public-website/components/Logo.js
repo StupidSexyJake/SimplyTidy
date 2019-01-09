@@ -1,29 +1,38 @@
-import { Fragment } from 'react'
+import React from 'react'
+import Link from 'next/link'
+import { makeStyles } from '@material-ui/styles'
 
-export const NavbarLogo = () => (
-    <Fragment>
-        <div>
-            Simply<span className="logoEnd">Tidy</span>
-        </div>        
-        <style jsx>{`
-            div {
-                height: 100%;
-                display: flex;
-                align-items: center;
-                text-decoration: none;
-                font-family: 'Montserrat', sans-serif;
-                font-weight: 500;
-                text-transform: uppercase;
-                letter-spacing: 0.125rem;
-                font-size: 24px;
-                color: #00bcd4;
-            }
-            div:hover {
-                color: #0097A7;
-            }
-            .logoEnd {
-                color: #212121;
-            }
-        `}</style>
-    </Fragment>
-)
+const logoSize = (property, mapping) => props => mapping[props[property]];
+
+const useStyles = makeStyles(theme => ({
+    start: {
+        fontFamily: "'Open Sans', sans-serif",
+        fontWeight: 500,
+        textTransform: 'uppercase',        
+        color: theme.palette.primary.main,
+        lineHeight: 0,
+        fontSize: logoSize('type',{
+            sm: '1rem',
+            navbar: '1.5rem',
+            xl: '5rem'
+        })
+    },
+    end: {
+        color: theme.palette.grey[900]
+    },
+    image: {
+        height: 44,
+    }
+}))
+
+export default function Logo(props) {
+    const { type, ...other } = props;
+    const classes = useStyles(props)
+    return (
+        <Link href="/">
+            <a>
+                <img src='./static/logos/logo-primary.png' className={classes.image} />
+            </a>            
+        </Link>        
+    )
+}

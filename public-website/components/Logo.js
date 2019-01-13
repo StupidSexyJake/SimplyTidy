@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { makeStyles } from '@material-ui/styles'
 
-const logoSize = (property, mapping) => props => mapping[props[property]];
+const logoSize = (property, mapping) => props => mapping[props[property]]
 
 const useStyles = makeStyles(theme => ({
     start: {
@@ -12,8 +12,9 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.primary.main,
         lineHeight: 0,
         fontSize: logoSize('type',{
-            sm: '1rem',
             navbar: '1.5rem',
+            sm: '1rem',
+            lg: '2rem',
             xl: '5rem'
         })
     },
@@ -21,12 +22,12 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.grey[900]
     },
     image: {
-        height: 44,
+        height: props => props.height
     }
 }))
 
 export default function Logo(props) {
-    const { type, ...other } = props;
+    const { type, height, ...other } = props;
     const classes = useStyles(props)
     return (
         <Link href="/">

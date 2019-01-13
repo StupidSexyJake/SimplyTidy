@@ -1,24 +1,26 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles'
-import Grid from '@material-ui/core/Grid'
 // Material components
+import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Divider from '@material-ui/core/Divider'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
+// Custom components
+import Container from '../components/Container'
 // Colors
 import amber from '@material-ui/core/colors/amber'
+import blueGrey from '@material-ui/core/colors/blueGrey'
 // Icons
 import QuoteIcon from '@material-ui/icons/FormatQuote'
 import StarIcon from '@material-ui/icons/StarRate'
-import ArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
-// Custom components
-import Container from '../components/Container'
+import ExpandIcon from '@material-ui/icons/KeyboardArrowDown'
+
 
 export function ReviewCard () {
-    const cardStyles = makeStyles(theme => ({
+    const useStyles = makeStyles(theme => ({
         topCard: {
             padding: '2rem 2rem 3rem 1rem'
         },
@@ -42,6 +44,12 @@ export function ReviewCard () {
             flex: '1 1 auto',
             paddingTop: '1rem'
         },
+        expandIcon: {
+            fontSize: '16px', 
+            position: 'relative', 
+            bottom: '-2px', 
+            left: '4px'
+        },
         rating: {
             paddingTop: '1rem'
         },
@@ -60,12 +68,13 @@ export function ReviewCard () {
         authorName: {
             fontWeight: 500,
             paddingBottom: '0.25rem',
-            marginTop: '-0.25rem'
+            marginTop: '-0.25rem',
+            color: 'rgba(0, 0, 0, 0.87)',
         }
     }))
-    const classes = cardStyles()
+    const classes = useStyles()
     return (
-        <Grid item md={4} sm={6} xs={12} className={classes.gridItem}>
+        <Grid item sm={12} md={6} lg={4} xl={4} className={classes.gridItem}>
             <Card>
                 <CardContent className={classes.topCard}>
                     <Grid container alignItems='flex-start' wrap='nowrap'>
@@ -75,8 +84,9 @@ export function ReviewCard () {
                         <Grid item className={classes.comment}>
                             <Typography variant='subtitle1' component='span'>
                                 <em>
-                                    I used Gold Coast Maids for the first time today and I have say I was impressed! They provided an excellent service and were so-so professional! I'll ... </em>
-                                    <ArrowDownIcon style={{fontSize: '16px', position: 'relative', bottom: '-2px', left: '4px'}} />
+                                    I used Gold Coast Maids for the first time this week and was impressed. I liked the online booking system. I did it in my lunch break at work and they came the next day! Will definitely use again. 
+                                </em>
+                                <ExpandIcon className={classes.expandIcon} />
                             </Typography>  
                             
                             <div className={classes.rating}>
@@ -105,23 +115,20 @@ export function ReviewCard () {
 }
 
 export default function Reviews() {
-    const sectionStyles = makeStyles(theme => ({
+    const useStyles = makeStyles(theme => ({
         root: {
         },
         heading: {
-            paddingBottom: '1rem',
-            textAlign: 'center'
         },
         subtitle: {
-            paddingBottom: '3rem',
-            textAlign: 'center'
+            paddingBottom: '3rem'
         },
         cta: {
             display: 'block',
-            margin: '3rem auto 0 auto'
+            margin: '3rem auto 0 auto',
         }
     }))
-    const classes = sectionStyles()
+    const classes = useStyles()
     return (
         <section className={classes.root}>
             <Container>
@@ -136,7 +143,7 @@ export default function Reviews() {
                     <ReviewCard />
                     <ReviewCard />
                 </Grid>
-                <Button variant='outlined' color='primary' className={classes.cta} size='large'>
+                <Button variant='outlined' color='primary' className={classes.cta}>
                     View all reviews
                 </Button>
             </Container>

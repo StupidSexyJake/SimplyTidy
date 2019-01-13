@@ -1,48 +1,71 @@
 import { SheetsRegistry } from 'jss'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { createGenerateClassName } from '@material-ui/styles'
+import orange from '@material-ui/core/colors/orange'
 import cyan from '@material-ui/core/colors/cyan'
-import brown from '@material-ui/core/colors/brown'
-import grey from '@material-ui/core/colors/grey'
 
 // A theme with custom primary and secondary color.
 // It's optional.
 const theme = createMuiTheme({
-
+    overrides: {
+        MuiButton: {
+            outlined: {
+            }
+        }
+    },
     palette: {
         primary: {
-            light: cyan[300],
+            light: cyan[50],
             main: cyan[500],
-            dark: cyan[700],
-            contrastText: grey[50]
+            dark: cyan[900],
+            contrastText: 'rgba(255,255,255,0.95)'
         },
         secondary: {
-            light: brown[300],
-            main: brown[500],
-            dark: brown[700],
-            contrastText: grey[50]
+            light: orange[50],
+            main: orange[700],
+            dark: orange[900],
+            contrastText: 'rgba(255,255,255,0.95)'
         },
     },
     typography: {
         useNextVariants: true,
-        // Use the system font instead of the default Roboto font.
+        fontFamily: '"Open Sans", "Roboto", "Helvetica", "Arial", sans-serif',
         h1: {
-            fontFamily: '"Merriweather", "Roboto", "Helvetica", "Arial", sans-serif'
+            fontFamily: '"Montserrat", "Open Sans", "Roboto", "Helvetica", "Arial", sans-serif',
+            textAlign: 'center',
+            paddingBottom: '1rem',
+            fontWeight: 400,
         },
         h2: {
-            fontFamily: '"Open Sans", "Roboto", "Helvetica", "Arial", sans-serif'
+            fontFamily: '"Montserrat", "Open Sans", "Roboto", "Helvetica", "Arial", sans-serif',
+            textAlign: 'center',
+            paddingBottom: '1rem',
+            color: cyan[500],
         },
         h3: {
-            fontFamily: '"Open Sans", "Roboto", "Helvetica", "Arial", sans-serif'
+            fontFamily: '"Montserrat", "Open Sans", "Roboto", "Helvetica", "Arial", sans-serif',            
+            textAlign: 'center',
+            paddingBottom: '1rem',
+            color: cyan[500],
         },
         h4: {
-            fontFamily: '"Open Sans", "Roboto", "Helvetica", "Arial", sans-serif'
+            fontFamily: '"Montserrat", "Open Sans", "Roboto", "Helvetica", "Arial", sans-serif',
+            textAlign: 'center',
+            paddingBottom: '1rem',
+            color: cyan[500]
         },
         h5: {
-            fontFamily: '"Open Sans", "Roboto", "Helvetica", "Arial", sans-serif'
+            fontFamily: '"Montserrat", "Open Sans", "Roboto", "Helvetica", "Arial", sans-serif',
+            textAlign: 'center',
+            paddingBottom: '1rem'
         },
         h6: {
-            fontFamily: '"Open Sans", "Roboto", "Helvetica", "Arial", sans-serif'
+            fontFamily: '"Montserrat", "Open Sans", "Roboto", "Helvetica", "Arial", sans-serif',
+            textAlign: 'center',
+            paddingBottom: '1rem'
+        },
+        body1: {
+            color: '#597a96',
         }
     }
 })

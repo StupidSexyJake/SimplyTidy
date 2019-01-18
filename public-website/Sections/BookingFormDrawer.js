@@ -7,7 +7,7 @@ import BookingModal from './BookingForm/BookingModal'
 import Drawer from '@material-ui/core/Drawer'
 
 export default function BookingForm() {
-    const {drawerState, drawerDispatch} = React.useContext(DrawerContextProvider)
+    const {drawerState, drawerDispatch} = React.useContext(DrawerContext)
     const {bookingFormState} = React.useContext(BookingFormContext)
     return (
         <Drawer anchor='top' open={drawerState} onClose={() => drawerDispatch('close')}>

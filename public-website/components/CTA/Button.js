@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 export default function CTA(props) {
     const classes = useStyles()    
     const { children, className, variant, color, size, ...other } = props    
-    const {changeDrawerState} = React.useContext(DrawerContext)
+    const {drawerDispatch} = React.useContext(DrawerContext)
     const textShadow = function textShadowOn() {
         if (!variant || variant === 'fab' || variant === 'contained') {
             return classNames(className, classes.textShadow)
@@ -31,7 +31,7 @@ export default function CTA(props) {
                 className={textShadow()}
                 size={size || 'medium'}
                 {...other} 
-                onClick={() => changeDrawerState('open')}
+                onClick={() => drawerDispatch('open')}
             >
                 {children}
             </Button>

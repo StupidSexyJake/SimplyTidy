@@ -21,7 +21,8 @@ import CommonQuestions from '../sections/Homepage/CommonQuestions'
 import Footer from '../sections/Footer'
 import Navbar from '../sections/Navbar'
 
-const state = (type) => {
+export default function Index() {
+    console.log(' index render')
     // Client state
     const [clientState, setClientState] = React.useState(
         {
@@ -73,20 +74,17 @@ const state = (type) => {
     const changeBookingFormState = (key, val) => {
         setBookingFormState({...bookingFormState, [key]: val})
     }
-    switch (type) {
-        case 'client':
-            return {clientState, changeClientState}
-        case 'service':
-            return {serviceState, changeServiceState}
-        case 'bookingForm':
-            return {bookingFormState, changeBookingFormState}
-        default:
-            return type
-    }
-}
-
-export default function Index() {
-    console.log('index render')
+    // Booking form drawer state reducer
+    const [drawerState, drawerDispatch] = React.useReducer((state, action) => {
+        switch (action) {
+            case 'open':
+                return true
+            case 'close':
+                return false
+            default:
+                return state;
+        }
+    }, false)
     return (
         <React.Fragment>
             <Header title="House Cleaning Services" />                
@@ -100,34 +98,34 @@ export default function Index() {
                 }}
                 subtitle="You click. We clean. It's that simple."
             >
-                <DrawerContext>
-                    <ClientContext.Provider value={state('client')}>
-                        <ServiceContext.Provider value={state('service')}>
+                <DrawerContext.Provider value={{drawerState, drawerDispatch}}>
+                    <ClientContext.Provider value={{clientState, changeClientState}}>
+                        <ServiceContext.Provider value={{serviceState, changeServiceState}}>
                             <PreBooking />
                         </ServiceContext.Provider>                        
                     </ClientContext.Provider>
-                </DrawerContext>
+                </DrawerContext.Provider>
             </Fold>
-            <DrawerContext>
-                <BookingFormContext.Provider value={state('bookingForm')}>
-                    <ClientContext.Provider value={state('client')}>
-                        <ServiceContext.Provider value={state('service')}>
+            <DrawerContext.Provider value={{drawerState, drawerDispatch}}>
+                <BookingFormContext.Provider value={{ bookingFormState, changeBookingFormState }}>
+                    <ClientContext.Provider value={{ clientState, changeClientState }}>
+                        <ServiceContext.Provider value={{serviceState, changeServiceState}}>
                             <BookingFormDrawer />
                         </ServiceContext.Provider>
                     </ClientContext.Provider>
                 </BookingFormContext.Provider>
-            </DrawerContext>             
+            </DrawerContext.Provider>             
             <Features />        
             <About />  
             <Benefits />
-            <DrawerContext>
+            <DrawerContext.Provider value={{drawerState, drawerDispatch}}>
                 <CTADivider /> 
-            </DrawerContext>              
+            </DrawerContext.Provider>                       
             <Services />
             <Guarantee />
-            <DrawerContext>
+            <DrawerContext.Provider value={{drawerState, drawerDispatch}}>
                 <Reviews />
-            </DrawerContext>           
+            </DrawerContext.Provider>            
             <Numbers />
             <CommonQuestions />
             <Footer />

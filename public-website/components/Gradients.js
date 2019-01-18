@@ -4,6 +4,7 @@ const hsl = {
     primary: '187, 100%, 42%',
     primaryDark: '186, 100%, 33%',
     primaryLight: '187, 72%, 71%',
+    primaryExtraLight: '187, 72%, 93%',
     secondary: '30, 100%, 48%',
     secondaryDark: '21, 100%, 45%',
     white: '0, 100%, 100%',

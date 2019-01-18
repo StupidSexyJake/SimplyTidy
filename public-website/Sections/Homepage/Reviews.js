@@ -9,10 +9,10 @@ import Divider from '@material-ui/core/Divider'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 // Custom components
-import Container from '../components/Container'
+import Container from '../../components/Containers/Sections'
+import Button_CTA from '../../components/CTA/Button'
 // Colors
 import amber from '@material-ui/core/colors/amber'
-import blueGrey from '@material-ui/core/colors/blueGrey'
 // Icons
 import QuoteIcon from '@material-ui/icons/FormatQuote'
 import StarIcon from '@material-ui/icons/StarRate'
@@ -114,38 +114,50 @@ export function ReviewCard () {
     )
 }
 
-export default function Reviews() {
+export default function Reviews(props) {
     const useStyles = makeStyles(theme => ({
         root: {
+        },
+        container: {
         },
         heading: {
         },
         subtitle: {
             paddingBottom: '3rem'
         },
-        cta: {
-            display: 'block',
-            margin: '3rem auto 0 auto',
+        CTAContainer: {
+            width: 'fit-content',
+            margin: '0 auto',
+            paddingTop: '3rem',
+        },
+        button: {
+            margin: '0 1rem',
+            width: '20rem'
         }
     }))
     const classes = useStyles()
     return (
         <section className={classes.root}>
-            <Container>
+            <Container className={classes.container}>
                 <Typography variant='h3' component='h2' className={classes.heading}>
                     Actual Customer Reviews
                 </Typography>
                 <Typography variant='h6' component='p' className={classes.subtitle}>
                     And that's just a few
                 </Typography>
-                <Grid container spacing={32} justify='center' className={classes.gridContainer}>
+                <Grid container spacing={32} justify='center'>
                     <ReviewCard />
                     <ReviewCard />
                     <ReviewCard />
                 </Grid>
-                <Button variant='outlined' color='primary' className={classes.cta}>
-                    View all reviews
-                </Button>
+                <div className={classes.CTAContainer}>
+                    <Button variant='outlined' size='large' color='primary' className={classes.button}>
+                        Read More Reviews
+                    </Button>
+                    <Button_CTA size='large' className={classes.button} serviceValue={props.serviceValue} toggleDrawer={props.toggleDrawer} setService={props.setService}>
+                        Get An Instant Quote
+                    </Button_CTA>
+                </div>
             </Container>
         </section>
     )

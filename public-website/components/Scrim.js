@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
             background: props => Gradient(props.hsl)
         }
     },
-    scrim: {
+    bringForward: {
         height: '100%',
         width: '100%',
         position: 'relative',
@@ -27,21 +27,13 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function Scrim(props) {
-    const { hsl, background, classes, children, className, ...other } = props
-    const override = useStyles(props)
-    if (hsl) {
-        return (
-            <section className={classNames(override.root, className)} {...other} >
-                <div className={override.scrim}>
-                    {children}
-                </div>            
-            </section>
-        )
-    } else {
-        return (
-            <section className={className} {...other} >
-                {children}  
-            </section>
-        )
-    }
+    const { children, className } = props
+    const classes = useStyles(props)
+    return (
+        <div className={classNames(classes.root, className)} >
+            <div className={classes.bringForward}>
+                {children}
+            </div>
+        </div>
+    )
 }

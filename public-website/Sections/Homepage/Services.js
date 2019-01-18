@@ -10,7 +10,7 @@ import CardActions from '@material-ui/core/CardActions'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 // Custom components
-import Container from '../components/Container'
+import Container from '../../components/Containers/Sections'
 
 function getServices() {
     return [
@@ -40,53 +40,43 @@ function getServices() {
             href: '/how', 
             image: '/static/cards/bond-cleaning.jpg', 
             title: 'Bond Cleaning', 
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet facilisis.'
-        },
-        { 
-            value: 5, 
-            href: '/how', 
-            image: '/static/cards/home-cleaning.jpg', 
-            title: 'Airbnb Turnover', 
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet facilisis.'
-        },
-        { 
-            value: 6, 
-            href: '/how', 
-            image: '/static/cards/spring-cleaning.jpg', 
-            title: 'Special Requests', 
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet facilisis.'
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet.'
         },
     ]
 }
 
 export function ServiceList() {
     const useStyles = makeStyles(theme => ({
-        gridItem: {
-            marginTop: '2rem'
-        },
-        content: {
-            padding: '2rem 1rem',
-        },
         media: {
             height: '8rem'
+        },
+        title: {
+            padding: 0
         }
     }))
     const classes = useStyles()
+    function splitTitle(title) {
+        const titleArray = title.split(' ')
+        const line2 = titleArray[titleArray.length - 1]
+        const line1 = title.split(` ${line2}`)[0]
+        return { line1, line2 }
+    }
     return (
         <React.Fragment>
             {getServices().map((service) => (
-                <Grid item sm={12} md={6} lg={4} xl={4} className={classes.gridItem} key={service.value}>
+                <Grid item xs={3} className={classes.gridItem} key={service.value}>
                     <Card>
                         <CardActionArea>
                             <CardMedia
                                 className={classes.media}
                                 image={service.image}
-                            />
+                            >
+                            </CardMedia>
                             <CardContent className={classes.content}>
-                                <Typography variant='h5' component='p' color='primary'>
-                                    {service.title}
+                                <Typography gutterBottom variant='h5' component='p' color='primary' className={classes.title} align='left'>
+                                    {splitTitle(service.title).line1} {splitTitle(service.title).line2}
                                 </Typography>
-                                <Typography component="p" align='center'>
+                                <Typography color='textSecondary' component="p" className={classes.subtitle}>
                                     {service.description}
                                 </Typography>
                             </CardContent>
@@ -106,22 +96,40 @@ export function ServiceList() {
 export default function Services() {
     const useStyles = makeStyles(theme => ({
         root: {
-            padding: '1rem 0 2rem 0'
         },
-        heading: {
-            paddingBottom: '2rem'
+        container: {
         },
+        gridContainer: {
+            padding: '2rem 0 1rem 0'
+        },
+        subtitle: {
+            marginBottom: 4 * theme.spacing.unit
+        },
+        CTAContainer: {
+            width: '100%',
+            margin: '0 auto',
+            paddingTop: '3rem',
+            maxWidth: '20rem'
+        }
     }))
     const classes = useStyles()
     return (
         <section className={classes.root}>
-            <Container>
+            <Container className={classes.container}>
                 <Typography variant='h3' component='h2' className={classes.heading}>
                     Services For Every Need
                 </Typography>
-                <Grid container spacing={32} justify='center' className={classes.gridContainer}>
+                <Typography variant='h6' component='p' className={classes.subtitle} align='center'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+                </Typography>
+                <Grid container spacing={32} justify='center' alignItems='center' className={classes.gridContainer}>
                     <ServiceList />
                 </Grid>
+                <div className={classes.CTAContainer}>
+                    <Button fullWidth variant='outlined' size='large' color='primary'>
+                        See What's Included
+                    </Button>
+                </div>
             </Container>
         </section>
     )

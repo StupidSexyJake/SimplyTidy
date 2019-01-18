@@ -4,15 +4,16 @@ import { createGenerateClassName } from '@material-ui/styles'
 import orange from '@material-ui/core/colors/orange'
 import cyan from '@material-ui/core/colors/cyan'
 
-// A theme with custom primary and secondary color.
-// It's optional.
 const theme = createMuiTheme({
+    // Theme overides
     overrides: {
         MuiButton: {
-            outlined: {
+            text: {
+                padding: '6px 16px'
             }
         }
     },
+    // Theme adjustments
     palette: {
         primary: {
             light: cyan[50],
@@ -26,6 +27,9 @@ const theme = createMuiTheme({
             dark: orange[900],
             contrastText: 'rgba(255,255,255,0.95)'
         },
+        text: {
+            secondary: 'rgba(89, 122, 150, 0.95)'
+        }
     },
     typography: {
         useNextVariants: true,
@@ -34,25 +38,25 @@ const theme = createMuiTheme({
             fontFamily: '"Montserrat", "Open Sans", "Roboto", "Helvetica", "Arial", sans-serif',
             textAlign: 'center',
             paddingBottom: '1rem',
-            fontWeight: 400,
+            color: cyan[900],
         },
         h2: {
             fontFamily: '"Montserrat", "Open Sans", "Roboto", "Helvetica", "Arial", sans-serif',
             textAlign: 'center',
             paddingBottom: '1rem',
-            color: cyan[500],
+            color: cyan[900],
         },
         h3: {
             fontFamily: '"Montserrat", "Open Sans", "Roboto", "Helvetica", "Arial", sans-serif',            
             textAlign: 'center',
             paddingBottom: '1rem',
-            color: cyan[500],
+            color: cyan[900],
         },
         h4: {
             fontFamily: '"Montserrat", "Open Sans", "Roboto", "Helvetica", "Arial", sans-serif',
             textAlign: 'center',
             paddingBottom: '1rem',
-            color: cyan[500]
+            color: cyan[700]
         },
         h5: {
             fontFamily: '"Montserrat", "Open Sans", "Roboto", "Helvetica", "Arial", sans-serif',
@@ -65,8 +69,15 @@ const theme = createMuiTheme({
             paddingBottom: '1rem'
         },
         body1: {
-            color: '#597a96',
+            color: 'rgba(89, 122, 150, 0.95)'
         }
+    },
+    // Custom variables
+    custom: {
+        transparentColors: {
+            white: 'rgba(255,255,255,0.95)'
+        },
+        textShadow: '0 1px 2px rgba(0,0,0,0.2)'
     }
 })
 

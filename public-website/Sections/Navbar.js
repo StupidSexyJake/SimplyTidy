@@ -9,110 +9,86 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 // Icons
 import MenuIcon from '@material-ui/icons/Menu'
-import EventIcon from '@material-ui/icons/Event'
+import BookIcon from '@material-ui/icons/Launch'
 import CallIcon from '@material-ui/icons/Call'
 // Custom components
-import Logo from '../components/Logo'
-import { CTA } from '../components/Button'
+import CTA from '../components/CTA/Fab'
 
 function getLinks() {
     return [
-        { value: 1, href: "/how", title: "How To Book" },
-        { value: 2, href: "/services", title: "What's Included" },
-        { value: 5, href: "/offers", title: "Hot Deals" },
-        { value: 3, href: "/reviews", title: "Reviews" },
-        { value: 4, href: "/faq", title: "FAQs" },
-        { value: 6, href: "/contact", title: "Contact" },
+        { href: "/how", title: "How To Book" },
+        { href: "/services", title: "What's Included" },
+        { href: "/offers", title: "Hot Deals" },
+        { href: "/reviews", title: "Reviews" },
+        { href: "/faq", title: "FAQs" },
+        { href: "/contact", title: "Contact" },
     ]
 }
 
 const useStyles = makeStyles(theme => ({
     root: {
-        background: 'rgba(255,255,255,0.95)',
+        background: theme.custom.transparentColors.white,
         boxShadow: 'none'
     },
     logo: {
-        height: '2.75rem',
+        height: 5.5 * theme.spacing.unit, // Change once image resized
+        marginLeft: 3 * theme.spacing.unit,
+        marginRight: 3 * theme.spacing.unit,
+        verticalAlign: 'middle'
     },
-    primaryLinkGroup: {
-        marginLeft: '1rem',
+    navGroup: {
         flexGrow: 1
     },
-    primaryLinkItem: {
-        height: '2.25rem',
-        minHeight: 0,
-        padding: '0 1rem',
-        color: theme.palette.grey[800],
+    navItem: {
+        paddingLeft: 2 * theme.spacing.unit,
+        paddingRight: 2 * theme.spacing.unit,
         '&:hover': {
             color: theme.palette.primary.main
         }
     },
-    menuButton: {
-        marginLeft: '-.75rem',
-        marginRight: '1rem'
+    phoneButton: {
+        marginRight: 2 * theme.spacing.unit,
     },
-    phone: {
-        marginRight: '1rem'
-    },
-    icon: {
+    buttonIcon: {
         marginRight: theme.spacing.unit,
-        fontSize: '1.125rem'
     }
 }))
 
 export default function NavReturn() {
     const classes = useStyles()
     return (
-        <React.Fragment>
-            <AppBar className={classes.root} position='fixed' color='default'>
-                <Toolbar>
-                    <Hidden implementation='css' lgUp>
-                        <IconButton className={classes.menuButton}>
-                            <MenuIcon />
-                        </IconButton>
+        <AppBar className={classes.root} position='fixed'>
+            <Toolbar>
+                <Hidden implementation='css' lgUp>
+                    <IconButton>
+                        <MenuIcon />
+                    </IconButton>
+                </Hidden>
+                <Link href="/">
+                    <a>
+                        <img src='./static/logos/logo-primary.png' className={classes.logo} />
+                    </a>
+                </Link>     
+                <div className={classes.navGroup}>
+                    <Hidden implementation='css' mdDown>
+                        {getLinks().map((link, index) => (
+                            <Link href={link.href} key={index}>
+                                <Button className={classes.navItem} component='a'>
+                                    {link.title}
+                                </Button>
+                            </Link>
+                        ))}
                     </Hidden>
-                    <div className={classes.logo}>
-                        <Logo height='2.75rem' />
-                    </div>
-                    <div className={classes.primaryLinkGroup}>
-                        <Hidden implementation='css' mdDown>
-                            {getLinks().map((link) => (
-                                <Link href={link.href} key={link.value}>
-                                    <Button className={classes.primaryLinkItem} component='a'>
-                                        {link.title}
-                                    </Button>
-                                </Link>
-                            ))}
-                        </Hidden>
-                    </div>
-                    <div>
-                        <Button className={classes.phone} color='primary' component='a' href='tel:+56465290' size='large'>
-                            <CallIcon className={classes.icon} /> (07) 5646 5290
-                        </Button>
-                        <CTA className={classes.book}>
-                            <EventIcon className={classes.icon} /> Book online now
-                        </CTA>
-                    </div>
-                </Toolbar>
-            </AppBar>
-        </React.Fragment>
+                </div>
+                <div>
+                    <Button className={classes.phoneButton} color='primary' component='a' href='tel:+56465290'>
+                        <CallIcon className={classes.buttonIcon} fontSize='small' /> 07 5646 5290
+                    </Button>
+                    <CTA>
+                        <BookIcon className={classes.buttonIcon} fontSize='small' /> Book online now
+                    </CTA>
+                </div>
+            </Toolbar>
+        </AppBar>
     )
-}
-
-class Navbar extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleScroll = this.handleScroll.bind(this)
-    }
-    componentDidMount() {
-        window.addEventListener('scroll', this.handleScroll)
-    }
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll)
-    }
-    handleScroll(event) {
-    }
-    render() {
-        return <NavReturn />
-    }
 }

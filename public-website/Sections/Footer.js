@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 // Custom components
-import Container from '../components/Container';
+import Container from '../components/Containers/Sections';
 import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles(theme => ({
@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function Footer() {
+    console.log('footer render')
     const classes = useStyles()
     return (
         <section className={classes.root}>

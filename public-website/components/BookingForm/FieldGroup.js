@@ -3,19 +3,20 @@ import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 import Typography from '@material-ui/core/Typography'
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        marginBottom: 6 * theme.spacing.unit
-    },
-    title: {
-        paddingBottom: 0
-    },
-    subtitle: {
-        paddingBottom: 2 * theme.spacing.unit
-    }
-}))
-
-export default function FieldGroup(props) {
+export default React.memo(function FieldGroup(props) {
+    // Create styles
+    const useStyles = makeStyles(theme => ({
+        root: {
+            marginBottom: 6 * theme.spacing.unit
+        },
+        title: {
+            paddingBottom: 0
+        },
+        subtitle: {
+            paddingBottom: 2 * theme.spacing.unit
+        }
+    }))
+    // Define styles
     const classes = useStyles()
     return (
         <div className={classes.root}>
@@ -28,5 +29,4 @@ export default function FieldGroup(props) {
                 {props.children}
         </div>
     )
-}
-
+})

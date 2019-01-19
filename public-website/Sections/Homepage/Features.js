@@ -21,7 +21,9 @@ const benefitList = [
     { icon: <CommunicationIcon />, description: 'Seemless Communication', skip: true },
 ]
 
-export default function Features() {
+export default React.memo(function Features() {
+    console.log('Features rendered')
+    // Create styles
     const useStyles = makeStyles(theme => ({
         root: {
             paddingTop: 3 * theme.spacing.unit,
@@ -39,10 +41,12 @@ export default function Features() {
             textShadow: theme.custom.textShadow
         },
     }))
+    // Define styles
     const classes = useStyles()
-    const benefits = benefitList.map((benefit, index) => {
-        if (!benefit.skip) {
-            return (
+
+    return (
+        <Grid container component='section' className={classes.root} justify='center' alignItems='center' spacing={16}>
+            {benefitList.map((benefit, index) => (
                 <Grid item lg={2} md={3} sm={3} xs={3} key={index}>
                     <Grid container direction='column' justify='center' alignItems='center'>
                         <Grid item>
@@ -57,29 +61,7 @@ export default function Features() {
                         </Hidden>
                     </Grid>
                 </Grid>
-            )
-        } else {
-            return (
-                <Hidden mdDown key={index}>
-                    <Grid item lg={2}>
-                        <Grid container direction='column' justify='center' alignItems='center'>
-                            <Grid item>
-                                {React.cloneElement(benefit.icon, {className: classes.icon})}
-                            </Grid>
-                            <Grid item>
-                                <Typography variant='subtitle1' className={classes.description} component='p'>
-                                    {benefit.description}
-                                </Typography>        
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Hidden>
-            )  
-        }
-    })    
-    return (
-        <Grid container component='section' className={classes.root} justify='center' alignItems='center' spacing={16}>
-            { benefits }
+            ))}
         </Grid>
     )
-}
+})

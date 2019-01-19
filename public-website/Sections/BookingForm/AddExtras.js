@@ -1,6 +1,7 @@
 import React from 'react'
 // Context
-import {ClientContext, BookingFormContext} from '../../components/Context'
+import {ClientContext} from '../../state/ClientState'
+import {BookingFormContext} from '../../state/BookingFormState'
 // Material components
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
@@ -22,29 +23,29 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-export default function AddExtras() {
+export default React.memo(function AddExtras() {
     const {clientState, setClientState} = React.useContext(ClientContext)
-    const {bookingFormState, changeBookingFormState} = React.useContext(BookingFormContext)
+    const {bookingFormState, setBookingFormState} = React.useContext(BookingFormContext)
     const classes = useStyles()
     const handleDeleteExtra = data => () => {    
         const extraToDelete = clientState.extras.indexOf(data)
         clientState.extras.splice(extraToDelete, 1)
         bookingFormState.unselectedExtras.unshift(data)
         setClientState(clientState.extras)
-        changeBookingFormState(bookingFormState)
+        setBookingFormState(bookingFormState)
     }
     const handleAddExtra = data => () => {
         const extraToAdd = bookingFormState.unselectedExtras.indexOf(data)
         bookingFormState.unselectedExtras.splice(extraToAdd, 1)
         clientState.extras.push(data)        
         setClientState(clientState.extras)
-        changeBookingFormState(bookingFormState.unselectedExtras)
+        setBookingFormState(bookingFormState.unselectedExtras)
     }
     return (
         <Grid container spacing={16} className={classes.gridContainer} alignItems='center'>
             <Grid item xs={12}>
                 <Grid container spacing={16}>
-                    {clientState.extras.map((data, index) => {
+                    {bookingFormState.extras.map((data, index) => {
                         return (
                             <Grid item key={index}>
                                 <Chip
@@ -69,5 +70,4 @@ export default function AddExtras() {
             </Grid>
         </Grid>
     )
-}
-
+})

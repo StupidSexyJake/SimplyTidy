@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-export function TextInput(props) {
+export const TextInput = React.memo(function input(props) {
     const classes = useStyles()
     return (
         <FormControl className={classes.root}>
@@ -20,4 +20,4 @@ export function TextInput(props) {
             <Input name={props.name} id={props.name} value={props.value} onChange={props.onChange} />
         </FormControl>
     )
-}
+})

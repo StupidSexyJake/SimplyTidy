@@ -1,6 +1,6 @@
 import React from 'react'
 // Context
-import {ClientContext} from '../../components/Context'
+import {ClientContext} from '../../state/ClientState'
 // Sections
 import {InputGroup_2Col_WithIcons} from './InputGroup'
 // Material components
@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function ExtraRooms() {
+export default React.memo(function ExtraRooms() {
     const classes = useStyles()
     const {clientState, setClientState} = React.useContext(ClientContext)
     const handleChange = (name) => event => {
@@ -69,4 +69,4 @@ export default function ExtraRooms() {
         >
         </InputGroup_2Col_WithIcons>
     )
-}
+})

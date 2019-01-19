@@ -80,7 +80,7 @@ function questionsArray() {
     ]
 }
 
-export default function CommonQuestions() {
+export default React.memo(function CommonQuestions() {
     const classes = useStyles()
     return (
         <section className={classes.root}>
@@ -122,4 +122,4 @@ export default function CommonQuestions() {
             </Container>
         </section>
     )
-}
+})

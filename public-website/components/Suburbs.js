@@ -3,7 +3,7 @@ import Downshift from 'downshift'
 import PropTypes from 'prop-types'
 import deburr from 'lodash/deburr'
 // Context
-import {ClientContext} from './Context'
+import {ClientContext} from '../state/ClientState'
 // Material components
 import { makeStyles } from '@material-ui/styles'
 import FormControl from '@material-ui/core/FormControl'
@@ -174,10 +174,9 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function Suburbs(props) {
+export default React.memo(function Suburbs(props) {
     const classes = useStyles()
     const {clientState, setClientState} = React.useContext(ClientContext)
-    console.log(setClientState)
     const hande = function handeClick(selection) {
         setClientState({...clientState, 'suburb': selection})
     }
@@ -227,4 +226,4 @@ export default function Suburbs(props) {
                 )}
         </Downshift>
     )
-}
+})

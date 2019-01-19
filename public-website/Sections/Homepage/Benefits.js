@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function Benefits() {
+export default React.memo(function Benefits() {
     const classes = useStyles()
     return (
         <section>
@@ -75,4 +75,4 @@ export default function Benefits() {
             </Container>
         </section>
     )
-}
+})

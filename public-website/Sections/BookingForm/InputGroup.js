@@ -19,8 +19,10 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-export function InputGroup_2Col_WithIcons(props) {
+export const InputGroup_2Col_WithIcons = React.memo(function (props) {
+    // Definte styles
     const classes = useStyles()
+    // Set input component type
     function InputType(props) {
         const InputVariant = props.type
         return <InputVariant {...props.inputProps}>{props.inputChildren}</InputVariant>
@@ -42,9 +44,10 @@ export function InputGroup_2Col_WithIcons(props) {
             ))}
         </Grid>
     )
-}
+})
 
-export function InputGroup_1Col_WithIcons(props) {
+export const InputGroup_1Col_WithIcons = React.memo(function (props) {
+    // Definte styles
     const classes = useStyles()
     return (
         <Grid container spacing={16} className={classes.root} alignItems='center'>
@@ -60,4 +63,4 @@ export function InputGroup_1Col_WithIcons(props) {
             ))}
         </Grid>
     )
-}
+})

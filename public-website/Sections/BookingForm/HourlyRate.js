@@ -1,6 +1,6 @@
 import React from 'react'
 // Context
-import {ClientContext} from '../../components/Context'
+import {ClientContext} from '../../state/ClientState'
 // Sections
 import {InputGroup_2Col_WithIcons} from './InputGroup'
 // Material components
@@ -11,7 +11,7 @@ import FilledInput from '@material-ui/core/FilledInput'
 import CleanersIcon from '@material-ui/icons/Hotel'
 import HoursIcon from '@material-ui/icons/Wc'
 
-export default function HourlyRate() {
+export default React.memo(function HourlyRate() {
     const {clientState, setClientState} = React.useContext(ClientContext)
     const handleChange = (name) => event => {
         setClientState({...clientState, [name]: event.target.value})
@@ -59,5 +59,4 @@ export default function HourlyRate() {
         >
         </InputGroup_2Col_WithIcons> 
     )
-}
-
+})

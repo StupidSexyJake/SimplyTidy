@@ -16,13 +16,13 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-export default function CTADivider(props) {
+export default React.memo(function CTADivider(props) {
     const classes = useStyles()
     return (
         <div className={classes.root} >
-            <Button_CTA fullWidth size='large' toggleDrawer={props.toggleDrawer} serviceValue={props.serviceValue} setService={props.setService}>
+            <Button_CTA fullWidth size='large'>
                 Get A Quote Now
             </Button_CTA>
         </div>
     )
-}
+})

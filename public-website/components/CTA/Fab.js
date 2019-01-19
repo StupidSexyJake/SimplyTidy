@@ -16,7 +16,8 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function CTA(props) {
+export default React.memo(function CTA(props) {
+    console.log('Navbar CTA rendered')
     const { children, className, variant, color, size, ...other } = props
     const classes = useStyles(props)
     const [state, setState] = React.useState({
@@ -50,4 +51,4 @@ export default function CTA(props) {
             </Drawer>
         </React.Fragment>
     )
-}
+})

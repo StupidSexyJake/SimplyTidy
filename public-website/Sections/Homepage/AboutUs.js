@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function AboutUs() {
+export default React.memo(function AboutUs() {
     const classes = useStyles()
     return (
         <section className={classes.root}>
@@ -78,4 +78,4 @@ export default function AboutUs() {
             </Container>
         </section>
     )
-}
+})

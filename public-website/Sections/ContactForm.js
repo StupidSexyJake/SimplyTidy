@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-export default function ContactForm() {
+export default React.memo(function ContactForm() {
     const classes = useStyles()
     return (
         <section className={classes.root}>
@@ -29,4 +29,4 @@ export default function ContactForm() {
             </Container>
         </section>
     )
-}
+})

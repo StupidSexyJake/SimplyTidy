@@ -1,10 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import '../src/bootstrap'
 import React from 'react'
+// Context
+import { ClientContext } from '../state/ClientState'
+import { ServiceContext } from '../state/ServiceState'
+import { DrawerContext } from '../state/DrawerState'
+import { BookingFormContext } from '../state/BookingFormState'
 // Custom components
 import Header from '../sections/Header'
-// Context
-import {DrawerContext, ClientContext, ServiceContext, BookingFormContext} from '../components/Context'
 // Sections
 import Fold from '../sections/Fold'
 import PreBooking from '../sections/PreBooking'
@@ -22,7 +25,22 @@ import Footer from '../sections/Footer'
 import Navbar from '../sections/Navbar'
 
 export default function Index() {
-    console.log(' index render')
+    // Drawer state
+    const [drawerState, setDrawerState] = React.useState(false)
+    // Booking form state
+    const [bookingFormState, setBookingFormState] = React.useState(
+        {
+            page: 0,
+            showAllRooms: false,
+            unselectedExtras: [
+                { label: 'Oven cleaning' },
+                { label: 'Inside cupboards' },
+                { label: 'Inside fridge' },
+                { label: 'Inside cupboards' },
+                { label: 'Inside fridge' },
+            ]
+        }
+    )
     // Client state
     const [clientState, setClientState] = React.useState(
         {
@@ -33,12 +51,9 @@ export default function Index() {
             suburb: '',
             postcode: '',
             state: '',
-            reminders: true,          
+            reminders: true,
         }
     )
-    const changeClientState = (name) => event => {
-        setClientState({...clientState, [name]: event.target.value})
-    }
     // Service state
     const [serviceState, setServiceState] = React.useState(
         {
@@ -54,78 +69,47 @@ export default function Index() {
             extras: []
         }
     )
-    const changeServiceState = (name) => event => {
-        setServiceState({...serviceState, [name]: event.target.value})
-    }
-    // Booking form state
-    const [bookingFormState, setBookingFormState] = React.useState(
-        {
-            page: 0,
-            showAllRooms: false,
-            unselectedExtras: [
-                { label: 'Oven cleaning' },
-                { label: 'Inside cupboards' },
-                { label: 'Inside fridge' },
-                { label: 'Inside cupboards' },
-                { label: 'Inside fridge' },
-            ]
-        }
-    )
-    const changeBookingFormState = (key, val) => {
-        setBookingFormState({...bookingFormState, [key]: val})
-    }
-    // Booking form drawer state reducer
-    const [drawerState, drawerDispatch] = React.useReducer((state, action) => {
-        switch (action) {
-            case 'open':
-                return true
-            case 'close':
-                return false
-            default:
-                return state;
-        }
-    }, false)
     return (
         <React.Fragment>
-            <Header title="House Cleaning Services" />                
+            <Header title="House Cleaning Services" />
             <Navbar />
-            <Fold 
-                hero='homepage-hero-woman-relaxing.jpg'                
+            <Fold
+                hero='homepage-hero-woman-relaxing.jpg'
                 scrim='white'
                 title='That Clean Home Feeling!'
-                titleProps= {{
+                titleProps={{
                     component: 'p',
                 }}
                 subtitle="You click. We clean. It's that simple."
             >
-                <DrawerContext.Provider value={{drawerState, drawerDispatch}}>
-                    <ClientContext.Provider value={{clientState, changeClientState}}>
-                        <ServiceContext.Provider value={{serviceState, changeServiceState}}>
+                <DrawerContext.Provider value={{ setDrawerState }}>
+                    <ClientContext.Provider value={{ clientState, setClientState }}>
+                        <ServiceContext.Provider value={{ serviceState, setServiceState }}>
                             <PreBooking />
-                        </ServiceContext.Provider>                        
+                        </ServiceContext.Provider>
                     </ClientContext.Provider>
                 </DrawerContext.Provider>
             </Fold>
-            <DrawerContext.Provider value={{drawerState, drawerDispatch}}>
-                <BookingFormContext.Provider value={{ bookingFormState, changeBookingFormState }}>
-                    <ClientContext.Provider value={{ clientState, changeClientState }}>
-                        <ServiceContext.Provider value={{serviceState, changeServiceState}}>
+            <DrawerContext.Provider value={{ drawerState, setDrawerState }}>
+                <BookingFormContext.Provider value={{ bookingFormState, setBookingFormState }}>
+                    <ClientContext.Provider value={{ clientState, setClientState }}>
+                        <ServiceContext.Provider value={{ serviceState, setServiceState }}>
                             <BookingFormDrawer />
                         </ServiceContext.Provider>
                     </ClientContext.Provider>
                 </BookingFormContext.Provider>
-            </DrawerContext.Provider>             
-            <Features />        
-            <About />  
+            </DrawerContext.Provider>
+            <Features />
+            <About />
             <Benefits />
-            <DrawerContext.Provider value={{drawerState, drawerDispatch}}>
-                <CTADivider /> 
-            </DrawerContext.Provider>                       
+            <DrawerContext.Provider value={{ drawerState, setDrawerState }}>
+                <CTADivider />
+            </DrawerContext.Provider>
             <Services />
             <Guarantee />
-            <DrawerContext.Provider value={{drawerState, drawerDispatch}}>
+            <DrawerContext.Provider value={{ drawerState, setDrawerState }}>
                 <Reviews />
-            </DrawerContext.Provider>            
+            </DrawerContext.Provider>
             <Numbers />
             <CommonQuestions />
             <Footer />

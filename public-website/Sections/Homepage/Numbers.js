@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-export default function Numbers() {
+export default React.memo(function Numbers() {
     const classes = useStyles()
     return (
         <section className={classes.root}>
@@ -72,4 +72,4 @@ export default function Numbers() {
             
         </section>
     )
-}
+})

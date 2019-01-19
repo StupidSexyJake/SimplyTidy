@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function Footer() {
+export default React.memo(function Footer() {
     console.log('footer render')
     const classes = useStyles()
     return (
@@ -64,4 +64,4 @@ export default function Footer() {
             </Container>
         </section>
     )
-}
+})

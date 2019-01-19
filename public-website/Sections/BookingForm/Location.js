@@ -6,7 +6,7 @@ import Suburbs from '../../components/Suburbs'
 // Icons
 import LocationIcon from '@material-ui/icons/LocationOn'
 
-export default function BedBaths() {
+export default React.memo(function BedBaths() {
     return (
         <InputGroup_1Col_WithIcons 
             fields = {[
@@ -21,4 +21,4 @@ export default function BedBaths() {
         >
         </InputGroup_1Col_WithIcons>
     )
-}
+})

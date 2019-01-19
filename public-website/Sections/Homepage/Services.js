@@ -93,7 +93,7 @@ export function ServiceList() {
     )
 }
 
-export default function Services() {
+export default React.memo(function Services() {
     const useStyles = makeStyles(theme => ({
         root: {
         },
@@ -133,4 +133,4 @@ export default function Services() {
             </Container>
         </section>
     )
-}
+})

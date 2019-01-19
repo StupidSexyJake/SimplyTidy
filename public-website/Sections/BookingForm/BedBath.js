@@ -1,6 +1,6 @@
 import React from 'react'
 // Context
-import {ClientContext} from '../../components/Context'
+import {ClientContext} from '../../state/ClientState'
 // Sections
 import {InputGroup_2Col_WithIcons} from './InputGroup'
 // Material components
@@ -11,8 +11,10 @@ import FilledInput from '@material-ui/core/FilledInput'
 import BedroomsIcon from '@material-ui/icons/Hotel'
 import BathroomsIcon from '@material-ui/icons/Wc'
 
-export default function BedBath() {
+export default React.memo(function BedBath() {
+    // Get state context
     const {clientState, setClientState} = React.useContext(ClientContext)
+    // Handle on change event
     const handleChange = (name) => event => {
         setClientState({...clientState, [name]: event.target.value})
     }
@@ -65,4 +67,4 @@ export default function BedBath() {
         >
         </InputGroup_2Col_WithIcons>
     )
-}
+})

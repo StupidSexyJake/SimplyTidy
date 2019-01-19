@@ -19,7 +19,7 @@ import StarIcon from '@material-ui/icons/StarRate'
 import ExpandIcon from '@material-ui/icons/KeyboardArrowDown'
 
 
-export function ReviewCard () {
+export function ReviewCard() {
     const useStyles = makeStyles(theme => ({
         topCard: {
             padding: '2rem 2rem 3rem 1rem'
@@ -35,7 +35,7 @@ export function ReviewCard () {
         icon: {
             flex: '0 0 auto',
             marginRight: '1rem',
-        },    
+        },
         quoteIcon: {
             transform: 'scaleX(-1) scaleY(-1)',
             color: theme.palette.grey[500]
@@ -45,9 +45,9 @@ export function ReviewCard () {
             paddingTop: '1rem'
         },
         expandIcon: {
-            fontSize: '16px', 
-            position: 'relative', 
-            bottom: '-2px', 
+            fontSize: '16px',
+            position: 'relative',
+            bottom: '-2px',
             left: '4px'
         },
         rating: {
@@ -84,20 +84,20 @@ export function ReviewCard () {
                         <Grid item className={classes.comment}>
                             <Typography variant='subtitle1' component='span'>
                                 <em>
-                                    I used Gold Coast Maids for the first time this week and was impressed. I liked the online booking system. I did it in my lunch break at work and they came the next day! Will definitely use again. 
+                                    I used Gold Coast Maids for the first time this week and was impressed. I liked the online booking system. I did it in my lunch break at work and they came the next day! Will definitely use again.
                                 </em>
                                 <ExpandIcon className={classes.expandIcon} />
-                            </Typography>  
-                            
+                            </Typography>
+
                             <div className={classes.rating}>
                                 <StarIcon className={classes.starIcon} />
                                 <StarIcon className={classes.starIcon} />
                                 <StarIcon className={classes.starIcon} />
                                 <StarIcon className={classes.starIcon} />
                                 <StarIcon className={classes.starIcon} />
-                            </div>                                        
+                            </div>
                         </Grid>
-                    </Grid>                                                         
+                    </Grid>
                 </CardContent>
                 <Divider />
                 <CardContent className={classes.author}>
@@ -108,13 +108,13 @@ export function ReviewCard () {
                     <Typography variant='body2'>
                         September 1, 2018
                     </Typography>
-                </CardContent> 
+                </CardContent>
             </Card>
         </Grid>
     )
 }
 
-export default function Reviews(props) {
+export default React.memo(function Reviews(props) {
     const useStyles = makeStyles(theme => ({
         root: {
         },
@@ -154,11 +154,13 @@ export default function Reviews(props) {
                     <Button variant='outlined' size='large' color='primary' className={classes.button}>
                         Read More Reviews
                     </Button>
-                    <Button_CTA size='large' className={classes.button} serviceValue={props.serviceValue} toggleDrawer={props.toggleDrawer} setService={props.setService}>
+                    <Button_CTA
+                        size='large'
+                        className={classes.button}>
                         Get An Instant Quote
                     </Button_CTA>
                 </div>
             </Container>
         </section>
     )
-}
+})

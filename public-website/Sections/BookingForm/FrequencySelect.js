@@ -1,6 +1,6 @@
 import React from 'react'
 // Context
-import {ClientContext} from '../../components/Context'
+import {ClientContext} from '../../state/ClientState'
 // Material components
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
@@ -9,28 +9,31 @@ import RadioGroup from '@material-ui/core/RadioGroup'
 import Radio from '@material-ui/core/Radio'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        marginBottom: theme.spacing.unit,
-        width: '100%'
-    },
-    frequencyGroup: {
-        justifyContent: 'center',
-    },
-    checked: {
-        '&, & + $label': {
-          color: theme.palette.secondary.main,
+export default React.memo(function FrequencySelect() {
+    // Create styles
+    const useStyles = makeStyles(theme => ({
+        root: {
+            marginBottom: theme.spacing.unit,
+            width: '100%'
         },
-    },
-    label: {},
-    noMarginRight: {
-        marginRight: 0
-    }
-}))
-
-export default function FrequencySelect() {
-    const {clientState, setClientState} = React.useContext(ClientContext)
+        frequencyGroup: {
+            justifyContent: 'center',
+        },
+        checked: {
+            '&, & + $label': {
+              color: theme.palette.secondary.main,
+            },
+        },
+        label: {},
+        noMarginRight: {
+            marginRight: 0
+        }
+    }))
+    // Define styles
     const classes = useStyles()
+    // Get state contexts
+    const {clientState, setClientState} = React.useContext(ClientContext)
+    // Handle change events for client state
     const handleChange = (name) => event => {
         setClientState({...clientState, [name]: event.target.value})
     }
@@ -44,8 +47,7 @@ export default function FrequencySelect() {
                         name="Frequency"
                         className={classes.frequencyGroup}
                         value={clientState.frequency}
-                        onChange={handleChange('frequency')}
-                    >
+                        onChange={handleChange('frequency')}>
                         <FormControlLabel 
                             classes={{ label: classes.label }} 
                             value='weekly' 
@@ -67,4 +69,4 @@ export default function FrequencySelect() {
             </Grid>
         </Grid>
     )
-}
+})

@@ -1,36 +1,38 @@
 import React from 'react'
 // Context
-import {ClientContext} from '../../components/Context'
+import {ClientContext} from '../../state/ClientState'
 // Material components
 import { makeStyles } from '@material-ui/styles'
 import Typography from '@material-ui/core/Typography'
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        textAlign: 'center',
-    },
-    icon: {
-        display: 'block',
-        margin: '0 auto',
-        marginTop: 4 * theme.spacing.unit,
-        marginBottom: 2 * theme.spacing.unit,
-        height: 12 * theme.spacing.unit
-    },
-    title: {
-        paddingBottom: 0
-    },
-    changeService: {
-        marginBottom: 2 * theme.spacing.unit
-    }
-}))
-
-const icon = {
-    10: 'regular-maid-services-icon.png',
-    20: 'spring-cleaning-icon.png'
-}
-
-export default function ServiceType() {
+export default React.memo(function ServiceType() {
+    // Create styles
+    const useStyles = makeStyles(theme => ({
+        root: {
+            textAlign: 'center',
+        },
+        icon: {
+            display: 'block',
+            margin: '0 auto',
+            marginTop: 4 * theme.spacing.unit,
+            marginBottom: 2 * theme.spacing.unit,
+            height: 12 * theme.spacing.unit
+        },
+        title: {
+            paddingBottom: 0
+        },
+        changeService: {
+            marginBottom: 2 * theme.spacing.unit
+        }
+    }))    
+    // Define styles
     const classes = useStyles()
+    // Map icons to service value
+    const icon = {
+        10: 'regular-maid-services-icon.png',
+        20: 'spring-cleaning-icon.png'
+    }
+    // Get state contexts
     const {clientState} = React.useContext(ClientContext)
     return (
         <div className={classes.root}>
@@ -43,4 +45,4 @@ export default function ServiceType() {
             </Typography>
         </div>
     )
-}
+})

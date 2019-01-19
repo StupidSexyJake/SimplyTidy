@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function Navbar() {
+export default React.memo(function Navbar() {
     const classes = useStyles()
     return (
         <section className={classes.root}>
@@ -59,4 +59,4 @@ export default function Navbar() {
         </section>
         
     )
-}
+})

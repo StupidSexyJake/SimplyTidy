@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-export default function ChooseUs() {
+export default React.memo(function ChooseUs() {
     const classes = useStyles()
     return (
         <section className={classes.root}>
@@ -62,4 +62,4 @@ export default function ChooseUs() {
             </Grid>
         </section>
     )
-}
+})

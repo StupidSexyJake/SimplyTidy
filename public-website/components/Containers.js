@@ -4,9 +4,7 @@ import classNames from 'classnames'
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
 
-
-
-export default React.memo(function Sections(props) {
+export default function Sections(props) {
     // Create styles
     const useStyles = makeStyles(theme => ({
         root: {
@@ -24,19 +22,19 @@ export default React.memo(function Sections(props) {
     const { children, className, paddingTop, xs, sm, md, lg, xl, paddingBottom, itemProps, ...other } = props
     const classes = useStyles(props)
     return (
-        <Grid 
-            container 
+        <Grid
+            container
             className={classNames(classes.root, className)}
             justify='center'
             {...other}>
-            <Grid 
-                item 
-                sm={sm || 12} 
-                md={md || 10} 
-                className={classes.item} 
+            <Grid
+                item
+                sm={sm || 12}
+                md={md || 10}
+                className={classes.item}
                 {...itemProps}>
                 {children}
             </Grid>
-        </Grid> 
+        </Grid>
     )
-})
+}

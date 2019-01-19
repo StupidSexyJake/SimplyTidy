@@ -22,7 +22,6 @@ const benefitList = [
 ]
 
 export default React.memo(function Features() {
-    console.log('Features rendered')
     // Create styles
     const useStyles = makeStyles(theme => ({
         root: {

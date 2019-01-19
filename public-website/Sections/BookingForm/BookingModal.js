@@ -1,9 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 // Context
-import {BookingFormContext} from '../../state/BookingFormState'
 // Sections
-import Step1 from './Step1'
+import Step1 from './Steps/Step1'
 // Material components
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
@@ -13,7 +12,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 // Custom components
-import Container from '../../components/Containers/Sections'
+import Container from '../../components/Containers'
 
 // Get current step
 function getStepIndex(stepIndex) {
@@ -49,15 +48,14 @@ function getStepIndex(stepIndex) {
 
 // Export booking form
 export default React.memo(function BookingForm(props) {
-    console.log('Booking Form rendered')
     // Create styles
     const useStyles = makeStyles(theme => ({
         root: {
             background: theme.palette.grey[200],
         },
         stepper: {
-            background: theme.palette.grey[200],         
-            marginTop: 2 * theme.spacing.unit,            
+            background: theme.palette.grey[200],
+            marginTop: 2 * theme.spacing.unit,
             marginBottom: 2 * theme.spacing.unit,
         },
         title: {
@@ -70,23 +68,21 @@ export default React.memo(function BookingForm(props) {
     }))
     // Define styles
     const classes = useStyles()
-    // Get state contexts
-    const {bookingFormState, setBookingFormState} = React.useContext(BookingFormContext)
     // Define props
     const { service, ...other } = props
     // Define steps
     const steps = ['Choose Your Service', 'Select A Date', 'Add Instructions', 'Confirm Booking']
-    // Handle next step
-    function handleNext() {
-        setBookingFormState('page', bookingFormState.page + 1)
-    }
-    // Handle previous step
-    function handleBack() {
-        setBookingFormState(['page'], bookingFormState.page - 1)
-    }
+    // // Handle next step
+    // function handleNext() {
+    //     setBookingFormState('page', bookingFormState.page + 1)
+    // }
+    // // Handle previous step
+    // function handleBack() {
+    //     setBookingFormState(['page'], bookingFormState.page - 1)
+    // }
     return (
         <section className={classes.root}>
-            <Container md={6} paddingTop='1' paddingBottom='0' height='fit-content'>
+            {/* <Container md={6} paddingTop='1' paddingBottom='0' height='fit-content'>
                 <Stepper activeStep={bookingFormState.page} alternativeLabel className={classes.stepper}>
                     {steps.map(label => {
                         return (
@@ -129,7 +125,7 @@ export default React.memo(function BookingForm(props) {
                         </Container>
                     </CardContent>
                 </Card>
-            </Container>
+            </Container> */}
         </section>
     )
 })

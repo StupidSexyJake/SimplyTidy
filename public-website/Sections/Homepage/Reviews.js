@@ -9,8 +9,8 @@ import Divider from '@material-ui/core/Divider'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 // Custom components
-import Container from '../../components/Containers/Sections'
-import Button_CTA from '../../components/CTA/Button'
+import Container from '../../components/Containers'
+import Button_CTA from '../../components/Buttons'
 // Colors
 import amber from '@material-ui/core/colors/amber'
 // Icons

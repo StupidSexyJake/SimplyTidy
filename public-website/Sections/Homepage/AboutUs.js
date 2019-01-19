@@ -7,7 +7,7 @@ import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 // Custom components
-import Container from '../../components/Containers/Sections'
+import Container from '../../components/Containers'
 
 const useStyles = makeStyles(theme => ({
     root: {

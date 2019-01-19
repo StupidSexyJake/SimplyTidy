@@ -1,6 +1,4 @@
 import React from 'react'
-// Context
-import {ClientContext} from '../../state/ClientState'
 // Material components
 import { makeStyles } from '@material-ui/styles'
 import Typography from '@material-ui/core/Typography'
@@ -32,17 +30,16 @@ export default React.memo(function ServiceType() {
         10: 'regular-maid-services-icon.png',
         20: 'spring-cleaning-icon.png'
     }
-    // Get state contexts
-    const {clientState} = React.useContext(ClientContext)
+
     return (
         <div className={classes.root}>
-            <img src={`/static/icons/services/${icon[clientState.service]}`} className={classes.icon} />
+            {/* <img src={`/static/icons/services/${icon[clientState.service]}`} className={classes.icon} />
             <Typography variant='h6' component='p' className={classes.title}>
                 Routine Cleaning
             </Typography>
             <Typography variant='body2' component='p' color='primary' align='center' className={classes.changeService}>
                 Change service...
-            </Typography>
+            </Typography> */}
         </div>
     )
 })

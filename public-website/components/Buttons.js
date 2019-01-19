@@ -1,12 +1,16 @@
-import React from 'react'
+import { Fragment, useContext } from 'react'
 import { makeStyles } from '@material-ui/styles'
 import classNames from 'classnames'
+// State
+import { Store } from '../state/store'
+// Actions
+import { toggleBookingFormDrawer } from '../state/actions'
 // Material components
 import Button from '@material-ui/core/Button'
-// Context
-import {DrawerContext} from '../../state/DrawerState'
 
-export default React.memo(function CTA(props) {
+export default function CTA(props) {
+    // Get state contexts
+    const { dispatch } = useContext(Store)
     // Create styles
     const useStyles = makeStyles(theme => ({
         textShadow: {
@@ -14,25 +18,19 @@ export default React.memo(function CTA(props) {
         }
     }))
     // Define styles
-    const classes = useStyles()    
-    // Get state contexts
-    const { setDrawerState } = React.useContext(DrawerContext)
-    // Handle click events
-    const handleClick = (val) => {
-        setDrawerState(val)
-    }
+    const classes = useStyles()
     return (
-        <React.Fragment>
-            <Button 
+        <Fragment>
+            <Button
                 color='secondary'
                 variant={props.variant || 'contained'}
                 className={classNames(props.className, classes.textShadow)}
                 size={props.size || 'medium'}
-                {...props} 
-                onClick={() => handleClick(true)}
+                {...props}
+                onClick={() => dispatch(toggleBookingFormDrawer(true))}
             >
                 {props.children}
             </Button>
-        </React.Fragment>
+        </Fragment>
     )
-})
+}

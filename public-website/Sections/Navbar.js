@@ -26,7 +26,6 @@ function getLinks() {
 }
 
 export default React.memo(function NavReturn() {
-    console.log('Navbar rendered')
     // Create styles
     const useStyles = makeStyles(theme => ({
         root: {

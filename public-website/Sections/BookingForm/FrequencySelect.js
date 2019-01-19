@@ -1,6 +1,4 @@
 import React from 'react'
-// Context
-import {ClientContext} from '../../state/ClientState'
 // Material components
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
@@ -21,7 +19,7 @@ export default React.memo(function FrequencySelect() {
         },
         checked: {
             '&, & + $label': {
-              color: theme.palette.secondary.main,
+                color: theme.palette.secondary.main,
             },
         },
         label: {},
@@ -31,15 +29,9 @@ export default React.memo(function FrequencySelect() {
     }))
     // Define styles
     const classes = useStyles()
-    // Get state contexts
-    const {clientState, setClientState} = React.useContext(ClientContext)
-    // Handle change events for client state
-    const handleChange = (name) => event => {
-        setClientState({...clientState, [name]: event.target.value})
-    }
     return (
         <Grid container className={classes.root} justify='center' spacing={32}>
-            <Grid item>
+            {/* <Grid item>
                 <FormControl >
                     <RadioGroup
                         row
@@ -66,7 +58,7 @@ export default React.memo(function FrequencySelect() {
                             className={classes.noMarginRight} />
                     </RadioGroup>
                 </FormControl>
-            </Grid>
+            </Grid> */}
         </Grid>
     )
 })

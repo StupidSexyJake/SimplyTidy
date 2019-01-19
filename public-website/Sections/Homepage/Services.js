@@ -10,36 +10,36 @@ import CardActions from '@material-ui/core/CardActions'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 // Custom components
-import Container from '../../components/Containers/Sections'
+import Container from '../../components/Containers'
 
 function getServices() {
     return [
-        { 
-            value: 1, 
-            href: '/how', 
-            image: '/static/cards/home-cleaning.jpg', 
-            title: 'Routine Cleaning', 
+        {
+            value: 1,
+            href: '/how',
+            image: '/static/cards/home-cleaning.jpg',
+            title: 'Routine Cleaning',
             description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica'
         },
-        { 
-            value: 2, 
-            href: '/how', 
-            image: '/static/cards/contemplative-reptile.jpg', 
-            title: 'One Time Cleaning', 
+        {
+            value: 2,
+            href: '/how',
+            image: '/static/cards/contemplative-reptile.jpg',
+            title: 'One Time Cleaning',
             description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica'
         },
-        { 
-            value: 3, 
-            href: '/how',  
-            image: '/static/cards/spring-cleaning.jpg', 
-            title: 'Deep Cleaning', 
+        {
+            value: 3,
+            href: '/how',
+            image: '/static/cards/spring-cleaning.jpg',
+            title: 'Deep Cleaning',
             description: 'Nulla posuere sollicitudin aliquam ultrices sagittis. Nisi porta lorem mollis aliquam ut porttitor leo a diam. Turpis egestas maecenas.'
         },
-        { 
-            value: 4, 
-            href: '/how', 
-            image: '/static/cards/bond-cleaning.jpg', 
-            title: 'Bond Cleaning', 
+        {
+            value: 4,
+            href: '/how',
+            image: '/static/cards/bond-cleaning.jpg',
+            title: 'Bond Cleaning',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet.'
         },
     ]

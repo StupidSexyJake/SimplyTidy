@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 // Custom components
-import Container from '../../components/Containers/Sections'
+import Container from '../../components/Containers'
 import Scrim from '../../components/Scrim'
 // Colors
 

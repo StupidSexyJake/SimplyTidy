@@ -1,5 +1,19 @@
-import React from 'react'
-import Reducer { initialState } from './reducers'
+import React, { useReducer, createContext } from 'react'
+import reducer, { initialState } from './reducers'
 
-export const DrawerContext = React.createContext()
-export const BookingFormContext = React.createContext()
+// Create context
+const Store = createContext()
+
+// Create store
+const createStore = (reducer, initialState) => {
+    const [state, dispatch] = useReducer(reducer, initialState)
+    return { state, dispatch }
+}
+
+// Return store provider
+const Provider = ({ children }) => {
+    const store = createStore(reducer, initialState)
+    return <Store.Provider value={store}>{children}</Store.Provider>
+}
+
+export { Store, Provider }

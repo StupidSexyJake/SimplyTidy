@@ -3,7 +3,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 import Typography from '@material-ui/core/Typography'
 
-export default React.memo(function FieldGroup(props) {
+export default function FieldGroup(props) {
     // Create styles
     const useStyles = makeStyles(theme => ({
         root: {
@@ -26,7 +26,7 @@ export default React.memo(function FieldGroup(props) {
             <Typography variant='caption' align='left' className={classes.subtitle}>
                 {props.description}
             </Typography>
-                {props.children}
+            {props.children}
         </div>
     )
-})
+}

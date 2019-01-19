@@ -1,17 +1,14 @@
 import React from 'react'
-// Context
-import {ClientContext} from '../../state/ClientState'
-import {BookingFormContext} from '../../state/BookingFormState'
 // Sections
-import ServiceType from './ServiceType'
-import FrequencySelect from './FrequencySelect'
-import FieldGroup from '../../components/BookingForm/FieldGroup'
-import Location from './Location'
-import BedBaths from './BedBath'
-import ShowMoreRooms from './ShowMoreRooms'
-import ExtraRooms from './ExtraRooms'
-import HourlyRate from './HourlyRate'
-import AddExtras from './AddExtras'
+import ServiceType from '../ServiceType'
+import FrequencySelect from '../FrequencySelect'
+import FieldGroup from '../Layout/FieldGroup'
+import Location from '../Location'
+import BedBaths from '../BedBath'
+import ShowMoreRooms from '../ShowMoreRooms'
+import ExtraRooms from '../ExtraRooms'
+import HourlyRate from '../HourlyRate'
+import AddExtras from '../AddExtras'
 // Material components
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
@@ -41,20 +38,14 @@ export default React.memo(function Step1() {
     }))
     // Define styles
     const classes = useStyles()
-    // Get state contexts
-    const {clientState, setClientState} = React.useContext(ClientContext)
-    const {bookingFormState, setBookingFormState} = React.useContext(BookingFormContext)
     // Handle client state change on click events
-    const handleClickClient = (name) => event => {
-        setClientState({ ...clientState, [name]: event.target.value })
-    }
     // Handle select events for service package type
-    const handleSelectFixedPrice = () => {
-        setClientState({...clientState, 'fixedPrice': true})
-    }
-    const handleSelectHourly = () => {
-        setClientState({...clientState, 'fixedPrice': false})
-    }
+    // const handleSelectFixedPrice = () => {
+    //     setClientState({...clientState, 'fixedPrice': true})
+    // }
+    // const handleSelectHourly = () => {
+    //     setClientState({...clientState, 'fixedPrice': false})
+    // }
 
     
     const packageColor = {
@@ -67,7 +58,7 @@ export default React.memo(function Step1() {
     }
     return (
         <React.Fragment>
-            <ServiceType />
+            {/* <ServiceType />
             <form>
                 <FrequencySelect />
                 <Grid container>
@@ -158,7 +149,7 @@ export default React.memo(function Step1() {
                         </Typography>
                     </Grid>
                 </Grid>
-            </form>
+            </form> */}
         </React.Fragment>
     )
 })

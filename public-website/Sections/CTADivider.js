@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 // Custom components
-import Button_CTA from '../components/CTA/Button'
+import Button_CTA from '../components/Buttons'
 
 const useStyles = makeStyles(theme => ({
     root: {

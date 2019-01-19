@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import GuaranteeIcon from '@material-ui/icons/ThumbUp'
 // Custom components
 import Scrim from '../../components/Scrim'
-import Container from '../../components/Containers/Sections'
+import Container from '../../components/Containers'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     },
     heading: {
         color: theme.palette.secondary.contrastText,
-        padding:'0 0 1.5rem 0'
+        padding: '0 0 1.5rem 0'
     },
     description: {
         color: 'rgba(255,255,255,1)',
@@ -40,7 +40,7 @@ export default React.memo(function Navbar() {
     return (
         <section className={classes.root}>
             <Scrim hsl='primaryDark'>
-                <Container className={classes.container}>                
+                <Container className={classes.container}>
                     <Grid container spacing={16} className={classes.gridContainer} alignItems='center'>
                         <Grid item xs={8}>
                             <Typography variant='h3' component='h2' className={classes.heading}>
@@ -57,6 +57,6 @@ export default React.memo(function Navbar() {
                 </Container>
             </Scrim>
         </section>
-        
+
     )
 })

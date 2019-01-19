@@ -1,26 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
 // Context
-import {DrawerContext} from '../state/DrawerState'
+import { Store } from '../state/store'
+// Actions
+import { toggleBookingFormDrawer } from '../state/actions'
 // Sections
 import BookingModal from './BookingForm/BookingModal'
 // Material components
 import Drawer from '@material-ui/core/Drawer'
 
-export default React.memo(function BookingFormDrawer() {
-    console.log('booking form drawer render')
+export default function BookingFormDrawer() {
     // Get state contexts
-    const {drawerState, setDrawerState} = React.useContext(DrawerContext)
-    // Handle close event
-    const handleClose = (val) => {
-        console.log('close drawer')
-        setDrawerState(val)
-    }
-    
+    const { state, dispatch } = useContext(Store)
     return (
-        <Drawer anchor='top' open={drawerState} onClose={() => handleClose(false)}>
-            <div tabIndex={0} role='button'>
-                <BookingModal />    
+        <Drawer
+            anchor='top'
+            open={state.drawer.open}
+            onClose={() => dispatch(toggleBookingFormDrawer(false))}
+        >
+            <div
+                tabIndex={0}
+                role='button'
+            >
+                <BookingModal />
             </div>
         </Drawer>
     )
-})
+}

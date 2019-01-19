@@ -2,7 +2,6 @@ import React from 'react'
 import Head from 'next/head'
 
 export default React.memo(function(props) {
-    console.log('Header rendered')
     return (
         <React.Fragment>
             <Head>

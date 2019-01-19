@@ -7,7 +7,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 // Custom components
-import Container from '../../components/Containers/Sections'
+import Container from '../../components/Containers'
 // Icons
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import QuestionIcon from '@material-ui/icons/ContactSupport'

@@ -1,6 +1,4 @@
 import React from 'react'
-// Context
-import {BookingFormContext} from '../../state/BookingFormState'
 // Material components
 import { makeStyles } from '@material-ui/styles'
 import Typography from '@material-ui/core/Typography'
@@ -17,15 +15,13 @@ export default React.memo(function ShowMoreRooms() {
     }))
     // Define styles
     const classes = useStyles()
-    // Get state contexts
-    const {setBookingFormState} = React.useContext(BookingFormContext)
     return (
         <Grid 
             item xs={11} 
             className={classes.root}>
-            <Typography variant='caption'>                                                
+            {/* <Typography variant='caption'>                                                
                 Includes 1 living area, 1 kitchen, hallways and stairs. Click <a onClick={() => setBookingFormState('showAllRooms', true)} href='#'>here</a> to add more rooms
-            </Typography>
+            </Typography> */}
         </Grid>
     )
 })

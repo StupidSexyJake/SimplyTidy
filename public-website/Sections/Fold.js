@@ -5,10 +5,9 @@ import classNames from 'classnames'
 import Typography from '@material-ui/core/Typography'
 // Custom components
 import Scrim from '../components/Scrim'
-import Container from '../components/Containers/Sections'
+import Container from '../components/Containers'
 
-export default React.memo(function Fold(props) {
-    console.log('Fold rendered')
+export default function Fold(props) {
     // Create styles
     const useStyles = makeStyles(theme => ({
         root: {
@@ -45,4 +44,4 @@ export default React.memo(function Fold(props) {
             </Scrim>
         </section>
     )
-})
+}

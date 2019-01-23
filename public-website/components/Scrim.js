@@ -4,29 +4,30 @@ import classNames from 'classnames'
 // Custom components
 import Gradient from './Gradients'
 
-export default function Scrim(props) {
-    // Create styles
-    const useStyles = makeStyles(theme => ({
-        root: {
-            position: 'relative',
-            height: '100%',
-            width: '100%',
-            '&:before': {
-                content: '""',
-                position: 'absolute',
-                top: 0,
-                bottom: 0,
-                right: 0,
-                left: 0,
-                background: props => Gradient(props.hsl)
-            }
-        },
-        bringForward: {
-            height: '100%',
-            width: '100%',
-            position: 'relative',
+// Scrim styles
+const useStyles = makeStyles({
+    root: {
+        position: 'relative',
+        height: '100%',
+        width: '100%',
+        '&:before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            right: 0,
+            left: 0,
+            background: props => Gradient(props.hsl)
         }
-    }))
+    },
+    bringForward: {
+        height: '100%',
+        width: '100%',
+        position: 'relative',
+    }
+})
+
+export default function Scrim(props) {
     // Define styles
     const classes = useStyles(props)
     return (

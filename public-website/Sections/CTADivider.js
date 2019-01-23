@@ -1,8 +1,9 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 // Custom components
-import Button_CTA from '../components/Buttons'
+import { CallToActionButton } from '../components/Buttons'
 
+// Create styles
 const useStyles = makeStyles(theme => ({
     root: {
         maxWidth: 86 * theme.spacing.unit,
@@ -16,13 +17,14 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-export default React.memo(function CTADivider(props) {
+export default React.memo(function CTADivider() {
+    // Define styles
     const classes = useStyles()
     return (
         <div className={classes.root} >
-            <Button_CTA fullWidth size='large'>
+            <CallToActionButton fullWidth size='large'>
                 Get A Quote Now
-            </Button_CTA>
+            </CallToActionButton>
         </div>
     )
 })

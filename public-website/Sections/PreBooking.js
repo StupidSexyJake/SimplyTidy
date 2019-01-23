@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 // Layout
-import { InputField } from './BookingForm/Layout/InputContainer'
+import { InputGroup } from './BookingForm/Layout/InputGroup'
 // Fields
 import {
     Name,
@@ -9,74 +9,60 @@ import {
     Suburb,
     Service,
     Bedrooms,
-    Bathrooms
+    Bathrooms,
 } from './BookingForm/Fields'
 // Material components
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 // Custom components
-import Button_CTA from '../components/Buttons'
+import { CallToActionButton } from '../components/Buttons'
 
-export default function PreBooking() {
-    // Create styles
-    const useStyles = makeStyles(theme => ({
-        root: {
-            marginTop: 8 * theme.spacing.unit,
-            paddingTop: 2 * theme.spacing.unit,
-            paddingBottom: 2 * theme.spacing.unit,
-            paddingLeft: 4 * theme.spacing.unit,
-            paddingRight: 4 * theme.spacing.unit
-        },
-        submit: {
-            display: 'block',
-            marginTop: 4 * theme.spacing.unit
-        },
-        container: {
-            flexGrow: 1,
-            position: 'relative',
-        },
-        paper: {
-            position: 'absolute',
-            zIndex: 1,
-            marginTop: theme.spacing.unit,
-            left: 0,
-            right: 0,
-        },
-    }))
+// Create styles
+const useStyles = makeStyles(theme => ({
+    card: {
+        paddingLeft: 2 * theme.spacing.unit,
+        paddingRight: 2 * theme.spacing.unit
+    },
+    inputGroup: {
+        marginBottom: theme.spacing.unit
+    },
+    submit: {
+        display: 'block',
+        marginTop: 2 * theme.spacing.unit
+    }
+}))
+
+export default function PreBooking(props) {
     // Define styles
     const classes = useStyles()
     return (
-        <Grid container spacing={32} justify='center'>
+        <Grid
+            container
+            spacing={32}
+            justify='center'
+            className={props.className}>
             <Grid item xs={8}>
-                <Card className={classes.root}>
+                <Card className={classes.card}>
                     <CardContent>
-                        <Grid container spacing={16}>
-                            <InputField>
-                                <Name />
-                            </InputField>
-                            <InputField>
-                                <Email />
-                            </InputField>
-                            <InputField>
-                                <Suburb />
-                            </InputField>
-                            <InputField>
-                                <Service />
-                            </InputField>
-                            <InputField>
-                                <Bedrooms />
-                            </InputField>
-                            <InputField>
-                                <Bathrooms />
-                            </InputField>
-                        </Grid>
-                        <Button_CTA
+                        <InputGroup
+                            className={classes.inputGroup}
+                            cols={3}
+                            fields={[
+                                { key: 1, inputField: Name },
+                                { key: 2, inputField: Email },
+                                { key: 3, inputField: Suburb },
+                                { key: 4, inputField: Service },
+                                { key: 5, inputField: Bedrooms },
+                                { key: 6, inputField: Bathrooms }
+                            ]}
+                        />
+                        <CallToActionButton
                             fullWidth
                             size='large'
                             className={classes.submit}>
                             Get an instant quote
-                        </Button_CTA>
+                        </CallToActionButton>
                     </CardContent>
                 </Card>
             </Grid>

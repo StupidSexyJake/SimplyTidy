@@ -1,6 +1,6 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/styles'
 // Material components
+import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
@@ -10,7 +10,7 @@ import CardActions from '@material-ui/core/CardActions'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 // Custom components
-import Container from '../../components/Containers'
+import { Container } from '../../components/Containers'
 
 function getServices() {
     return [
@@ -45,22 +45,27 @@ function getServices() {
     ]
 }
 
-export function ServiceList() {
-    const useStyles = makeStyles(theme => ({
-        media: {
-            height: '8rem'
-        },
-        title: {
-            padding: 0
-        }
-    }))
-    const classes = useStyles()
-    function splitTitle(title) {
-        const titleArray = title.split(' ')
-        const line2 = titleArray[titleArray.length - 1]
-        const line1 = title.split(` ${line2}`)[0]
-        return { line1, line2 }
+// Split title into 2 lines
+function splitTitle(title) {
+    const titleArray = title.split(' ')
+    const line2 = titleArray[titleArray.length - 1]
+    const line1 = title.split(` ${line2}`)[0]
+    return { line1, line2 }
+}
+
+// Create styles
+const serviceListStyles = makeStyles({
+    media: {
+        height: '8rem'
+    },
+    title: {
+        padding: 0
     }
+})
+
+// Create service list presentational component
+function ServiceList() {
+    const classes = serviceListStyles()
     return (
         <React.Fragment>
             {getServices().map((service) => (
@@ -93,29 +98,28 @@ export function ServiceList() {
     )
 }
 
+// Services styles
+const serviceStyles = makeStyles(theme => ({
+    gridContainer: {
+        padding: '2rem 0 1rem 0'
+    },
+    subtitle: {
+        marginBottom: 4 * theme.spacing.unit
+    },
+    CTAContainer: {
+        width: '100%',
+        margin: '0 auto',
+        paddingTop: '3rem',
+        maxWidth: '20rem'
+    }
+}))
+
 export default React.memo(function Services() {
-    const useStyles = makeStyles(theme => ({
-        root: {
-        },
-        container: {
-        },
-        gridContainer: {
-            padding: '2rem 0 1rem 0'
-        },
-        subtitle: {
-            marginBottom: 4 * theme.spacing.unit
-        },
-        CTAContainer: {
-            width: '100%',
-            margin: '0 auto',
-            paddingTop: '3rem',
-            maxWidth: '20rem'
-        }
-    }))
-    const classes = useStyles()
+    // Define styles
+    const classes = serviceStyles()
     return (
-        <section className={classes.root}>
-            <Container className={classes.container}>
+        <section>
+            <Container variant='section'>
                 <Typography variant='h3' component='h2' className={classes.heading}>
                     Services For Every Need
                 </Typography>

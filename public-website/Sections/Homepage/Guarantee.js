@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import GuaranteeIcon from '@material-ui/icons/ThumbUp'
 // Custom components
 import Scrim from '../../components/Scrim'
-import Container from '../../components/Containers'
+import { Container } from '../../components/Containers'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -27,8 +27,6 @@ const useStyles = makeStyles(theme => ({
         color: 'rgba(255,255,255,1)',
         padding: 0
     },
-    underline: {
-    },
     icon: {
         fontSize: '16rem',
         color: 'rgba(255,255,255,1)'
@@ -36,6 +34,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default React.memo(function Navbar() {
+    // Define styles
     const classes = useStyles()
     return (
         <section className={classes.root}>
@@ -44,7 +43,7 @@ export default React.memo(function Navbar() {
                     <Grid container spacing={16} className={classes.gridContainer} alignItems='center'>
                         <Grid item xs={8}>
                             <Typography variant='h3' component='h2' className={classes.heading}>
-                                Your Happiness <span className={classes.underline}>Guaranteed</span>
+                                Your Happiness Guaranteed
                             </Typography>
                             <Typography variant='h6' component='p' className={classes.description}>
                                 If your cleaning isn’t up to the quality you expect, we’ll come back and re-clean for free. We expect quality and you should too.

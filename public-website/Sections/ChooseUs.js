@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 // Custom components
-import Container from '../components/Container'
+import { Container } from '../components/Container'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -35,7 +35,7 @@ export default React.memo(function ChooseUs() {
         <section className={classes.root}>
             <Grid container className={classes.grid}>
                 <Grid item className={classes.image} xs={6}>
-                
+
                 </Grid>
                 <Grid item xs={6} className={classes.gridContainer}>
                     <Container className={classes.container}>

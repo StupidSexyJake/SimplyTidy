@@ -4,36 +4,50 @@ import classNames from 'classnames'
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
 
-export default function Sections(props) {
-    // Create styles
-    const useStyles = makeStyles(theme => ({
-        root: {
-            paddingLeft: 2 * theme.spacing.unit,
-            paddingRight: 2 * theme.spacing.unit,
-            paddingTop: props => (props.paddingTop || 7.5) * theme.spacing.unit,
-            paddingBottom: props => (props.paddingBottom || 10) * theme.spacing.unit,
-            height: props => props.height || '100%',
-        },
-        item: {
-            width: '100%'
-        }
-    }))
+// Container styles
+const containerStyles = makeStyles(theme => ({
+    allVariants: {
+    },
+    section: {
+        paddingLeft: 2 * theme.spacing.unit,
+        paddingRight: 2 * theme.spacing.unit,
+        paddingTop: 7.5 * theme.spacing.unit,
+        paddingBottom: 10 * theme.spacing.unit,
+    },
+    base: {
+    },
+    content: {
+        padding: 2 * theme.spacing.unit
+    },
+    fold: {
+        paddingLeft: 2 * theme.spacing.unit,
+        paddingRight: 2 * theme.spacing.unit,
+        paddingTop: 14 * theme.spacing.unit,
+        paddingBottom: 12 * theme.spacing.unit
+    },
+    item: {
+        width: '100%'
+    }
+}))
+export function Container(props) {
     // Define styles
-    const { children, className, paddingTop, xs, sm, md, lg, xl, paddingBottom, itemProps, ...other } = props
-    const classes = useStyles(props)
+    const classes = containerStyles()
+    // Get variant
+    const variant = props.variant || 'base'
     return (
         <Grid
             container
-            className={classNames(classes.root, className)}
+            className={classNames(props.className, classes[variant], classes.allVariants)}
             justify='center'
-            {...other}>
+        >
             <Grid
                 item
-                sm={sm || 12}
-                md={md || 10}
+                sm={props.sm || 12}
+                md={props.md || 10}
                 className={classes.item}
-                {...itemProps}>
-                {children}
+                {...props.innerProps}
+            >
+                {props.children}
             </Grid>
         </Grid>
     )

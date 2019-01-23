@@ -1,23 +1,33 @@
-import PropTypes from 'prop-types'
+import React from 'react'
 // Autocomplete
 import Downshift from 'downshift'
-import deburr from 'lodash/deburr'
 // Material components
 import { makeStyles } from '@material-ui/styles'
+import Grid from '@material-ui/core/Grid'
 import FormControl from '@material-ui/core/FormControl'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 import InputLabel from '@material-ui/core/InputLabel'
 import Input from '@material-ui/core/Input'
 import FilledInput from '@material-ui/core/FilledInput'
 import Select from '@material-ui/core/Select'
+import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import Radio from '@material-ui/core/Radio'
+import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
+import Chip from '@material-ui/core/Chip'
 
 // Create styles
 const useStyles = makeStyles(theme => ({
     formControl: {
-        marginBottom: theme.spacing.unit,
         width: '100%'
+    },
+    formControlLabelLine2: {
+        fontSize: theme.typography.captionNext.fontSize,
+        marginRight: 0.75 * theme.spacing.unit
     },
     selectEmpty: {
         marginTop: 4 * theme.spacing.unit
@@ -44,19 +54,65 @@ const useStyles = makeStyles(theme => ({
         marginBottom: theme.spacing.unit,
         width: '100%'
     },
+    selectedImageContainer: {
+        textAlign: 'center'
+    },
+    selectedImageIcon: {
+        display: 'block',
+        margin: '0 auto',
+        marginTop: 4 * theme.spacing.unit,
+        marginBottom: 2 * theme.spacing.unit,
+        height: 12 * theme.spacing.unit
+    },
+    selectedImageTitle: {
+        paddingBottom: 0,
+        marginBottom: 0.5 * theme.spacing.unit
+    },
+    selectedImageChange: {
+        marginBottom: 2 * theme.spacing.unit
+    },
+    selectedImageChangeSelected: {
+        color: theme.palette.text.disabled
+    },
+    buttonSelect: {
+        marginRight: 2 * theme.spacing.unit,
+        transition: 'all 0.1s cubic-bezier(0.4, 0.0, 0.2, 1)'
+    },
+    buttonSelectIcon: {
+        marginRight: theme.spacing.unit,
+        lineHeight: 1,
+    },
+    buttonSeletDisabled: {
+        backgroundColor: `${theme.palette.primary.main} !important`,
+        color: `${theme.palette.primary.contrastText} !important`,
+    },
+    radioGroup: {
+        justifyContent: 'center',
+    },
+    radioChecked: {
+        '&, & + $radioLabel': {
+            color: theme.palette.secondary.main,
+        },
+    },
+    radioLabel: {},
+    noMarginRight: {
+        marginRight: 0
+    }
 }))
 
 export function TextInput(props) {
     // Define styles
     const classes = useStyles()
-    // Set input component  
-    function VariantInput(props) {
+    // Create input component
+    function VariantInput(inputProps) {
         const inputTypes = {
             filled: FilledInput,
             standard: Input
         }
-        const InputVariant = inputTypes[props.variant]
-        return <InputVariant {...props} />
+        const InputVariant = inputTypes[inputProps.variant]
+        return (
+            <InputVariant {...inputProps} />
+        )
     }
     return (
         <FormControl className={classes.formControl}>
@@ -67,14 +123,14 @@ export function TextInput(props) {
                 {props.label}
             </InputLabel>
             <VariantInput
+                fullWidth
+                autoComplete={props.id}
                 name={props.id}
                 id={props.id}
                 variant={props.variant || 'standard'}
-                autoComplete={props.autoComplete || '__nope'}
-                fullWidth={props.fullWidth || false}
                 value={props.value}
                 onChange={props.onChange}
-                {...props}
+                {...props.inputProps}
             />
         </FormControl>
     )
@@ -84,21 +140,18 @@ export function SelectInput(props) {
     // Define styles
     const classes = useStyles()
     return (
-        <FormControl className={classes.formControl}>
+        <FormControl className={classes.formControl} variant={props.variant || 'standard'} >
             <InputLabel htmlFor={props.id}>
                 {props.label}
             </InputLabel>
             <Select
-                displayEmpty
-                name={props.id}
                 value={props.value}
                 onChange={props.onChange}
-                input={<Input name={props.id} id={props.id} />}
-                className={classes.selectEmpty}
+                input={props.inputVariant}
             >
-                {props.menuItems.map((menuItem) => (
-                    <MenuItem value={menuItem.value} key={menuItem.key}>
-                        {menuItem.name}
+                {props.options.map((item) => (
+                    <MenuItem value={item.value} key={item.key}>
+                        {item.label}
                     </MenuItem>
                 ))}
             </Select>
@@ -106,61 +159,9 @@ export function SelectInput(props) {
     )
 }
 
-
 export function Autocomplete(props) {
     // Define styles
     const classes = useStyles()
-    // Render input
-    function renderInput(inputProps) {
-        const { InputProps, classes, ref, ...other } = inputProps;
-
-        return (
-            <TextField label={props.label} fullWidth {...InputProps} {...other} />
-        )
-    }
-    // Get suggestion array
-    function getSuggestions(value) {
-        const inputValue = deburr(value.trim()).toLowerCase()
-        const inputLength = inputValue.length
-        let count = 0
-        return inputLength === 0
-            ? []
-            : props.suggestions.filter(suggestion => {
-                const keep =
-                    count < 5 && suggestion.label.slice(0, inputLength).toLowerCase() === inputValue
-
-                if (keep) {
-                    count += 1
-                }
-                return keep
-            })
-    }
-    // Render suggestions
-    function renderSuggestion({ suggestion, index, itemProps, highlightedIndex, selectedItem }) {
-        const isHighlighted = highlightedIndex === index
-        const isSelected = (selectedItem || '').indexOf(suggestion.label) > -1
-        return (
-            <MenuItem
-                {...itemProps}
-                key={suggestion.label}
-                selected={isHighlighted}
-                component="div"
-                style={{
-                    fontWeight: isSelected ? 500 : 400,
-                }}
-            >
-                {suggestion.label}
-            </MenuItem>
-        );
-    }
-    // Render suggestions prop types
-    renderSuggestion.propTypes = {
-        highlightedIndex: PropTypes.number,
-        index: PropTypes.number,
-        itemProps: PropTypes.object,
-        selectedItem: PropTypes.string,
-        suggestion: PropTypes.shape({ label: PropTypes.string }).isRequired,
-    };
     return (
         <Downshift id="downshift"
             onChange={props.onChange}
@@ -176,24 +177,29 @@ export function Autocomplete(props) {
                 selectedItem,
             }) => (
                     <div className={classes.autoCompleteContainer}>
-                        {renderInput({
-                            classes,
-                            InputProps: getInputProps({
+                        <TextField
+                            label={props.label}
+                            variant={props.variant}
+                            fullWidth
+                            inputProps={getInputProps({
                                 autoComplete: '__nope'
-                            }),
-                        })}
-
+                            })}
+                        />
                         <div {...getMenuProps()}>
                             {isOpen ? (
                                 <Paper className={classes.autoCompletePaper} square>
-                                    {getSuggestions(inputValue).map((suggestion, index) =>
-                                        renderSuggestion({
-                                            suggestion,
-                                            index,
-                                            itemProps: getItemProps({ item: suggestion.label }),
-                                            highlightedIndex,
-                                            selectedItem,
-                                        }),
+                                    {props.getSuggestions(inputValue).map((suggestion, index) =>
+                                        <MenuItem
+                                            {...getItemProps({ item: suggestion.label })}
+                                            key={suggestion.label}
+                                            selected={highlightedIndex === index}
+                                            component="div"
+                                            style={{
+                                                fontWeight: (selectedItem || '').indexOf(suggestion.label) > -1 ? 500 : 400,
+                                            }}
+                                        >
+                                            {suggestion.label}
+                                        </MenuItem>
                                     )}
                                 </Paper>
                             ) : null}
@@ -201,5 +207,131 @@ export function Autocomplete(props) {
                     </div>
                 )}
         </Downshift>
+    )
+}
+
+export function SelectedIcon(props) {
+    // Define styles
+    const classes = useStyles()
+    return (
+        <div className={classes.selectedImageContainer}>
+            <img
+                src={`/static/icons/${props.icon}`}
+                className={classes.selectedImageIcon}
+            />
+            <Typography
+                variant='h6'
+                component='p'
+                className={classes.selectedImageTitle}
+            >
+                {props.title}
+            </Typography>
+            <Button
+                size='small'
+                color='primary'
+                className={classes.selectedImageChange}
+                onClick={props.onClick}
+            >
+                {props.changeLabel}
+            </Button>
+            <Menu id="selectServiceMenu" anchorEl={props.anchorEl} open={Boolean(props.anchorEl)} onClose={props.onClose}>
+                {props.options.map((option) => (
+                    <MenuItem onClick={props.onClose} value={option.value} key={option.key}>
+                        {option.disabled === true ?
+                            <span className={classes.selectedImageChangeSelected}>{option.label}</span>
+                            :
+                            option.label
+                        }
+                    </MenuItem>
+                ))}
+            </Menu>
+        </div>
+    )
+}
+
+export function RadioSelect(props) {
+    // Define styles
+    const classes = useStyles()
+    return (
+        <FormControl className={classes.formControl}>
+            <RadioGroup
+                row
+                aria-label={props.label}
+                name={props.label}
+                className={classes.radioGroup}
+                value={props.value}
+                onChange={props.onChange}
+            >
+                {props.options.map((option) => (
+                    <FormControlLabel
+                        key={option.key}
+                        classes={{ label: classes.radioLabel }}
+                        align='center'
+                        value={option.value}
+                        control={<Radio classes={{ checked: classes.radioChecked }} />}
+                        label={
+                            <React.Fragment>
+                                <span>{option.label}</span> <br />
+                                <span className={classes.formControlLabelLine2}>{option.secondLine}</span>
+                            </React.Fragment>
+                        }
+                    />
+                ))}
+            </RadioGroup>
+        </FormControl>
+    )
+}
+
+export function ButtonSelect(props) {
+    // Define styles
+    const classes = useStyles()
+    // Define selected color
+    const selectedColor = {
+        true: 'primary',
+        false: 'default'
+    }
+    return (
+        props.options.map((item, index) => (
+            <Button
+                key={index}
+                size={item.value === props.value ? 'large' : 'medium'}
+                disabled={item.value === props.value}
+                variant='contained'
+                color={selectedColor[item.value === props.value]}
+                onClick={() => props.onClick(item.value)}
+                classes={{ disabled: classes.buttonSeletDisabled }}
+                className={classes.buttonSelect}
+            >
+                {item.icon &&
+                    <span className={classes.buttonSelectIcon}>
+                        {item.icon}
+                    </span>}
+                {item.label}
+            </Button>
+        ))
+    )
+}
+
+export function ChipSelect(props) {
+    return (
+        <Grid container spacing={16}>
+            {props.selected.map((chip, index) => (
+                <Grid item key={index}>
+                    <Chip
+                        label={chip.label}
+                        onDelete={() => props.onDelete(chip)}
+                        color='primary'
+                    />
+                </Grid>
+            ))}
+            {props.unselected.map((chip, index) => (
+                <Grid item key={index}>
+                    <Chip
+                        label={chip.label}
+                        onClick={() => props.onClick(chip)}
+                    />
+                </Grid>
+            ))}
+        </Grid>
     )
 }

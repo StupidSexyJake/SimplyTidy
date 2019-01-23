@@ -5,13 +5,17 @@ import classNames from 'classnames'
 import Typography from '@material-ui/core/Typography'
 // Custom components
 import Scrim from '../components/Scrim'
-import Container from '../components/Containers'
+import { Container } from '../components/Containers'
 
 export default function Fold(props) {
     // Create styles
     const useStyles = makeStyles(theme => ({
-        root: {
+        scrim: {
             background: props => `url("/static/backgrounds/${props.hero}") no-repeat 0 center/cover`,
+        },
+        container: {
+            paddingTop: 18 * theme.spacing.unit,
+            paddingBottom: 12 * theme.spacing.unit
         }
     }))
     // Define styles
@@ -20,11 +24,8 @@ export default function Fold(props) {
         <section>
             <Scrim
                 hsl={props.scrim}
-                className={classes.root}>
-                <Container
-                    paddingTop={props.paddingTop || 20}
-                    paddingBottom={props.paddingBottom || 12}
-                >
+                className={classes.scrim}>
+                <Container variant='fold'>
                     <Typography
                         variant={props.titleProps.variant || 'h2'}
                         component={props.titleProps.component}

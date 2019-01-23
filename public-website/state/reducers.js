@@ -2,9 +2,17 @@
 import {
     TOGGLE_BOOKING_FORM_DRAWER,
     HANDLE_CLICK,
-    ADD_EXTRA,
-    DELETE_EXTRA
+    HANDLE_CHANGE,
+    HANDLE_LINK_CLICK,
+    ADD_CHIP,
+    DELETE_CHIP,
+    NEXT_BOOKING_STEP,
+    PREVIOUS_BOOKING_STEP,
 } from './actions'
+// Data
+import {
+    extrasMap
+} from '../components/serviceDetails'
 
 // Set initial state values
 export const initialState = {
@@ -20,14 +28,14 @@ export const initialState = {
     },
     service: {
         service: 10,
-        fixedPrice: true,
+        package: 'fixedPrice',
         bedrooms: 1,
         bathrooms: 1,
         livingAreas: 1,
         kitchens: 1,
         cleaners: 1,
-        hours: 1,
-        frequency: 'weekly',
+        hours: 2,
+        frequency: '10',
         extras: []
     },
     drawer: {
@@ -35,15 +43,17 @@ export const initialState = {
     },
     bookingForm: {
         page: 0,
-        showAllRooms: false,
-        unselectedExtras: [
-            { label: 'Oven cleaning' },
-            { label: 'Inside cupboards' },
-            { label: 'Inside fridge' },
-            { label: 'Inside cupboards' },
-            { label: 'Inside fridge' },
-        ]
+        fadeService: false,
+        unselectedExtras: initialUnselectedExtrasArray()
     }
+}
+
+function initialUnselectedExtrasArray() {
+    let unselectedExtrasArray = []
+    for (const key in extrasMap.values) {
+        unselectedExtrasArray.push(key)
+    }
+    return unselectedExtrasArray
 }
 
 // Create reducer
@@ -58,6 +68,7 @@ const reducer = (state, action) => {
                 }
             })
         case HANDLE_CLICK:
+        case HANDLE_CHANGE:
             return Object.assign({}, state, {
                 ...reduced,
                 [action.payload.stateType]: {
@@ -65,34 +76,62 @@ const reducer = (state, action) => {
                     [action.payload.value]: action.payload.event
                 }
             })
-        case ADD_EXTRA:
-            const extraToAdd = state.bookingForm.unselectedExtras.indexOf(action.payload)
-            const newAddUnselectedExtras = state.bookingForm.unselectedExtras.splice(extraToAdd, 1)
-            const newAddSelectedExtras = state.service.extras.push(extraToAdd)
+        case HANDLE_LINK_CLICK:
             return Object.assign({}, state, {
                 ...reduced,
-                service: {
-                    ...reduced.service,
-                    extra: newAddSelectedExtras
-                },
-                bookingForm: {
-                    ...reduced.bookingForm,
-                    unselectedExtras: newAddUnselectedExtras
+                [action.payload.stateType]: {
+                    ...reduced[action.payload.stateType],
+                    [action.payload.state]: action.payload.value
                 }
             })
-        case DELETE_EXTRA:
-            const extraToDelete = state.service.extras.indexOf(action.payload)
-            const NewDeletedSelectedExtras = state.service.extras.splice(extraToDelete, 1)
-            const newDeletedUnselectedExtras = state.bookingForm.unselectedExtras.push(extraToDelete)
+        case ADD_CHIP:
+            const currentStateArrayAdd = state[action.payload.stateType][action.payload.value]
+            const unselectedArrayAdd = state[action.payload.unselectedStateType][action.payload.unselectedValue]
+            currentStateArrayAdd.push(action.payload.chip)
+            const extraToRemoveAdd = unselectedArrayAdd.indexOf(action.payload.chip)
+            unselectedArrayAdd.splice(extraToRemoveAdd, 1)
             return Object.assign({}, state, {
                 ...reduced,
-                service: {
-                    ...reduced.service,
-                    extra: NewDeletedSelectedExtras
+                [action.payload.stateType]: {
+                    ...reduced[action.payload.stateType],
+                    [action.payload.value]: currentStateArrayAdd
                 },
+                [action.payload.unselectedStateType]: {
+                    ...reduced[action.payload.unselectedStateType],
+                    [action.payload.unselectedValue]: unselectedArrayAdd
+                },
+            })
+        case DELETE_CHIP:
+            const currentStateArrayDel = state[action.payload.stateType][action.payload.value]
+            const unselectedArrayDel = state[action.payload.unselectedStateType][action.payload.unselectedValue]
+            unselectedArrayDel.unshift(action.payload.chip)
+            const extraToRemoveDel = currentStateArrayDel.indexOf(action.payload.chip)
+            currentStateArrayDel.splice(extraToRemoveDel, 1)
+            return Object.assign({}, state, {
+                ...reduced,
+                [action.payload.stateType]: {
+                    ...reduced[action.payload.stateType],
+                    [action.payload.value]: currentStateArrayDel
+                },
+                [action.payload.unselectedStateType]: {
+                    ...reduced[action.payload.unselectedStateType],
+                    [action.payload.unselectedValue]: unselectedArrayDel
+                },
+            })
+        case NEXT_BOOKING_STEP:
+            return Object.assign({}, state, {
+                ...reduced,
                 bookingForm: {
                     ...reduced.bookingForm,
-                    unselectedExtras: newDeletedUnselectedExtras
+                    page: state.bookingForm.page + 1
+                }
+            })
+        case PREVIOUS_BOOKING_STEP:
+            return Object.assign({}, state, {
+                ...reduced,
+                bookingForm: {
+                    ...reduced.bookingForm,
+                    page: state.bookingForm.page - 1
                 }
             })
         default:

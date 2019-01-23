@@ -7,7 +7,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 // Custom components
-import Container from '../../components/Containers'
+import { Container } from '../../components/Containers'
 // Icons
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import QuestionIcon from '@material-ui/icons/ContactSupport'
@@ -37,8 +37,8 @@ const useStyles = makeStyles(theme => ({
         margin: '0.5rem 0.5rem 0 0.5rem'
     },
     moreQuestions: {
-        textAlign: 'center', 
-        width: 'fit-content', 
+        textAlign: 'center',
+        width: 'fit-content',
         margin: '3rem auto 0 auto'
     }
 }))
@@ -84,7 +84,7 @@ export default React.memo(function CommonQuestions() {
     const classes = useStyles()
     return (
         <section className={classes.root}>
-            <Container className={classes.container}>
+            <Container variant='section' className={classes.container}>
                 <Typography variant='h3' component='h2'>
                     Common Questions
                         </Typography>

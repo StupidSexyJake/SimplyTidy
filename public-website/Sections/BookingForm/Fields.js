@@ -1,116 +1,176 @@
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 // State
 import { Store } from '../../state/store'
 // Actions
-import { handleClick } from '../../state/actions'
-// Input field layouts
 import {
-    TextInput,
-    SelectInput,
-    Autocomplete
+    handleChange,
+} from '../../state/actions'
+// Data
+import {
+    serviceMap,
+    packageMap,
+    frequencyMap,
+    roomsMap,
+    clientMap,
+    hourlyRateMap,
+    extrasMap
+} from '../../components/serviceDetails'
+// InputField containers
+import {
+    SelectInputContainer,
+    SelectedIconContainer,
+    TextInputContainer,
+    AutoCompleteContainer,
+    ButtonSelectContainer,
+    ChipSelectContainer
+} from './Containers/InputField'
+import {
+    RadioSelect,
 } from './Layout/InputField'
-// Suggestion arrays
-import { suburbArray } from '../../components/suburbsArray'
 
+//
+// CLIENT FIELDS
+// ::::::::::::::::::::::::::
 export function Name(props) {
-    const { state, dispatch } = useContext(Store)
     return (
-        <TextInput
-            label='Name'
-            id='name'
-            value={state.client.name}
-            onChange={(event) => dispatch(handleClick('client', 'name', event.target.value))}
-            variant={props.variant || 'standard'}
-            autoComplete={props.autoComplete || 'none'}
-            fullWidth={props.fullWidth || false}
+        <TextInputContainer
+            category={clientMap.values.name}
+            variant={props.filled && 'filled'}
         />
     )
 }
 
 export function Email(props) {
-    const { state, dispatch } = useContext(Store)
     return (
-        <TextInput
-            label='Email'
-            id='email'
-            value={state.client.email}
-            onChange={(event) => dispatch(handleClick('client', 'email', event.target.value))}
-            variant={props.variant || 'standard'}
-            autoComplete={props.autoComplete || 'none'}
-            fullWidth={props.fullWidth || false}
+        <TextInputContainer
+            category={clientMap.values.email}
+            variant={props.filled && 'filled'}
         />
     )
 }
 
 export function Suburb(props) {
-    const { state, dispatch } = useContext(Store)
     return (
-        <Autocomplete
-            label='Suburb'
-            id='suburb'
-            value={state.client.suburb}
-            onChange={(selection) => dispatch(handleClick('client', 'suburb', selection))}
-            suggestions={suburbArray}
-            variant={props.variant || 'standard'}
-            autoComplete={props.autoComplete || 'none'}
-            fullWidth={props.fullWidth || false}
+        <AutoCompleteContainer
+            category={clientMap.values.suburb}
+            variant={props.filled && 'filled'}
         />
     )
 }
 
-export function Service() {
-    const { state, dispatch } = useContext(Store)
+//
+// SERVICE FIELDS
+// ::::::::::::::::::::::::::
+export function Service(props) {
     return (
-        <SelectInput
-            label='Service'
-            id='service'
-            value={state.service.service}
-            onChange={(event) => dispatch(handleClick('service', 'service', event.target.value))}
-            menuItems={[
-                { key: 1, value: 10, name: 'Routine Cleaning' },
-                { key: 2, value: 20, name: 'One Time Cleaning' },
-                { key: 3, value: 30, name: 'Deep Cleaning' },
-                { key: 4, value: 40, name: 'Bond Cleaning' }
-            ]}
+        <SelectInputContainer
+            category={serviceMap}
+            variant={props.filled && 'filled'}
         />
     )
 }
 
-export function Bedrooms() {
-    const { state, dispatch } = useContext(Store)
+// CHANGE ICON FROM IMAGE TO SVG COMPONENT
+export function ServiceImage() {
     return (
-        <SelectInput
-            label='Bedrooms'
-            id='bedrooms'
-            value={state.service.bedrooms}
-            onChange={(event) => dispatch(handleClick('service', 'bedrooms', event.target.value))}
-            menuItems={[
-                { key: 1, value: 1, name: '1' },
-                { key: 2, value: 2, name: '2' },
-                { key: 3, value: 3, name: '3' },
-                { key: 4, value: 4, name: '4' },
-                { key: 5, value: 5, name: '5' },
-                { key: 6, value: 6, name: '6' },
-            ]}
+        <SelectedIconContainer
+            category={serviceMap}
         />
     )
 }
 
-export function Bathrooms() {
-    const { state, dispatch } = useContext(Store)
+export function Package() {
     return (
-        <SelectInput
-            label='Bathrooms'
-            id='bathrooms'
-            value={state.service.bathrooms}
-            onChange={(event) => dispatch(handleClick('service', 'bathrooms', event.target.value))}
-            menuItems={[
-                { key: 1, value: 1, name: '1' },
-                { key: 2, value: 2, name: '2' },
-                { key: 3, value: 3, name: '3' },
-                { key: 4, value: 4, name: '4' },
-                { key: 5, value: 5, name: '5' },
-                { key: 6, value: 6, name: '6' },
+        <ButtonSelectContainer
+            category={packageMap}
+        />
+    )
+}
+
+export function Bedrooms(props) {
+    return (
+        <SelectInputContainer
+            category={roomsMap.values[10]}
+            variant={props.filled && 'filled'}
+        />
+    )
+}
+
+export function Bathrooms(props) {
+    return (
+        <SelectInputContainer
+            category={roomsMap.values[20]}
+            variant={props.filled && 'filled'}
+        />
+    )
+}
+
+export function LivingAreas(props) {
+    return (
+        <SelectInputContainer
+            category={roomsMap.values[30]}
+            variant={props.filled && 'filled'}
+        />
+    )
+}
+
+export function Kitchens(props) {
+    return (
+        <SelectInputContainer
+            category={roomsMap.values[40]}
+            variant={props.filled && 'filled'}
+        />
+    )
+}
+
+export function NumberOfCleaners(props) {
+    return (
+        <SelectInputContainer
+            category={hourlyRateMap.values.cleaners}
+            variant={props.filled && 'filled'}
+        />
+    )
+}
+
+export function NumberOfHours(props) {
+    return (
+        <SelectInputContainer
+            category={hourlyRateMap.values.hours}
+            variant={props.filled && 'filled'}
+        />
+    )
+}
+
+export function Extras() {
+    return (
+        <ChipSelectContainer
+            category={extrasMap}
+        />
+        // <ChipSelect
+        //     selected={state.service.extras}
+        //     unselected={state.bookingForm.unselectedExtras}
+        //     onClick={(extra) => dispatch(addExtra(extra))}
+        //     onDelete={(extra) => dispatch(deleteExtra(extra))}
+        // />
+    )
+}
+
+export function Frequency() {
+    // Get state
+    const { state, dispatch } = useContext(Store)
+    function discountAmount(decimal) {
+        return (`${decimal * 100}% off ${' '}`)
+    }
+    return (
+        <RadioSelect
+            label='Frequency'
+            id='frequency'
+            value={state.service.frequency}
+            onChange={(event) => dispatch(handleChange('service', 'frequency', event.target.value))}
+            options={[
+                { key: 1, value: '10', label: frequencyMap['10'].label, secondLine: discountAmount(frequencyMap['10'].discountAmount) },
+                { key: 2, value: '20', label: frequencyMap['20'].label, secondLine: discountAmount(frequencyMap['20'].discountAmount) },
+                { key: 3, value: '30', label: frequencyMap['30'].label, secondLine: discountAmount(frequencyMap['30'].discountAmount) },
             ]}
         />
     )

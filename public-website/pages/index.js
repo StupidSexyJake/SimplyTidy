@@ -3,8 +3,9 @@ import '../src/bootstrap'
 import React from 'react'
 // State provider
 import { Provider } from '../state/store'
-// Custom components
-import Header from '../sections/Header'
+// Material components
+import { makeStyles } from '@material-ui/styles'
+import Hidden from '@material-ui/core/Hidden'
 // Page specific sections
 import Features from '../sections/Homepage/Features'
 import About from '../sections/Homepage/AboutUs'
@@ -15,6 +16,7 @@ import Reviews from '../sections/Homepage/Reviews'
 import Numbers from '../sections/Homepage/Numbers'
 import CommonQuestions from '../sections/Homepage/CommonQuestions'
 // Common sections
+import Header from '../sections/Header'
 import Fold from '../sections/Fold'
 import PreBooking from '../sections/PreBooking'
 import BookingFormDrawer from '../sections/BookingFormDrawer'
@@ -22,7 +24,16 @@ import CTADivider from '../sections/CTADivider'
 import Footer from '../sections/Footer'
 import Navbar from '../sections/Navbar'
 
+// Index styles
+const indexStyles = makeStyles(theme => ({
+    preBooking: {
+        marginTop: 8 * theme.spacing.unit,
+    },
+}))
+
 export default function Index() {
+    // Define styles
+    const classes = indexStyles()
     return (
         <React.Fragment>
             <Provider>
@@ -37,18 +48,20 @@ export default function Index() {
                     }}
                     subtitle="You click. We clean. It's that simple."
                 >
-                    <PreBooking />
+                    <PreBooking className={classes.preBooking} />
                 </Fold>
-                <BookingFormDrawer />
-                <Features />
-                <About />
-                <Benefits />
-                <CTADivider />
+                <BookingFormDrawer /> {/* Fix service image code */}
+                <Hidden smDown>
+                    <Features /> {/* Formatting */}
+                </Hidden>
+                <About />  {/* Split typography */}
+                <Benefits /> {/* Split into components, use grid instead of maxWidth */}
+                <CTADivider /> {/* Change to grid instead of maxWidth */}
                 <Services />
-                <Guarantee />
+                <Guarantee /> {/* rem to px */}
                 <Reviews />
-                <Numbers />
-                <CommonQuestions />
+                <Numbers /> {/* Split into components */}
+                <CommonQuestions /> {/* rem to px */}
                 <Footer />
             </Provider>
         </React.Fragment>

@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 // Custom components
-import Container from '../components/Containers';
+import { Container } from '../components/Containers';
 import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles(theme => ({
@@ -25,7 +25,7 @@ export default React.memo(function Footer() {
     const classes = useStyles()
     return (
         <section className={classes.root}>
-            <Container className={classes.container}>
+            <Container variant='section' className={classes.container}>
                 <Grid container>
                     <Grid item xs={8}>
                         LOGO
@@ -45,7 +45,7 @@ export default React.memo(function Footer() {
                             <Grid item xs={2}>
                                 Login
                             </Grid>
-                        </Grid>                       
+                        </Grid>
                     </Grid>
                     <Grid item xs={4}>
                         Sign Up

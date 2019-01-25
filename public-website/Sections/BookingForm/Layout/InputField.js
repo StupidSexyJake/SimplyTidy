@@ -7,8 +7,6 @@ import Grid from '@material-ui/core/Grid'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import InputLabel from '@material-ui/core/InputLabel'
-import Input from '@material-ui/core/Input'
-import FilledInput from '@material-ui/core/FilledInput'
 import Select from '@material-ui/core/Select'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -54,29 +52,29 @@ const useStyles = makeStyles(theme => ({
         marginBottom: theme.spacing.unit,
         width: '100%'
     },
-    selectedImageContainer: {
+    selectedIconContainer: {
         textAlign: 'center'
     },
-    selectedImageIcon: {
+    selectedIconIcon: {
         display: 'block',
         margin: '0 auto',
-        marginTop: 4 * theme.spacing.unit,
-        marginBottom: 2 * theme.spacing.unit,
-        height: 12 * theme.spacing.unit
+        marginTop: 2 * theme.spacing.unit,
+        fontSize: `${16 * theme.spacing.unit / 16}rem`,
+        color: theme.palette.primary.dark
     },
-    selectedImageTitle: {
+    selectedIconTitle: {
         paddingBottom: 0,
         marginBottom: 0.5 * theme.spacing.unit
     },
-    selectedImageChange: {
+    selectedIconChange: {
         marginBottom: 2 * theme.spacing.unit
     },
-    selectedImageChangeSelected: {
+    selectedIconChangeSelected: {
         color: theme.palette.text.disabled
     },
     buttonSelect: {
         marginRight: 2 * theme.spacing.unit,
-        transition: 'all 0.1s cubic-bezier(0.4, 0.0, 0.2, 1)'
+        transition: 'all 0.1s cubic-bezier(0.4, 0.0, 0.2, 1)',
     },
     buttonSelectIcon: {
         marginRight: theme.spacing.unit,
@@ -100,20 +98,18 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
+// Create input component based on prop variant
+function VariantInput(inputProps) {
+    const { inputVariant, ...other } = inputProps
+    const InputVariant = inputVariant
+    return (
+        <InputVariant {...other} />
+    )
+}
+
 export function TextInput(props) {
     // Define styles
     const classes = useStyles()
-    // Create input component
-    function VariantInput(inputProps) {
-        const inputTypes = {
-            filled: FilledInput,
-            standard: Input
-        }
-        const InputVariant = inputTypes[inputProps.variant]
-        return (
-            <InputVariant {...inputProps} />
-        )
-    }
     return (
         <FormControl className={classes.formControl}>
             <InputLabel
@@ -123,11 +119,11 @@ export function TextInput(props) {
                 {props.label}
             </InputLabel>
             <VariantInput
+                inputVariant={props.inputVariant}
                 fullWidth
                 autoComplete={props.id}
                 name={props.id}
                 id={props.id}
-                variant={props.variant || 'standard'}
                 value={props.value}
                 onChange={props.onChange}
                 {...props.inputProps}
@@ -145,9 +141,12 @@ export function SelectInput(props) {
                 {props.label}
             </InputLabel>
             <Select
+                fullWidth
+                name={props.id}
+                id={props.id}
                 value={props.value}
                 onChange={props.onChange}
-                input={props.inputVariant}
+                input={<VariantInput inputVariant={props.inputVariant} />}
             >
                 {props.options.map((item) => (
                     <MenuItem value={item.value} key={item.key}>
@@ -214,22 +213,19 @@ export function SelectedIcon(props) {
     // Define styles
     const classes = useStyles()
     return (
-        <div className={classes.selectedImageContainer}>
-            <img
-                src={`/static/icons/${props.icon}`}
-                className={classes.selectedImageIcon}
-            />
+        <div className={classes.selectedIconContainer}>
+            <VariantInput inputVariant={props.icon} className={classes.selectedIconIcon} />
             <Typography
                 variant='h6'
                 component='p'
-                className={classes.selectedImageTitle}
+                className={classes.selectedIconTitle}
             >
                 {props.title}
             </Typography>
             <Button
                 size='small'
                 color='primary'
-                className={classes.selectedImageChange}
+                className={classes.selectedIconChange}
                 onClick={props.onClick}
             >
                 {props.changeLabel}
@@ -238,7 +234,7 @@ export function SelectedIcon(props) {
                 {props.options.map((option) => (
                     <MenuItem onClick={props.onClose} value={option.value} key={option.key}>
                         {option.disabled === true ?
-                            <span className={classes.selectedImageChangeSelected}>{option.label}</span>
+                            <span className={classes.selectedIconChangeSelected}>{option.label}</span>
                             :
                             option.label
                         }
@@ -272,7 +268,7 @@ export function RadioSelect(props) {
                         label={
                             <React.Fragment>
                                 <span>{option.label}</span> <br />
-                                <span className={classes.formControlLabelLine2}>{option.secondLine}</span>
+                                {option.line2 && <span className={classes.formControlLabelLine2}>{option.line2}</span>}
                             </React.Fragment>
                         }
                     />

@@ -14,7 +14,7 @@ import QuestionIcon from '@material-ui/icons/ContactSupport'
 
 const useStyles = makeStyles(theme => ({
     root: {
-        background: theme.palette.primary.light
+        background: `${theme.palette.primary.light} url('/static/backgrounds/cleaning-pattern-light.jpg') no-repeat 0 center / cover`,
     },
     subtitle: {
         paddingBottom: '3rem'

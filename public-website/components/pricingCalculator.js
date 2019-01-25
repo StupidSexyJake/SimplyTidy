@@ -37,13 +37,13 @@ export function totalPrice(props) {
         case 10:
             // Calculate discount amounts for fixed price routine services
             switch (state.service.frequency) {
-                case '10':
+                case 'weekly':
                     discount = 0.75
                     break
-                case '20':
+                case 'fortnightly':
                     discount = 0.85
                     break
-                case '30':
+                case 'monthly':
                     discount = 0.9
                     break
                 default: null
@@ -55,20 +55,20 @@ export function totalPrice(props) {
             perLivingArea = 25
             perKitchen = 30
             // Calculate subtotal for fixed price vs hourly rate
-            switch (state.service.fixedPrice) {
-                case true:
+            switch (state.service.package) {
+                case 'fixedPrice':
                     bedrooms = state.service.bedrooms * perBedroom
                     bathrooms = state.service.bathrooms * perBathroom
                     kitchens = state.service.kitchens * perKitchen
                     livingAreas = state.service.livingAreas * perLivingArea
                     // Calculate extras prices
-                    const extras = state.service.extras
-                    extras.forEach(selectedExtra => {
-                        extrasTotal += extrasPricing[selectedExtra.key]
-                    })
-                    total = (flagfall + bedrooms + bathrooms + kitchens + livingAreas + extrasTotal) * discount
+                    // const extras = state.service.extras
+                    // extras.forEach(selectedExtra => {
+                    //     extrasTotal += extrasPricing[selectedExtra.key]
+                    // })
+                    total = (flagfall + bedrooms + bathrooms + kitchens + livingAreas) * discount
                     break
-                case false:
+                case 'hourlyRate':
                     perHour = 50
                     hourly = (state.service.hours * state.service.cleaners) * perHour
                     total = hourly

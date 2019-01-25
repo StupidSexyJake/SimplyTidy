@@ -12,7 +12,7 @@ import { Container } from '../../components/Containers'
 // Create styles
 const useStyles = makeStyles(theme => ({
     root: {
-        background: theme.palette.primary.light
+        background: `${theme.palette.primary.light} url('/static/backgrounds/cleaning-pattern-light.jpg') no-repeat 0 center / cover`,
     },
     leftGrid: {
         textAlign: 'center'
@@ -59,6 +59,13 @@ export default React.memo(function AboutUs() {
                                 src='./static/logos/logo-primary.png'
                                 className={classes.image}
                             />
+                            {/* <Typography
+                                variant='h4' component='p'
+                                className={classes.logo}
+                                color='secondary'
+                            >
+                                GoldCoastMaids
+                            </Typography> */}
                             <Divider className={classes.divider} />
                             <Typography
                                 variant='h6'

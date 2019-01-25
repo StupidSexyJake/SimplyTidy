@@ -19,6 +19,10 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 // Custom components
 import { Container } from '../../components/Containers'
+import { Divider, Grid } from '@material-ui/core';
+import { IconContentContainer } from './Containers/ContentField';
+import LockIcon from '@material-ui/icons/EnhancedEncryption';
+import Image from '../../components/Image'
 
 // Define steps
 const steps = ['Choose Your Service', 'Select A Date', 'Add Instructions', 'Confirm Booking']
@@ -77,6 +81,18 @@ const useStyles = makeStyles(theme => ({
         marginTop: 6 * theme.spacing.unit,
         paddingBottom: theme.spacing.unit
     },
+    buttonDivider: {
+        marginTop: 4 * theme.spacing.unit,
+        marginBottom: 4 * theme.spacing.unit
+    },
+    pageButtonContainer: {
+        marginTop: 2 * theme.spacing.unit
+    },
+    pageButton: {
+        paddingLeft: 12 * theme.spacing.unit,
+        paddingRight: 12 * theme.spacing.unit,
+        marginRight: 2 * theme.spacing.unit
+    }
 }))
 
 export default React.memo(function BookingForm(props) {
@@ -106,7 +122,7 @@ export default React.memo(function BookingForm(props) {
             <Container variant='base' md={8} className={classes.cardContainer}>
                 <Card className={classes.card}>
                     <CardContent className={classes.cardContainer}>
-                        <Container>
+                        <Container md={11}>
                             {state.bookingForm.page === steps.length ? (
                                 <div>
                                     <Typography className={classes.instructions}>
@@ -131,22 +147,43 @@ export default React.memo(function BookingForm(props) {
                                             {getStepIndex(state.bookingForm.page)['subtitle']}
                                         </Typography>
                                         {getStepIndex(state.bookingForm.page)['content']}
-                                        <div>
-                                            <Button
-                                                disabled={state.bookingForm.page === 0}
-                                                onClick={() => dispatch(previousBookingStep())}
-                                                className={classes.backButton}
-                                            >
-                                                Back
-                                        </Button>
-                                            <Button
-                                                variant="contained"
-                                                color="secondary"
-                                                onClick={() => dispatch(nextBookingStep())}
-                                            >
-                                                {state.bookingForm.page === steps.length - 1 ? 'Finish' : 'Next'}
-                                            </Button>
-                                        </div>
+                                        <Divider className={classes.buttonDivider} />
+                                        <Grid container className={classes.pageButtonContainer} alignItems='flex-end'>
+                                            <Grid item>
+                                                {state.bookingForm.page !== 0 &&
+                                                    <Button
+                                                        onClick={() => dispatch(previousBookingStep())}
+                                                        className={classes.pageButton}
+                                                        size='large'
+                                                    >
+                                                        Back
+                                                </Button>
+                                                }
+                                                <Button
+                                                    variant="contained"
+                                                    color="secondary"
+                                                    onClick={() => dispatch(nextBookingStep())}
+                                                    className={classes.pageButton}
+                                                    size='large'
+                                                >
+                                                    {state.bookingForm.page === steps.length - 1 ? 'Finish' : 'Next'}
+                                                </Button>
+                                            </Grid>
+                                            <Grid item style={{ marginLeft: 'auto' }}>
+                                                <IconContentContainer
+                                                    height={4} // measured in theme.styling.units (8px unless default changed)
+                                                    icons={[
+                                                        {
+                                                            inputVariant: LockIcon,
+                                                        },
+                                                        {
+                                                            inputVariant: Image,
+                                                            src: './static/other/powered_by_stripe.png',
+                                                        },
+                                                    ]}
+                                                />
+                                            </Grid>
+                                        </Grid>
                                     </div>
                                 )}
                         </Container>

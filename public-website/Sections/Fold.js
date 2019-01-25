@@ -11,12 +11,8 @@ export default function Fold(props) {
     // Create styles
     const useStyles = makeStyles(theme => ({
         scrim: {
-            background: props => `url("/static/backgrounds/${props.hero}") no-repeat 0 center/cover`,
+            background: props => `url('/static/backgrounds/${props.hero}') no-repeat 0 center/cover`,
         },
-        container: {
-            paddingTop: 18 * theme.spacing.unit,
-            paddingBottom: 12 * theme.spacing.unit
-        }
     }))
     // Define styles
     const classes = useStyles(props)
@@ -27,9 +23,9 @@ export default function Fold(props) {
                 className={classes.scrim}>
                 <Container variant='fold'>
                     <Typography
-                        variant={props.titleProps.variant || 'h2'}
-                        component={props.titleProps.component}
-                        color={props.titleProps.color}
+                        variant={props.titleProps && props.titleProps.variant || 'h2'}
+                        component={props.titleProps && props.titleProps.component || 'h1'}
+                        color={props.titleProps && props.titleProps.color}
                         className={classNames(classes.title, props.className)}
                         {...props.titleProps}
                     >

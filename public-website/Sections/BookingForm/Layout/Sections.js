@@ -1,11 +1,11 @@
 import React from 'react'
+import classNames from 'classnames'
 // Components
 import { Container } from '../../../components/Containers'
 // Material components
 import { makeStyles } from '@material-ui/styles'
 import Typography from '@material-ui/core/Typography'
 import Collapse from '@material-ui/core/Collapse'
-import Grid from '@material-ui/core/Grid'
 // import Fade from '@material-ui/core/Fade'
 
 // Create styles
@@ -21,8 +21,8 @@ const useStyles = makeStyles(theme => ({
         paddingBottom: theme.spacing.unit
     },
     sidebarContainer: {
-        paddingTop: 4 * theme.spacing.unit,
-        paddingBottom: 4 * theme.spacing.unit,
+        marginTop: 2 * theme.spacing.unit,
+        marginBottom: 2 * theme.spacing.unit,
         height: 'fit-content'
     },
     sidebarTitleContainer: {
@@ -33,7 +33,8 @@ const useStyles = makeStyles(theme => ({
         paddingBottom: theme.spacing.unit
     }
 }))
-export function FieldGroup(props) {
+
+export function FormGroup(props) {
     // Define styles
     const classes = useStyles()
     return (
@@ -63,58 +64,28 @@ export function ExpandGroup(props) {
     const classes = useStyles()
     return (
         <Collapse in={props.expandState} timeout={props.timeout || 300} className={props.className}>
-            <Container md={12} className={classes.fieldGroupContainer}>
-                {props.title && <Typography
-                    variant='h6'
-                    component='h3'
-                    align='left'
-                    className={classes.fieldGrouptitle}
-                >
-                    {props.title}
-                </Typography>}
-                {props.description && <Typography
-                    variant='caption'
-                    align='left'
-                    className={classes.fieldGroupsubtitle}
-                >
-                    {props.description}
-                </Typography>}
-                {props.children}
-            </Container>
+            {props.children}
         </ Collapse>
     )
 }
-
-// Not implemented
-// export function FadeSelectGroup(props) {
-//     return (
-//         <Fade in={props.checked}>
-//             <div>
-//                 {props.children}
-//             </div>
-//         </Fade>
-//     )
-// }
 
 export function SidebarGroup(props) {
     // Define styles
     const classes = useStyles()
     return (
-        <Container md={12} className={classes.sidebarContainer}>
+        <Container md={12} className={classNames(classes.sidebarContainer, props.className)}>
             <div className={classes.sidebarTitleContainer}>
                 <Typography
                     variant={props.titleVariant || 'h6'}
                     component={props.component || 'p'}
-                    align={props.align || 'center'}
+                    align={props.align || 'left'}
                     className={classes.sidebarTitle}
                 >
                     {props.title}
                 </Typography>
             </div>
             <div className={classes.sidebarContent}>
-                <Grid container alignItems='center'>
-                    {props.children}
-                </Grid>
+                {props.children}
             </div>
         </Container>
     )

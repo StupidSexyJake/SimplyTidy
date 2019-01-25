@@ -9,6 +9,7 @@ const hsl = {
     secondaryDark: '21, 100%, 45%',
     white: '0, 100%, 100%',
     black: '0, 0%, 0%',
+    brown: '16, 25%, 38%'
 }
 
 export default function Gradient(props) {

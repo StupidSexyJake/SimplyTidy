@@ -69,7 +69,7 @@ function ServiceList() {
     return (
         <React.Fragment>
             {getServices().map((service) => (
-                <Grid item xs={3} className={classes.gridItem} key={service.value}>
+                <Grid item md={6} lg={3} className={classes.gridItem} key={service.value}>
                     <Card>
                         <CardActionArea>
                             <CardMedia

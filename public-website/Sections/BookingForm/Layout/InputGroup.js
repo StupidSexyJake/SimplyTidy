@@ -10,20 +10,27 @@ const useStyles = makeStyles(theme => ({
         marginTop: 0.5 * theme.spacing.unit,
     },
     iconContainer: {
-        textAlign: 'center'
+        textAlign: 'center',
     },
+    icon: {
+        color: theme.palette.primary.dark
+    }
 }))
+
+// Create field input component from data
+function VariantInput(inputProps) {
+    const { inputVariant, ...other } = inputProps
+    const InputVariant = inputVariant
+    return (
+        <InputVariant {...other} />
+    )
+}
 
 export function InputGroup(props) {
     // Get number of columns
     const cols = props.cols || 1
     // Define styles
     const classes = useStyles()
-    // Create input component
-    function FieldInput(inputProps) {
-        const InputVariant = inputProps.type
-        return <InputVariant {...inputProps} />
-    }
     return (
         <Grid
             container
@@ -31,12 +38,10 @@ export function InputGroup(props) {
             className={classes.container}
             alignItems='center'
         >
-            {props.fields.map((field, index) => (
-                <React.Fragment key={index}>
-                    <Grid item md={12 / cols} sm={6} xs={12} className={props.className}>
-                        <FieldInput filled={props.filled} type={field.inputField} />
-                    </Grid>
-                </React.Fragment>
+            {props.data.map((data, index) => (
+                <Grid item md={12 / cols} sm={6} xs={12} key={index}>
+                    <VariantInput filled={props.filled} inputVariant={data.inputField} />
+                </Grid>
             ))}
         </Grid>
     )
@@ -47,11 +52,6 @@ export function InputGroup_WithIcons(props) {
     const classes = useStyles()
     // Get number of columns
     const cols = props.cols || 1
-    // Create input component
-    function FieldInput(inputProps) {
-        const InputVariant = inputProps.type
-        return <InputVariant {...inputProps} />
-    }
     return (
         <Grid
             container
@@ -59,13 +59,17 @@ export function InputGroup_WithIcons(props) {
             className={classes.container}
             alignItems='center'
         >
-            {props.fields.map((field, index) => (
+            {props.data.map((data, index) => (
                 <React.Fragment key={index}>
                     <Grid item xs={1} className={classes.iconContainer}>
-                        {field.icon}
+                        <VariantInput
+                            inputVariant={data.icon}
+                            fontSize='large'
+                            className={classes.icon}
+                        />
                     </Grid>
                     <Grid item xs={(12 / cols) - 1}>
-                        <FieldInput filled={props.filled} type={field.inputField} />
+                        <VariantInput filled={props.filled} inputVariant={data.inputField} />
                     </Grid>
                 </React.Fragment>
             ))}

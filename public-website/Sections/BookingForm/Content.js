@@ -1,12 +1,4 @@
-import React, { useContext } from 'react'
-// State
-import { Store } from '../../state/store'
-// Field layouts
-import {
-    SummaryTextOnly,
-    SummaryIconWithValue,
-    SummaryWithIcon
-} from './Layout/ContentField'
+import React from 'react'
 // Data
 import {
     serviceMap,
@@ -14,55 +6,65 @@ import {
     frequencyMap,
     hourlyRateMap
 } from '../../components/serviceDetails'
+// Content field containers
+import {
+    SummaryContainer,
+    StaticTextContainer,
+    IconContentContainer
+} from './Containers/ContentField'
 // Calculations
 import { totalPrice } from '../../components/pricingCalculator'
-// TEMP
-import ServiceIcon from '@material-ui/icons/Hotel'
+// Icons
+import LockIcon from '@material-ui/icons/EnhancedEncryption'
+// Components
+import Image from '../../components/Image'
 
-export function NeedHelp(props) {
+export function ServiceSummary() {
     return (
-        <React.Fragment>
-            <SummaryTextOnly
-                align={props.align}
-                summary="We're right here to help you! Click here to chat online with our Customer Happiness Team or call us on (07) 5646 5290."
-            />
-        </React.Fragment>
+        <SummaryContainer
+            category={serviceMap}
+        />
     )
 }
 
-export function BookingSummary(props) {
-    // Get state
-    const { state } = useContext(Store)
-    const serviceSummary = () => {
-        if (state.service.service === 10) {
-            return `${frequencyMap[state.service.frequency].label} Cleaning`
-        } else {
-            return serviceMap.values[state.service.service].label
-        }
-    }
+export function PackageSummary() {
     return (
-        <React.Fragment>
-            <SummaryWithIcon
-                summary={serviceSummary()}
-                icon={<ServiceIcon fontSize='small' />}
-                variant={props.variant}
-            />
-            <SummaryWithIcon
-                summary={packageMap.values[state.service.package].label}
-                icon={<ServiceIcon fontSize='small' />}
-                variant={props.variant}
-            />
+        <SummaryContainer
+            category={packageMap}
+        />
+    )
+}
 
-            <SummaryWithIcon
-                summary={`${state.service.cleaners} Cleaners`}
-                icon={hourlyRateMap.values.cleaners.icon}
-                variant={props.variant}
-            />
-            <SummaryWithIcon
-                summary={hourlyRateMap.values.hours.values[state.service.hours].label}
-                icon={hourlyRateMap.values.hours.icon}
-                variant={props.variant}
-            />
-        </React.Fragment>
+export function NeedHelp(props) {
+    return (
+        <StaticTextContainer {...props}>
+            We're right here to help you! Click here to chat online with our Customer Happiness Team or call us on (07) 5646 5290.
+        </StaticTextContainer>
+    )
+}
+
+export function TrustIcons(props) {
+    const { height, ...other } = props
+    return (
+        <IconContentContainer {...other}
+            height={height || 3} // measured in theme.styling.units (8px unless default changed)
+            icons={[
+                {
+                    inputVariant: LockIcon,
+                },
+                {
+                    inputVariant: Image,
+                    src: './static/other/powered_by_stripe.png',
+                },
+            ]}
+        />
+    )
+}
+
+export function PriceSummary(props) {
+    return (
+        <StaticTextContainer {...props}>
+            ${totalPrice()}
+        </StaticTextContainer>
     )
 }

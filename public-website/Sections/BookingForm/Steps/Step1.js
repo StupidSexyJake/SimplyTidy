@@ -1,106 +1,47 @@
 import React, { useContext } from 'react'
 // State
 import { Store } from '../../../state/store'
-// Fields
+// Data
 import {
-    ServiceImage,
-    Bedrooms,
-    Bathrooms,
-    LivingAreas,
-    Kitchens,
-    Frequency,
-    Packages,
-    NumberOfCleaners,
-    NumberOfHours,
-    Extras,
-    AllRooms,
-} from '../Fields'
-// Content
-import {
-    NeedHelp,
-    BookingSummary
-} from '../Content'
+    roomsMap,
+    hourlyRateMap,
+    packageMap,
+    extrasMap,
+    serviceMap,
+    frequencyMap
+} from '../../../components/serviceDetails'
 // Sections
 import {
-    FieldGroup,
+    FormGroup,
     SidebarGroup,
     ExpandGroup
-} from '../Layout/FieldGroup'
+} from '../Layout/Sections'
 // Input groups
 import {
     InputGroup,
     InputGroup_WithIcons,
 } from '../Layout/InputGroup'
+// Input fields
+import {
+    ServiceImage,
+    Frequency,
+} from '../Fields'
+// Content groups
+import {
+    ContentGroup_ParentValue,
+    StaticGroup,
+    ContentGroup_ChildValues
+} from '../Layout/ContentGroup'
+// Static content
+import {
+    NeedHelp,
+    TrustIcons,
+    PriceSummary,
+} from '../Content'
 // Material components
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
-// Icons
-import LockIcon from '@material-ui/icons/EnhancedEncryption'
-import { roomsMap, hourlyRateMap, packageMap, extrasMap } from '../../../components/serviceDetails';
-
-/*
-
-Component structure
-:::::::::::::::::::::::
-
-Grid container 
-:: 1 total
-:: Presentational component
-
-    - <ServiceImage>
-    :: 1 per grid container
-    :: Imported from ../Fields
-    :: Displays the selected service type with button to change service
-    :: Placed outside left grid item for better presentation
-
-    - <ExpandGroup>  <FrequencySelect /> </ExpandGroup>
-    :: 1 per grid container
-    :: ExpandGroup is a FieldGroup (see further below)
-    :: FrequencySelect is a Field (see further below)
-    :: Only displayed for relevant services
-    :: Placed outside left grid item for better presentation
-
-
-    - Left grid item
-    :: Presentational component
-    :: 1 per grid container
-    :: Booking form
-        
-        - ../Layout/FieldGroup 
-        :: Presentational and data component
-        :: 1 or more per left grid
-        :: Groups related fields
-        :: Includes optional title and description as props
-            
-            - ../Layout/InputGroup
-            :: Presentational component
-            :: 1 or more per field group
-            :: Defines the type of input e.g. how many columns, whether it has icons, etc.
-
-                - ../Field 
-                :: 1 or more per input group
-                :: Data component
-                :: Specifies the field input data
-
-                - ../Layout/InputField
-                :: 1 per field
-                :: Presentational component
-                :: Specifies the input type e.g. text input, select, radio buttons, etc.
-
-  - Right grid item
-  :: 1 per grid container
-  :: Presentational component
-  :: Sidebar
-
-    - ../Layout/FieldGroup
-    :: Same as left grid
-
-      - ../Content
-      :: 1 or more per field group
-      :: Data component
-      :: Speficies the content to be displayed   
-
-*/
+import { Paper, Divider } from '@material-ui/core';
 
 // Set styles
 const useStyles = makeStyles(theme => ({
@@ -109,18 +50,36 @@ const useStyles = makeStyles(theme => ({
     },
     border: {
         marginTop: 2 * theme.spacing.unit,
-        paddingRight: 4 * theme.spacing.unit,
-        borderRight: '1px solid rgba(0, 0, 0, 0.12)',
+        paddingRight: 3 * theme.spacing.unit,
+        // borderRight: '1px solid rgba(0, 0, 0, 0.12)',
     },
     sectionContainer: {
     },
-    helpContainer: {
-        paddingLeft: 4 * theme.spacing.unit,
+    sidebarContainer: {
+        paddingLeft: 3 * theme.spacing.unit,
     },
     stripeImage: {
         height: '32px'
     },
     lockIcon: {
+        fontSize: '2rem'
+    },
+    paper: {
+        padding: 2 * theme.spacing.unit,
+        paddingBottom: theme.spacing.unit,
+        background: theme.palette.primary.light,
+        marginTop: 3 * theme.spacing.unit,
+        marginBottom: 1 * theme.spacing.unit,
+    },
+    bookingSummaryGroup: {
+        marginTop: 0,
+        marginBottom: 0,
+    },
+    bookingSummaryDivider: {
+        marginTop: 3 * theme.spacing.unit,
+        marginBottom: 1 * theme.spacing.unit
+    },
+    price: {
         fontSize: '2rem'
     }
 }))
@@ -145,79 +104,98 @@ export default function Step1() {
                     className={classes.sectionContainer}
                 >
                     <div className={classes.border}>
-                        <FieldGroup
+                        <FormGroup
                             title='Your home'
                             description='Tell us about your home'
                         >
                             <InputGroup_WithIcons
                                 cols={2}
                                 filled
-                                fields={[
+                                data={[
                                     roomsMap.values[10],
                                     roomsMap.values[20],
                                     roomsMap.values[30],
                                     roomsMap.values[40]
                                 ]}
                             />
-                        </FieldGroup>
-                        <FieldGroup
+                        </FormGroup>
+                        <FormGroup
                             title='Service Type'
                             description="Fixed prices or hourly rates. It's your choice."
                         >
                             <InputGroup
-                                fields={[packageMap]}
+                                data={[packageMap]}
                             />
-                        </FieldGroup>
+                        </FormGroup>
                         <ExpandGroup
-                            title='Add Extras'
-                            description='Add some optional extras for that extra shine'
+
                             expandState={state.service.package === 'fixedPrice' && state.service.service === 10}
                         >
-                            <InputGroup
-                                fields={[extrasMap]}
-                            />
+                            <FormGroup
+                                title='Add Extras'
+                                description='Add some optional extras for that extra shine'
+                            >
+                                <InputGroup
+                                    data={[extrasMap]}
+                                />
+                            </FormGroup>
                         </ExpandGroup>
                         <ExpandGroup
-                            title='Hours Required'
-                            description='Select how many cleaners and hours you expect your service to take'
                             expandState={state.service.package === 'hourlyRate'}
                         >
-                            <InputGroup_WithIcons
-                                cols={2}
-                                filled
-                                fields={[
-                                    hourlyRateMap.values.cleaners,
-                                    hourlyRateMap.values.hours,
-                                ]}
-                            />
+                            <FormGroup
+                                title='Hours Required'
+                                description='Select how many cleaners and hours you expect your service to take'
+                            >
+                                <InputGroup_WithIcons
+                                    cols={2}
+                                    filled
+                                    data={[
+                                        hourlyRateMap.values.cleaners,
+                                        hourlyRateMap.values.hours,
+                                    ]}
+                                />
+                            </FormGroup>
+
                         </ExpandGroup>
                     </div>
                 </Grid>
                 <Grid
                     item xs={3}
-                    className={classes.helpContainer}
+                    className={classes.sidebarContainer}
                 >
+
                     <SidebarGroup
                         title='Need Help?'
                     >
-                        <NeedHelp align='center' />
+                        <StaticGroup
+                            content={NeedHelp}
+                        />
                     </SidebarGroup>
-                    <Grid container>
-                        <Grid item xs={3}>
-                            <LockIcon className={classes.lockIcon} />
-                        </Grid>
-                        <Grid item xs={9}>
-                            <img
-                                src='./static/other/powered_by_stripe.png'
-                                className={classes.stripeImage}
+                    <Paper elevation={0} className={classes.paper}>
+                        <SidebarGroup
+                            title='Booking Summary'
+                            className={classes.bookingSummaryGroup}
+                        >
+                            <ContentGroup_ParentValue
+                                data={[serviceMap, packageMap]}
                             />
-                        </Grid>
-                    </Grid>
-                    <SidebarGroup
-                        title='Booking Summary'
-                    >
-                        <BookingSummary variant='body2' />
-                    </SidebarGroup>
+                            <ContentGroup_ChildValues
+                                data={[packageMap]}
+                            />
+                            <Divider className={classes.bookingSummaryDivider} />
+                            <StaticGroup
+                                className={classes.price}
+                                content={PriceSummary}
+                            />
+                        </SidebarGroup>
+                    </Paper>
+                    {/* <SidebarGroup>
+                        <StaticGroup
+                            content={TrustIcons}
+                            height={4}
+                        />
+                    </SidebarGroup> */}
                 </Grid>
             </Grid>
         </React.Fragment>

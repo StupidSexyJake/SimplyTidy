@@ -4,7 +4,7 @@ import classNames from 'classnames'
 // State
 import { Store } from '../state/store'
 // Actions
-import { toggleBookingFormDrawer } from '../state/actions'
+import { toggleDrawer } from '../state/actions'
 // Material components
 import Button from '@material-ui/core/Button'
 import Fab from '@material-ui/core/Fab'
@@ -43,7 +43,7 @@ export function CallToActionButton(props) {
             className={classNames(props.className, classes.root)}
             size={props.size || 'medium'}
             {...props}
-            onClick={() => dispatch(toggleBookingFormDrawer(true))}
+            onClick={() => dispatch(toggleDrawer('bookingForm', true))}
         >
             {props.children}
         </ButtonType>

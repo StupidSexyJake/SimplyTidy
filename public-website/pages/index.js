@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import '../src/bootstrap'
-import React from 'react'
-// State provider
-import { Provider } from '../state/store'
+import React, { useContext } from 'react'
 // Material components
 import { makeStyles } from '@material-ui/styles'
 import Hidden from '@material-ui/core/Hidden'
@@ -23,9 +21,10 @@ import BookingFormDrawer from '../sections/BookingFormDrawer'
 import CTADivider from '../sections/CTADivider'
 import Footer from '../sections/Footer'
 import Navbar from '../sections/Navbar'
+import NavigationDrawer from '../sections/NavigationDrawer'
 
 // Index styles
-const indexStyles = makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
     preBooking: {
         marginTop: 8 * theme.spacing.unit,
     },
@@ -33,37 +32,36 @@ const indexStyles = makeStyles(theme => ({
 
 export default function Index() {
     // Define styles
-    const classes = indexStyles()
+    const classes = useStyles()
     return (
         <React.Fragment>
-            <Provider>
-                <Header title="House Cleaning Services" />
-                <Navbar />
-                <Fold
-                    hero='homepage-hero-woman-relaxing.jpg'
-                    scrim='white'
-                    title='That Clean Home Feeling!'
-                    titleProps={{
-                        component: 'p',
-                    }}
-                    subtitle="You click. We clean. It's that simple."
-                >
-                    <PreBooking className={classes.preBooking} />
-                </Fold>
-                <BookingFormDrawer /> {/* Fix service image code */}
-                <Hidden smDown>
-                    <Features /> {/* Formatting */}
-                </Hidden>
-                <About />  {/* Split typography */}
-                <Benefits /> {/* Split into components, use grid instead of maxWidth */}
-                <CTADivider /> {/* Change to grid instead of maxWidth */}
-                <Services />
-                <Guarantee /> {/* rem to px */}
-                <Reviews />
-                <Numbers /> {/* Split into components */}
-                <CommonQuestions /> {/* rem to px */}
-                <Footer />
-            </Provider>
+            <Header title="House Cleaning Services" />
+            <Navbar />
+            <Fold
+                hero='homepage-hero-woman-relaxing.jpg'
+                scrim='white'
+                title='That Clean Home Feeling!'
+                titleProps={{
+                    component: 'p',
+                }}
+                subtitle="You click. We clean. It's that simple."
+            >
+                <PreBooking className={classes.preBooking} />
+            </Fold>
+            <Hidden smDown>
+                <Features /> {/* Formatting */}
+            </Hidden>
+            <About />  {/* Split typography */}
+            <Benefits /> {/* Split into components, use grid instead of maxWidth */}
+            <CTADivider /> {/* Change to grid instead of maxWidth */}
+            <Services />
+            <Guarantee /> {/* rem to px */}
+            <Reviews />
+            <Numbers /> {/* Split into components */}
+            <CommonQuestions /> {/* rem to px */}
+            <Footer />
+            <BookingFormDrawer /> {/* Fix service image code */}
+            <NavigationDrawer />
         </React.Fragment>
     )
 }

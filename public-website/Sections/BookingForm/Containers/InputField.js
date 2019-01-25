@@ -10,24 +10,37 @@ import {
     addChip,
     deleteChip
 } from '../../../state/actions'
-// Components
+// Layouts
 import {
     TextInput,
     SelectInput,
     Autocomplete,
     SelectedIcon,
     ButtonSelect,
-    ChipSelect
+    ChipSelect,
+    RadioSelect
 } from '../Layout/InputField'
-// Material components
+// Material component variants
 import FilledInput from '@material-ui/core/FilledInput'
 import Select from '@material-ui/core/Select'
+import Input from '@material-ui/core/Input'
 
 export function TextInputContainer(props) {
     // Get state
     const { state, dispatch } = useContext(Store)
     // Define props
     const { category, variant } = props
+    // Set input component
+    function inputVariant(variant) {
+        switch (variant) {
+            case 'standard':
+                return Input
+            case 'filled':
+                return FilledInput
+            default:
+                return Input
+        }
+    }
     return (
         <TextInput
             id={category.id}
@@ -35,6 +48,7 @@ export function TextInputContainer(props) {
             variant={variant}
             value={state[category.stateType][category.stateValue]}
             onChange={(event) => dispatch(handleClick(category.stateType, category.stateValue, event.target.value))}
+            inputVariant={inputVariant(props.variant)}
         />
     )
 }
@@ -47,10 +61,12 @@ export function SelectInputContainer(props) {
     // Set input component
     function inputVariant(variant) {
         switch (variant) {
+            case 'standard':
+                return Select
             case 'filled':
-                return <FilledInput name={category.id} id={category.id} />
+                return FilledInput
             default:
-                return <Select name={category.id} id={category.id} />
+                return Select
         }
     }
     // Create options array for menu
@@ -149,6 +165,36 @@ export function SelectedIconContainer(props) {
             onClose={localClose}
             onClick={localClick}
             anchorEl={anchorEl}
+        />
+    )
+}
+
+export function RadioSelectContainer(props) {
+    // Get state
+    const { state, dispatch } = useContext(Store)
+    // Define props
+    const { category } = props
+    // Create options array for menu
+    let options = []
+    for (const key in category.values) {
+        let value = category.values[key]
+        options.push(
+            {
+                key: key,
+                value: key,
+                label: value.label,
+                line2: `${value.discountAmount * 100}% off`
+            }
+        )
+
+    }
+    return (
+        <RadioSelect
+            label={category.label}
+            id={category.id}
+            value={state[category.stateType][category.stateValue]}
+            onChange={(event) => dispatch(handleChange(category.stateType, category.stateValue, event.target.value))}
+            options={options}
         />
     )
 }

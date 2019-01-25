@@ -68,7 +68,7 @@ export default React.memo(function Benefits() {
                     <Grid item xs={3} className={classes.items}>
                         <CustomerServiceIcon className={classes.icon} />
                         <Typography variant='h6' component='p'>
-                            Customer Service
+                            Service
                         </Typography>
                         <Typography>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet consectetur.

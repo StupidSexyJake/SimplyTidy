@@ -1,5 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Link from 'next/link'
+// State
+import { Store } from '../state/store'
+// Actions
+import { toggleDrawer } from '../state/actions'
+// Data
+import { navPages } from '../data/navigationData'
 // Material components
 import { makeStyles } from '@material-ui/styles'
 import Hidden from '@material-ui/core/Hidden'
@@ -14,16 +20,6 @@ import CallIcon from '@material-ui/icons/Call'
 // Custom components
 import { CallToActionButton } from '../components/Buttons'
 
-function getLinks() {
-    return [
-        { href: "/how", title: "How To Book" },
-        { href: "/services", title: "What's Included" },
-        { href: "/offers", title: "Hot Deals" },
-        { href: "/reviews", title: "Reviews" },
-        { href: "/faq", title: "FAQs" },
-        { href: "/contact", title: "Contact" },
-    ]
-}
 
 // Create styles
 const useStyles = makeStyles((theme) => ({
@@ -65,6 +61,8 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function NavReturn() {
+    // Get state contexts
+    const { state, dispatch } = useContext(Store)
     // Define styles
     const classes = useStyles()
     return (
@@ -77,11 +75,12 @@ export default function NavReturn() {
                     implementation='css'
                     lgUp
                 >
-                    <IconButton>
+                    <IconButton
+                        onClick={() => dispatch(toggleDrawer('navigation', true))}>
                         <MenuIcon />
                     </IconButton>
                 </Hidden>
-                <Link href="/">
+                <Link prefetch href="/">
                     <a>
                         <img
                             src='./static/logos/logo-primary.png'
@@ -93,16 +92,17 @@ export default function NavReturn() {
                         implementation='css'
                         mdDown
                     >
-                        {getLinks().map((link, index) => (
+                        {navPages.map((link) => (
                             <Link
+                                prefetch
                                 href={link.href}
-                                key={index}
+                                key={link.label}
                             >
                                 <Button
                                     className={classes.navItem}
                                     component='a'
                                 >
-                                    {link.title}
+                                    {link.label}
                                 </Button>
                             </Link>
                         ))}

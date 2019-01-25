@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
+// State
+import { Store } from '../state/store'
 // Fields
 import {
     Bedrooms,
@@ -8,17 +10,31 @@ import {
     NumberOfCleaners,
     NumberOfHours,
     Package,
-    Extras
+    Extras,
+    Frequency
 } from '../sections/BookingForm/Fields'
+// Field summaries
+import {
+    ServiceSummary,
+    PackageSummary
+} from '../sections/BookingForm/Content'
 // Icons
+import ServiceIcon from '@material-ui/icons/Hotel'
+import RoutineIcon from '@material-ui/icons/Hotel'
+import OneTimeIcon from '@material-ui/icons/Wc'
+import BondIcon from '@material-ui/icons/Weekend'
+import SpringIcon from '@material-ui/icons/Face'
 import BedroomsIcon from '@material-ui/icons/Hotel'
-import BathroomsIcon from '@material-ui/icons/Wc'
+import BathroomsIcon from '@material-ui/icons/Wc' // Bath tub
 import LivingAreasIcon from '@material-ui/icons/Weekend'
 import KitchensIcon from '@material-ui/icons/Kitchen'
 import CleanersIcon from '@material-ui/icons/Face'
 import HoursIcon from '@material-ui/icons/Schedule'
-import FixedPriceIcon from '@material-ui/icons/CardGiftcard'
-import HourlyRateIcon from '@material-ui/icons/Schedule'
+import FixedPriceIcon from '@material-ui/icons/CardGiftcard' // Gem
+import HourlyRateIcon from '@material-ui/icons/Schedule' // Hourglass
+import PackageIcon from '@material-ui/icons/CardGiftcard'
+import ExtrasIcon from '@material-ui/icons/AddCircle'
+import { BathIcon } from '../components/Icons'
 
 export const clientMap = {
     values: {
@@ -27,21 +43,21 @@ export const clientMap = {
             stateType: 'client',
             stateValue: 'name',
             id: 'name',
-            icon: <BedroomsIcon />,
+            icon: BedroomsIcon,
         },
         email: {
             label: 'Email',
             stateType: 'client',
             stateValue: 'email',
             id: 'email',
-            icon: <BedroomsIcon />,
+            icon: BathroomsIcon,
         },
         suburb: {
             label: 'Suburb',
             stateType: 'client',
             stateValue: 'suburb',
             id: 'suburb',
-            icon: <BedroomsIcon />,
+            icon: KitchensIcon,
             values: [
                 { label: 'Advancetown' },
                 { label: 'Arundel' },
@@ -105,57 +121,6 @@ export const clientMap = {
     }
 }
 
-export const serviceMap = {
-    label: 'Service',
-    stateType: 'service',
-    stateValue: 'service',
-    id: 'service',
-    values: {
-        10: {
-            label: 'Routine Cleaning',
-            id: 'routineCleaning',
-            icon: 'regular-maid-services-icon.png'
-        },
-        20: {
-            label: 'One Time Cleaning',
-            id: 'oneTimeCleaning',
-            icon: 'spring-cleaning-icon.png'
-        },
-        30: {
-            label: 'Bond Cleaning',
-            id: 'bondCleaning',
-            icon: 'spring-cleaning-icon.png'
-        },
-        40: {
-            label: 'Spring Cleaning',
-            id: 'springCleaning',
-            icon: 'spring-cleaning-icon.png'
-        }
-    }
-}
-
-export const packageMap = {
-    stateType: 'service',
-    stateValue: 'package',
-    inputField: Package,
-    values: {
-        fixedPrice: {
-            label: 'Deluxe Package',
-            id: 'fixedPrice',
-            stateType: 'service',
-            stateValue: 'package',
-            icon: <FixedPriceIcon />,
-        },
-        hourlyRate: {
-            label: 'Hourly Rate',
-            id: 'hourlyRate',
-            stateType: 'service',
-            stateValue: 'package',
-            icon: <HourlyRateIcon />,
-        },
-    }
-}
-
 export const roomsMap = {
     values: {
         10: {
@@ -163,7 +128,7 @@ export const roomsMap = {
             stateType: 'service',
             stateValue: 'bedrooms',
             id: 'bedrooms',
-            icon: <BedroomsIcon />,
+            icon: BedroomsIcon,
             inputField: Bedrooms,
             values: {
                 0: { label: '0' },
@@ -179,7 +144,7 @@ export const roomsMap = {
             stateType: 'service',
             stateValue: 'bathrooms',
             id: 'bathrooms',
-            icon: <BathroomsIcon />,
+            icon: BathroomsIcon,
             inputField: Bathrooms,
             values: {
                 0: { label: '0' },
@@ -191,11 +156,11 @@ export const roomsMap = {
             }
         },
         30: {
-            label: 'LivingAreas',
+            label: 'Living Areas',
             id: 'livingAreas',
             stateType: 'service',
             stateValue: 'livingAreas',
-            icon: <LivingAreasIcon />,
+            icon: LivingAreasIcon,
             inputField: LivingAreas,
             values: {
                 0: { label: '0' },
@@ -211,7 +176,7 @@ export const roomsMap = {
             id: 'kitchens',
             stateType: 'service',
             stateValue: 'kitchens',
-            icon: <KitchensIcon />,
+            icon: KitchensIcon,
             inputField: Kitchens,
             values: {
                 0: { label: '0' },
@@ -223,25 +188,24 @@ export const roomsMap = {
 }
 
 export const frequencyMap = {
-    '10': {
-        key: 1,
-        label: 'Weekly',
-        discountAmount: 0.25
-    },
-    '20': {
-        key: 2,
-        label: 'Fortnightly',
-        discountAmount: 0.15
-    },
-    '30': {
-        key: 3,
-        label: 'Monthly',
-        discountAmount: 0.05
-    },
-    '1': {
-        key: 40,
-        label: 'One Time Service',
-        discountAmount: 0
+    label: 'Frequency',
+    id: 'frequency',
+    stateType: 'service',
+    stateValue: 'frequency',
+    inputField: Frequency,
+    values: {
+        weekly: {
+            label: 'Weekly',
+            discountAmount: 0.25
+        },
+        fortnightly: {
+            label: 'Fortnightly',
+            discountAmount: 0.15
+        },
+        monthly: {
+            label: 'Monthly',
+            discountAmount: 0.05
+        }
     }
 }
 
@@ -252,8 +216,9 @@ export const hourlyRateMap = {
             id: 'cleaners',
             stateType: 'service',
             stateValue: 'cleaners',
-            icon: <CleanersIcon />,
+            icon: CleanersIcon,
             inputField: NumberOfCleaners,
+            suffix: 'Cleaner/s',
             values: {
                 1: { label: '1' },
                 2: { label: '2' },
@@ -264,15 +229,44 @@ export const hourlyRateMap = {
             id: 'hours',
             stateType: 'service',
             stateValue: 'hours',
-            icon: <HoursIcon />,
+            icon: HoursIcon,
             inputField: NumberOfHours,
+            suffix: '',
             values: {
-                1: { label: '2 to 2.5 hours' },
-                2: { label: '2.5 to 3 hours' },
-                3: { label: '3 to 4 hours' },
-                4: { label: '4 to 6 hours' },
-                5: { label: 'More than 6 hours' },
+                2: { label: '2 to 2.5 Hours' },
+                2.5: { label: '2.5 to 3 Hours' },
+                3: { label: '3 to 4 Hours' },
+                4: { label: '4 to 6 Hours' },
+                6: { label: 'More than 6 Hours' },
             }
+        },
+    }
+}
+
+export const packageMap = {
+    label: 'Package',
+    id: 'package',
+    stateType: 'service',
+    stateValue: 'package',
+    icon: PackageIcon,
+    inputField: Package,
+    summary: PackageSummary,
+    values: {
+        fixedPrice: {
+            label: 'Deluxe Package',
+            id: 'fixedPrice',
+            stateType: 'service',
+            stateValue: 'package',
+            icon: FixedPriceIcon,
+            values: roomsMap.values
+        },
+        hourlyRate: {
+            label: 'Hourly Rate',
+            id: 'hourlyRate',
+            stateType: 'service',
+            stateValue: 'package',
+            icon: HourlyRateIcon,
+            values: hourlyRateMap.values
         },
     }
 }
@@ -282,19 +276,57 @@ export const extrasMap = {
     stateValue: 'extras',
     unselectedStateType: 'bookingForm',
     unselectedValue: 'unselectedExtras',
+    icon: ExtrasIcon,
+
+    summary: PackageSummary,
     inputField: Extras,
     values: {
         ovenCleaning: {
             label: 'Oven Cleaning',
+            icon: ExtrasIcon,
         },
         windowCleaning: {
             label: 'Window Cleaning',
+            icon: ExtrasIcon,
         },
         insideCupboards: {
             label: 'Inside Cupboards',
+            icon: ExtrasIcon,
         },
         insideFridge: {
             label: 'Inside Fridge',
+            icon: ExtrasIcon,
+        }
+    }
+}
+
+export const serviceMap = {
+    label: 'Service',
+    id: 'service',
+    stateType: 'service',
+    stateValue: 'service',
+    icon: ServiceIcon,
+    summary: ServiceSummary,
+    values: {
+        10: {
+            label: 'Routine Cleaning',
+            id: 'routineCleaning',
+            icon: RoutineIcon,
+        },
+        20: {
+            label: 'One Time Cleaning',
+            id: 'oneTimeCleaning',
+            icon: OneTimeIcon,
+        },
+        30: {
+            label: 'Bond Cleaning',
+            id: 'bondCleaning',
+            icon: BondIcon,
+        },
+        40: {
+            label: 'Spring Cleaning',
+            id: 'springCleaning',
+            icon: SpringIcon,
         }
     }
 }

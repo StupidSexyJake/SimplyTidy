@@ -1,6 +1,6 @@
 // Import actions
 import {
-    TOGGLE_BOOKING_FORM_DRAWER,
+    TOGGLE_DRAWER,
     HANDLE_CLICK,
     HANDLE_CHANGE,
     HANDLE_LINK_CLICK,
@@ -8,6 +8,7 @@ import {
     DELETE_CHIP,
     NEXT_BOOKING_STEP,
     PREVIOUS_BOOKING_STEP,
+    TOGGLE_PAGE_SLIDE,
 } from './actions'
 // Data
 import {
@@ -35,16 +36,29 @@ export const initialState = {
         kitchens: 1,
         cleaners: 1,
         hours: 2,
-        frequency: '10',
+        frequency: 'weekly',
         extras: []
     },
-    drawer: {
+    drawers: {
+        bookingForm: false,
+        navigation: false
+    },
+    menuDrawer: {
         open: false
     },
     bookingForm: {
         page: 0,
         fadeService: false,
         unselectedExtras: initialUnselectedExtrasArray()
+    },
+    page: {
+        home: true,
+        howToBook: false,
+        whatsIncluded: false,
+        meetTheTeam: false,
+        reviews: false,
+        faq: false,
+        contact: false
     }
 }
 
@@ -60,11 +74,12 @@ function initialUnselectedExtrasArray() {
 const reducer = (state, action) => {
     const reduced = { ...state }
     switch (action.type) {
-        case TOGGLE_BOOKING_FORM_DRAWER:
+        case TOGGLE_DRAWER:
             return Object.assign({}, state, {
                 ...reduced,
-                drawer: {
-                    open: action.payload
+                drawers: {
+                    ...reduced[action.payload.stateValue],
+                    [action.payload.stateValue]: action.payload.status
                 }
             })
         case HANDLE_CLICK:
@@ -134,8 +149,18 @@ const reducer = (state, action) => {
                     page: state.bookingForm.page - 1
                 }
             })
-        default:
-            return state
+        case TOGGLE_PAGE_SLIDE:
+            console.log(state, action)
+            return Object.assign({}, state, {
+                ...reduced,
+                page: {
+                    ...reduced[action.payload.page],
+                    [action.payload.pageToClose]: false,
+                    [action.payload.pageToOpen]: true
+                }
+            })
+        default: state
+
     }
 }
 

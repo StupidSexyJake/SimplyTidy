@@ -4,84 +4,49 @@ import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
-
 // Create styles
 const useStyles = makeStyles((theme) => ({
-    textSummary: {
-        paddingLeft: 4 * theme.spacing.unit
-    },
-    summaryWithIconIcon: {
-    },
-    summaryWithIconSummary: {
-        lineHeight: 1
-    },
-    iconIcon: {
-        marginTop: theme.spacing.unit
+    iconContentIcon: {
+        height: props => props.height * theme.spacing.unit,
+        fontSize: props => props.height * theme.spacing.unit,
     }
 }))
 
-export function SummaryTextOnly(props) {
+// Create input component based on prop variant
+function VariantInput(inputProps) {
+    const { inputVariant, ...other } = inputProps
+    const InputVariant = inputVariant
     return (
-        <Grid item xs={12}>
-            <Typography variant={props.variant || 'caption'} align={props.align}>
-                {props.summary}
-            </Typography>
+        <InputVariant {...other} />
+    )
+}
+
+export function Summary(props) {
+    return (
+        <Typography variant={props.variant || 'body2'} align={props.align}>
+            {props.summary}
+        </Typography>
+    )
+}
+
+export function StaticText(props) {
+    return (
+        <Typography variant={props.variant || 'caption'} align={props.align} className={props.className}>
+            {props.children}
+        </Typography>
+    )
+}
+
+export function IconContent(props) {
+    // Define styles
+    const classes = useStyles(props)
+    return (
+        <Grid container spacing={8} alignItems='center' justify='flex-start'>
+            {props.icons.map((icon, index) => (
+                <Grid item key={index}>
+                    <VariantInput inputVariant={icon.inputVariant} src={icon.src} className={classes.iconContentIcon} />
+                </Grid>
+            ))}
         </Grid>
-    )
-}
-
-export function SummaryWithIcon(props) {
-    // Define styles
-    const classes = useStyles()
-    return (
-        <React.Fragment>
-            <Grid item xs={3} className={classes.summaryWithIconIcon}>
-                {props.icon}
-            </Grid>
-            <Grid item xs={9}>
-                <Typography
-                    variant={props.variant || 'caption'}
-                    align={props.align}
-                    className={classes.summaryWithIconSummary}>
-                    {props.summary}
-                </Typography>
-            </Grid>
-        </React.Fragment>
-    )
-}
-
-export function SummaryWithLabel(props) {
-    // Define styles
-    const classes = useStyles()
-    return (
-        <React.Fragment>
-            <Grid item xs={3}>
-                <Typography variant={props.variant || 'caption'} align={props.alignLabel}>
-                    {props.label}:
-                </Typography>
-            </Grid>
-            <Grid item xs={9} className={classes.textSummary}>
-                <Typography variant={props.variant || 'caption'} align={props.alignSummary}>
-                    {props.summary}
-                </Typography>
-            </Grid>
-        </React.Fragment>
-    )
-}
-
-export function SummaryIconWithValue(props) {
-    // Define styles
-    const classes = useStyles()
-    return (
-        <React.Fragment>
-            <Grid item xs={6 / (props.cols || 2)} className={classes.iconIcon}>
-                {props.icon}
-            </Grid>
-            <Grid item xs={6 / (props.cols || 2)} className={classes.iconIcon}>
-                <Typography variant={props.variant || 'caption'} align={props.alignSummary}>
-                    {props.summary}
-                </Typography>
-            </Grid>
-        </React.Fragment>
     )
 }

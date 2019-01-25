@@ -48,7 +48,7 @@ export default function PreBooking(props) {
                         <InputGroup
                             className={classes.inputGroup}
                             cols={3}
-                            fields={[
+                            data={[
                                 { key: 1, inputField: Name },
                                 { key: 2, inputField: Email },
                                 { key: 3, inputField: Suburb },

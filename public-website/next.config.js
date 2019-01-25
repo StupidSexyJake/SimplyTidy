@@ -1,7 +1,3 @@
-module.exports = {
-    exportPathMap: function () {
-        return {
-            '/': { page: '/' }
-        }
-    }
-}
+const withSize = require('next-size')
+
+module.exports = withSize()

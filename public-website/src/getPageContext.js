@@ -47,7 +47,7 @@ const theme = createMuiTheme({
             color: cyan[900],
         },
         h3: {
-            fontFamily: '"Montserrat", "Open Sans", "Roboto", "Helvetica", "Arial", sans-serif',            
+            fontFamily: '"Montserrat", "Open Sans", "Roboto", "Helvetica", "Arial", sans-serif',
             textAlign: 'center',
             paddingBottom: '1rem',
             color: cyan[900],

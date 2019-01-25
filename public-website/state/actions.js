@@ -1,7 +1,9 @@
+//
 // Action types
 // :::::::::::::::
+//
 // Toggle booking form drawer open/close
-export const TOGGLE_BOOKING_FORM_DRAWER = 'TOGGLE_BOOKING_FORM_DRAWER'
+export const TOGGLE_DRAWER = 'TOGGLE_DRAWER'
 // Handle click events
 export const HANDLE_CLICK = 'HANDLE_CLICK'
 // Handle change events
@@ -16,19 +18,26 @@ export const NEXT_BOOKING_STEP = 'NEXT_BOOKING_STEP'
 export const PREVIOUS_BOOKING_STEP = 'PREVIOUS_BOOKING_STEP'
 // Handle scroll
 export const HANDLE_SCROLL = 'HANDLE_SCROLL'
+// Toggle page slide
+export const TOGGLE_PAGE_SLIDE = 'TOGGLE_PAGE_SLIDE'
 
+//
 // Action creators
 // ::::::::::::::::::
+//
 // Toggle booking form drawer open/close
-export function toggleBookingFormDrawer(openStatus) {
+export function toggleDrawer(stateValue, status) {
     return {
-        type: TOGGLE_BOOKING_FORM_DRAWER,
-        payload: openStatus
+        type: TOGGLE_DRAWER,
+        payload: {
+            stateValue: stateValue,
+            status: status
+        }
     }
 }
+
 // Hande click events
 export function handleClick(stateType, value, event) {
-    console.log(stateType, value, event)
     return {
         type: HANDLE_CLICK,
         payload: {
@@ -38,6 +47,7 @@ export function handleClick(stateType, value, event) {
         }
     }
 }
+
 // Hande change events
 export function handleChange(stateType, value, event) {
     return {
@@ -100,6 +110,17 @@ export function handleLinkClick(stateType, state, value) {
             stateType: stateType,
             state: state,
             value: value
+        }
+    }
+}
+
+// Toggle page slide
+export function togglePageSlide(pageToClose, pageToOpen) {
+    return {
+        type: TOGGLE_PAGE_SLIDE,
+        payload: {
+            pageToClose: pageToClose,
+            pageToOpen: pageToOpen
         }
     }
 }

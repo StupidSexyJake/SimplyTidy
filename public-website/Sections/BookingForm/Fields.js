@@ -1,10 +1,4 @@
-import React, { useContext } from 'react'
-// State
-import { Store } from '../../state/store'
-// Actions
-import {
-    handleChange,
-} from '../../state/actions'
+import React from 'react'
 // Data
 import {
     serviceMap,
@@ -22,11 +16,9 @@ import {
     TextInputContainer,
     AutoCompleteContainer,
     ButtonSelectContainer,
-    ChipSelectContainer
+    ChipSelectContainer,
+    RadioSelectContainer
 } from './Containers/InputField'
-import {
-    RadioSelect,
-} from './Layout/InputField'
 
 //
 // CLIENT FIELDS
@@ -70,7 +62,6 @@ export function Service(props) {
     )
 }
 
-// CHANGE ICON FROM IMAGE TO SVG COMPONENT
 export function ServiceImage() {
     return (
         <SelectedIconContainer
@@ -146,32 +137,13 @@ export function Extras() {
         <ChipSelectContainer
             category={extrasMap}
         />
-        // <ChipSelect
-        //     selected={state.service.extras}
-        //     unselected={state.bookingForm.unselectedExtras}
-        //     onClick={(extra) => dispatch(addExtra(extra))}
-        //     onDelete={(extra) => dispatch(deleteExtra(extra))}
-        // />
     )
 }
 
 export function Frequency() {
-    // Get state
-    const { state, dispatch } = useContext(Store)
-    function discountAmount(decimal) {
-        return (`${decimal * 100}% off ${' '}`)
-    }
     return (
-        <RadioSelect
-            label='Frequency'
-            id='frequency'
-            value={state.service.frequency}
-            onChange={(event) => dispatch(handleChange('service', 'frequency', event.target.value))}
-            options={[
-                { key: 1, value: '10', label: frequencyMap['10'].label, secondLine: discountAmount(frequencyMap['10'].discountAmount) },
-                { key: 2, value: '20', label: frequencyMap['20'].label, secondLine: discountAmount(frequencyMap['20'].discountAmount) },
-                { key: 3, value: '30', label: frequencyMap['30'].label, secondLine: discountAmount(frequencyMap['30'].discountAmount) },
-            ]}
+        <RadioSelectContainer
+            category={frequencyMap}
         />
     )
 }

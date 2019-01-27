@@ -10,6 +10,7 @@ import {
 // Steps
 import Step1 from './Steps/Step1'
 // Material components
+import Hidden from '@material-ui/core/Hidden'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
@@ -18,7 +19,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 // Custom components
-import { Container } from '../../components/Containers'
+import { Wrapper } from '../../components/Wrappers'
 import { Divider, Grid } from '@material-ui/core';
 import { IconContentContainer } from './Containers/ContentField';
 import LockIcon from '@material-ui/icons/EnhancedEncryption';
@@ -72,6 +73,11 @@ const useStyles = makeStyles(theme => ({
         background: theme.palette.grey[200],
         marginTop: 2 * theme.spacing.unit,
         marginBottom: 2 * theme.spacing.unit,
+        [theme.breakpoints.down('xs')]: {
+            margin: 0,
+            paddingTop: 2 * theme.spacing.unit,
+            paddingBottom: 1 * theme.spacing.unit
+        }
     },
     cardContainer: {
         paddingBottom: 6 * theme.spacing.unit,
@@ -79,7 +85,11 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         marginTop: 6 * theme.spacing.unit,
-        paddingBottom: theme.spacing.unit
+        paddingBottom: theme.spacing.unit,
+        [theme.breakpoints.down('xs')]: {
+            marginTop: 1 * theme.spacing.unit,
+            fontSize: '1.5rem'
+        }
     },
     buttonDivider: {
         marginTop: 4 * theme.spacing.unit,
@@ -102,7 +112,11 @@ export default React.memo(function BookingForm(props) {
     const classes = useStyles()
     return (
         <section className={classes.root}>
-            <Container variant='base' md={6} className={classes.stepperContainer}>
+            <Wrapper
+                variant='base'
+                md={6}
+                className={classes.stepperContainer}
+            >
                 <Stepper
                     activeStep={state.bookingForm.page}
                     alternativeLabel
@@ -112,17 +126,22 @@ export default React.memo(function BookingForm(props) {
                         return (
                             <Step key={label}>
                                 <StepLabel>
-                                    {label}
+                                    <Hidden xsDown>{label}
+                                    </Hidden>
                                 </StepLabel>
                             </Step>
                         );
                     })}
                 </Stepper>
-            </Container>
-            <Container variant='base' md={8} className={classes.cardContainer}>
+            </Wrapper>
+            <Wrapper
+                ariant='base'
+                md={8}
+                className={classes.cardContainer}
+            >
                 <Card className={classes.card}>
                     <CardContent className={classes.cardContainer}>
-                        <Container md={11}>
+                        <Wrapper md={11}>
                             {state.bookingForm.page === steps.length ? (
                                 <div>
                                     <Typography className={classes.instructions}>
@@ -139,13 +158,15 @@ export default React.memo(function BookingForm(props) {
                                         >
                                             {getStepIndex(state.bookingForm.page)['title']}
                                         </Typography>
-                                        <Typography
-                                            variant='subtitle1'
-                                            className={classes.subtitle}
-                                            align='center'
-                                        >
-                                            {getStepIndex(state.bookingForm.page)['subtitle']}
-                                        </Typography>
+                                        <Hidden xsDown>
+                                            <Typography
+                                                variant='subtitle1'
+                                                className={classes.subtitle}
+                                                align='center'
+                                            >
+                                                {getStepIndex(state.bookingForm.page)['subtitle']}
+                                            </Typography>
+                                        </Hidden>
                                         {getStepIndex(state.bookingForm.page)['content']}
                                         <Divider className={classes.buttonDivider} />
                                         <Grid container className={classes.pageButtonContainer} alignItems='flex-end'>
@@ -186,10 +207,10 @@ export default React.memo(function BookingForm(props) {
                                         </Grid>
                                     </div>
                                 )}
-                        </Container>
+                        </Wrapper>
                     </CardContent>
                 </Card>
-            </Container>
+            </Wrapper>
         </section>
     )
 })

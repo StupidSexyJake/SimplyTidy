@@ -2,14 +2,19 @@ import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 import classNames from 'classnames'
 // Material components
+import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 // Custom components
+import Navbar from '../sections/Navbar'
 import Scrim from '../components/Scrim'
-import { Container } from '../components/Containers'
+import { Wrapper } from '../components/Wrappers'
 
 export default function Fold(props) {
     // Create styles
     const useStyles = makeStyles(theme => ({
+        section: {
+            height: props => props.height || 'auto'
+        },
         scrim: {
             background: props => `url('/static/backgrounds/${props.hero}') no-repeat 0 center/cover`,
         },
@@ -17,11 +22,11 @@ export default function Fold(props) {
     // Define styles
     const classes = useStyles(props)
     return (
-        <section>
+        <section className={classes.section}>
             <Scrim
                 hsl={props.scrim}
                 className={classes.scrim}>
-                <Container variant='fold'>
+                <Wrapper variant='fold'>
                     <Typography
                         variant={props.titleProps && props.titleProps.variant || 'h2'}
                         component={props.titleProps && props.titleProps.component || 'h1'}
@@ -31,13 +36,18 @@ export default function Fold(props) {
                     >
                         {props.title}
                     </Typography>
-                    <Typography
-                        variant='h4'
-                        component='p'>
-                        {props.subtitle}
-                    </Typography>
+                    <Hidden smDown>
+                        <Typography
+                            variant='h4'
+                            component='p'
+                            color={props.subtitleProps && props.subtitleProps.color}
+                            {...props.subtitleProps}
+                        >
+                            {props.subtitle}
+                        </Typography>
+                    </Hidden>
                     {props.children}
-                </Container>
+                </Wrapper>
             </Scrim>
         </section>
     )

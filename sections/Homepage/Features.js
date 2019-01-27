@@ -9,7 +9,7 @@ import CleanersIcon from '@material-ui/icons/Face'
 import PaymentIcon from '@material-ui/icons/Payment'
 import OnlineBookingIcon from '@material-ui/icons/EventAvailable'
 import GuaranteeIcon from '@material-ui/icons/ThumbUp'
-import PricesIcon from '@material-ui/icons/AttachMoney'
+import PricesIcon from '@material-ui/icons/CardGiftcard'
 import CommunicationIcon from '@material-ui/icons/QuestionAnswer'
 
 const featuresList = [

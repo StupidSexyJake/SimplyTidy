@@ -13,7 +13,7 @@ import {
 // Data
 import {
     extrasMap
-} from '../components/serviceDetails'
+} from '../data/serviceData'
 
 // Set initial state values
 export const initialState = {

@@ -16,7 +16,8 @@ import IconButton from '@material-ui/core/IconButton'
 // Icons
 import MenuIcon from '@material-ui/icons/Menu'
 import BookIcon from '@material-ui/icons/Launch'
-import CallIcon from '@material-ui/icons/Call'
+import PhoneIcon from '@material-ui/icons/Call'
+import ChatIcon from '@material-ui/icons/Chat'
 // Custom components
 import { CallToActionButton } from '../components/Buttons'
 
@@ -24,13 +25,22 @@ import { CallToActionButton } from '../components/Buttons'
 // Create styles
 const useStyles = makeStyles((theme) => ({
     root: {
-        background: 'none'
+        background: '#ffffff',
+        boxShadow: 'none'
     },
     logo: {
-        height: 5.5 * theme.spacing.unit, // Change once image resized
-        marginLeft: 3 * theme.spacing.unit,
+        height: 5.5 * theme.spacing.unit, // Change image size
+        marginLeft: 1 * theme.spacing.unit,
         marginRight: 3 * theme.spacing.unit,
-        verticalAlign: 'middle'
+        marginTop: 0.5 * theme.spacing.unit,
+        verticalAlign: 'middle',
+        [theme.breakpoints.down('xs')]: {
+            height: 4.5 * theme.spacing.unit,
+            marginRight: 0,
+        },
+    },
+    toolbar: {
+        padding: 0.5 * theme.spacing.unit
     },
     navGroup: {
         flexGrow: 1
@@ -43,13 +53,14 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     phoneButton: {
-        marginRight: 26.0175 * theme.spacing.unit,
+        [theme.breakpoints.up('sm')]: {
+            marginRight: 28.0175 * theme.spacing.unit,
+        }
     },
-    buttonIcon: {
-        marginRight: theme.spacing.unit,
+    phoneIcon: {
+        marginRight: 1.5 * theme.spacing.unit
     },
     scrolledToTop: {
-        boxShadow: 'none'
     },
     stickyCTA: {
         position: 'fixed',
@@ -57,6 +68,9 @@ const useStyles = makeStyles((theme) => ({
         right: 4 * theme.spacing.unit,
         top: 1.25 * theme.spacing.unit,
         borderRadius: `${theme.shape.borderRadius}px !important`
+    },
+    mobileButton: {
+        color: theme.palette.primary.main
     }
 }))
 
@@ -109,24 +123,53 @@ export default function NavReturn() {
                     </Hidden>
                 </div>
                 <div>
-                    <Button
-                        className={classes.phoneButton}
-                        color='primary'
-                        component='a'
-                        href='tel:+61756465290'>
-                        <CallIcon
-                            className={classes.buttonIcon}
-                            fontSize='small'
-                        />
-                        07 5646 5290
-                    </Button>
-                    <CallToActionButton type='fab' className={classes.stickyCTA}>
-                        <BookIcon
-                            className={classes.buttonIcon}
-                            fontSize='small'
-                        />
-                        Book online now
-                    </CallToActionButton>
+                    <Hidden
+                        xsDown
+                        implementation='css'
+                    >
+                        <Button
+                            className={classes.phoneButton}
+                            color='primary'
+                            component='a'
+                            href='tel:+61756465290'
+                            size='large'
+                        >
+                            <PhoneIcon
+                                className={classes.phoneIcon}
+                                fontSize='small'
+                            />
+                            07 5646 5290
+                        </Button>
+                    </Hidden>
+                    <Hidden
+                        smUp
+                        implementation='css'
+                    >
+                        <IconButton
+                            className={classes.mobileButton}
+                        >
+                            <PhoneIcon />
+                        </IconButton>
+                        <IconButton
+                            className={classes.mobileButton}
+                        >
+                            <ChatIcon />
+                        </IconButton>
+                    </Hidden>
+                    <Hidden
+                        xsDown
+                        implementation='css'
+                    >
+                        <CallToActionButton
+                            type='fab'
+                            className={classes.stickyCTA}
+                        >
+                            <BookIcon
+                                fontSize='small'
+                            />
+                            Book online now
+                        </CallToActionButton>
+                    </Hidden>
                 </div>
             </Toolbar>
         </AppBar>

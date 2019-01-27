@@ -5,9 +5,8 @@ import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
 // Custom components
-import { Container } from '../../components/Containers'
+import { Wrapper } from '../../components/Wrappers'
 
 // Create styles
 const useStyles = makeStyles(theme => ({
@@ -25,12 +24,27 @@ const useStyles = makeStyles(theme => ({
         marginBottom: 2 * theme.spacing.unit
     },
     heading: {
-        marginBottom: 0.5 * theme.spacing.unit
+        color: theme.palette.primary.main,
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '2.125rem',
+        }
     },
     content: {
         marginLeft: 2 * theme.spacing.unit,
-        paddingTop: 1.5 * theme.spacing.unit,
-        paddingBottom: 1.5 * theme.spacing.unit
+        marginRight: 2 * theme.spacing.unit,
+        paddingBottom: 2 * theme.spacing.unit,
+        [theme.breakpoints.down('xs')]: {
+            marginLeft: 0,
+            marginRight: 0
+        }
+    },
+    contentEnd: {
+        marginLeft: 2 * theme.spacing.unit,
+        marginRight: 2 * theme.spacing.unit,
+        [theme.breakpoints.down('xs')]: {
+            marginLeft: 0,
+            marginRight: 0
+        }
     },
     button: {
         marginTop: 2.5 * theme.spacing.unit,
@@ -44,7 +58,7 @@ export default React.memo(function AboutUs() {
     const classes = useStyles()
     return (
         <section className={classes.root}>
-            <Container variant='section'>
+            <Wrapper variant='section'>
                 <Grid
                     container
                     alignItems='center'
@@ -59,13 +73,6 @@ export default React.memo(function AboutUs() {
                                 src='./static/logos/logo-primary.png'
                                 className={classes.image}
                             />
-                            {/* <Typography
-                                variant='h4' component='p'
-                                className={classes.logo}
-                                color='secondary'
-                            >
-                                GoldCoastMaids
-                            </Typography> */}
                             <Divider className={classes.divider} />
                             <Typography
                                 variant='h6'
@@ -106,19 +113,13 @@ export default React.memo(function AboutUs() {
                         </Typography>
                         <Typography
                             variant='body1'
-                            className={classes.content}
+                            className={classes.contentEnd}
                         >
                             You bought your home to live in it, not spend every hour cleaning it. You want to spend time with your family – you want to play games, watch movies, laugh, love, live. You shouldn’t have to live life from behind some cleaner and a rag. Let Gold Coast Maids take care of the work of cleaning your home so that you and your family can enjoy life.
                         </Typography>
-                        <Button
-                            variant='outlined'
-                            className={classes.button}
-                        >
-                            Read more
-                        </Button>
                     </Grid>
                 </Grid>
-            </Container>
+            </Wrapper>
         </section>
     )
 })

@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 // Components
-import { Container } from '../../../components/Containers'
+import { Wrapper } from '../../../components/Wrappers'
 // Material components
 import { makeStyles } from '@material-ui/styles'
 import Typography from '@material-ui/core/Typography'
@@ -38,7 +38,10 @@ export function FormGroup(props) {
     // Define styles
     const classes = useStyles()
     return (
-        <Container md={12} className={classes.fieldGroupContainer}>
+        <Wrapper
+            md={12}
+            className={classes.fieldGroupContainer}
+        >
             <Typography
                 variant='h6'
                 component='h3'
@@ -55,7 +58,7 @@ export function FormGroup(props) {
                 {props.description}
             </Typography>
             {props.children}
-        </Container>
+        </Wrapper>
     )
 }
 

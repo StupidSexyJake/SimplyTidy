@@ -27,8 +27,8 @@ export default function HowToBook() {
             <Navbar />
             <Fold
                 hero='homepage-hero-woman-relaxing.jpg'
-                title="How Gold Coast Maids Works"
-                subtitle="A clean home has never been so easy"
+                title="How To Book"
+                subtitle="The easy way to a clean home"
             >
             </Fold>
 

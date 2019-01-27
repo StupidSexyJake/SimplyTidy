@@ -15,6 +15,8 @@ import {
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
+import Typography from '@material-ui/core/Typography'
+import { Wrapper } from '../components/Wrappers'
 // Custom components
 import { CallToActionButton } from '../components/Buttons'
 
@@ -22,7 +24,8 @@ import { CallToActionButton } from '../components/Buttons'
 const useStyles = makeStyles(theme => ({
     card: {
         paddingLeft: 2 * theme.spacing.unit,
-        paddingRight: 2 * theme.spacing.unit
+        paddingRight: 2 * theme.spacing.unit,
+        margin: props => props.variant === 'mobile' && 2 * theme.spacing.unit,
     },
     inputGroup: {
         marginBottom: theme.spacing.unit
@@ -30,19 +33,30 @@ const useStyles = makeStyles(theme => ({
     submit: {
         display: 'block',
         marginTop: 2 * theme.spacing.unit
+    },
+    mobileTitle: {
+        paddingBottom: 0,
+        color: theme.palette.primary.dark
+    },
+    mobileSubtitle: {
+        color: theme.palette.primary.main
+    },
+    mobileSubmit: {
+        display: 'block',
+        marginTop: 4 * theme.spacing.unit
     }
 }))
 
-export default function PreBooking(props) {
+export function PreBooking(props) {
     // Define styles
-    const classes = useStyles()
+    const classes = useStyles(props)
     return (
         <Grid
             container
             spacing={32}
             justify='center'
             className={props.className}>
-            <Grid item xs={8}>
+            <Grid item xs={12} sm={10} md={8}>
                 <Card className={classes.card}>
                     <CardContent>
                         <InputGroup
@@ -65,6 +79,56 @@ export default function PreBooking(props) {
                         </CallToActionButton>
                     </CardContent>
                 </Card>
+            </Grid>
+        </Grid >
+    )
+}
+
+export function PreBooking_Mobile(props) {
+    // Define styles
+    const classes = useStyles(props)
+    return (
+        <Grid
+            container
+            spacing={32}
+            justify='center'
+            className={props.className}>
+            <Grid item xs={12}>
+                <Wrapper variant='section'>
+                    <Typography
+                        variant='h5'
+                        component='h2'
+                        className={classes.mobileTitle}
+                    >
+                        You click. We clean.
+                    </Typography>
+                    <Typography
+                        variant='h6'
+                        component='p'
+                        align='center'
+                        className={classes.mobileSubtitle}
+                    >
+                        It's that simple.
+                    </Typography>
+                    <InputGroup
+                        className={classes.inputGroup}
+                        cols={3}
+                        data={[
+                            { key: 1, inputField: Name },
+                            { key: 2, inputField: Email },
+                            { key: 3, inputField: Suburb },
+                            { key: 4, inputField: Service },
+                            { key: 5, inputField: Bedrooms },
+                            { key: 6, inputField: Bathrooms }
+                        ]}
+                    />
+                    <CallToActionButton
+                        fullWidth
+                        size='large'
+                        className={classes.mobileSubmit}>
+                        Get an instant quote
+                    </CallToActionButton>
+                </Wrapper>
             </Grid>
         </Grid >
     )

@@ -1,12 +1,16 @@
-import '../src/bootstrap';
-// --- Post bootstrap -----
-import React from 'react';
-import App, { Container } from 'next/app';
+// React and Next.js
+import '../src/bootstrap'
+import React from 'react'
+import App, { Container } from 'next/app'
+import getPageContext from '../src/getPageContext'
 // State provider
 import { Provider } from '../state/store'
-import { StylesProvider, ThemeProvider } from '@material-ui/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import getPageContext from '../src/getPageContext';
+// Material UI
+import { StylesProvider, ThemeProvider } from '@material-ui/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
+// Media queries
+import mediaQuery from 'css-mediaquery'
+import useMediaQueryTheme from '@material-ui/core/useMediaQuery/unstable_useMediaQueryTheme'
 
 class MyApp extends App {
   constructor() {

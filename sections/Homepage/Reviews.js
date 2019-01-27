@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 // Material components
 import Grid from '@material-ui/core/Grid'
+import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -9,7 +10,7 @@ import Divider from '@material-ui/core/Divider'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 // Custom components
-import { Container } from '../../components/Containers'
+import { Wrapper } from '../../components/Wrappers'
 import { CallToActionButton } from '../../components/Buttons'
 // Colors
 import amber from '@material-ui/core/colors/amber'
@@ -117,47 +118,70 @@ export function ReviewCard() {
 
 // Reviews styles
 const reviewsStyles = makeStyles(theme => ({
+    heading: {
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '2.125rem',
+        }
+    },
     subtitle: {
-        paddingBottom: '3rem'
+        paddingBottom: '3rem',
+        [theme.breakpoints.down('xs')]: {
+        }
     },
-    CTAContainer: {
-        width: 'fit-content',
-        margin: '0 auto',
-        paddingTop: '3rem',
+    buttonContainer: {
+        marginTop: '2rem',
     },
-    button: {
-        margin: '0 1rem',
-        width: '20rem'
-    }
 }))
 
 export default React.memo(function Reviews(props) {
     const classes = reviewsStyles()
     return (
         <section className={classes.root}>
-            <Container variant='section'>
+            <Wrapper variant='section'>
                 <Typography variant='h3' component='h2' className={classes.heading}>
                     Actual Customer Reviews
                 </Typography>
-                <Typography variant='h6' component='p' className={classes.subtitle}>
-                    And that's just a few
-                </Typography>
+                <Hidden xsDown>
+                    <Typography variant='h6' component='p' className={classes.subtitle}>
+                        And that's just a few
+                    </Typography>
+                </Hidden>
                 <Grid container spacing={32} justify='center'>
                     <ReviewCard />
                     <ReviewCard />
                     <ReviewCard />
                 </Grid>
-                <div className={classes.CTAContainer}>
-                    <Button variant='outlined' size='large' color='primary' className={classes.button}>
-                        Read More Reviews
-                    </Button>
-                    <CallToActionButton
-                        size='large'
-                        className={classes.button}>
-                        Get An Instant Quote
-                    </CallToActionButton>
-                </div>
-            </Container>
+                <Grid container
+                    spacing={32}
+                    justify='center'
+                    className={classes.buttonContainer}
+                >
+                    <Grid item
+                        xs={10}
+                        sm={3}
+                    >
+                        <Button
+                            fullWidth
+                            variant='outlined'
+                            size='large'
+                            color='primary'
+                        >
+                            Read More Reviews
+                        </Button>
+                    </Grid>
+                    <Grid item
+                        xs={10}
+                        sm={3}
+                    >
+                        <CallToActionButton
+                            fullWidth
+                            size='large'
+                        >
+                            Get An Instant Quote
+                        </CallToActionButton>
+                    </Grid>
+                </Grid>
+            </Wrapper>
         </section>
     )
 })

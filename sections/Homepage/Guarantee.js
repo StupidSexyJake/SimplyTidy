@@ -7,29 +7,48 @@ import Typography from '@material-ui/core/Typography'
 import GuaranteeIcon from '@material-ui/icons/ThumbUp'
 // Custom components
 import Scrim from '../../components/Scrim'
-import { Container } from '../../components/Containers'
+import { Wrapper } from '../../components/Wrappers'
 
 const useStyles = makeStyles(theme => ({
     root: {
-        background: 'url("/static/backgrounds/testimonials.jpg") no-repeat 0 top/cover'
+        backgroundImage: 'url("/static/backgrounds/testimonials.jpg")',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '2.125rem',
+            backgroundPosition: '15% top',
+        }
     },
     container: {
         padding: '3.5rem 2rem',
     },
-    center: {
-        textAlign: 'center'
-    },
     heading: {
         color: theme.palette.secondary.contrastText,
-        padding: '0 0 1.5rem 0'
+        marginBottom: 3 * theme.spacing.unit,
+        textShadow: theme.custom.textShadow,
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '2.125rem',
+        },
     },
     description: {
-        color: 'rgba(255,255,255,1)',
-        padding: 0
+        color: theme.palette.secondary.contrastText,
+        padding: 0,
+        textShadow: theme.custom.textShadow,
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '1rem',
+        }
+    },
+    iconContainer: {
+        textAlign: 'center',
+        margin: '0 auto'
     },
     icon: {
         fontSize: '16rem',
-        color: 'rgba(255,255,255,1)'
+        color: theme.palette.secondary.contrastText,
+        textShadow: theme.custom.textShadow,
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '8rem',
+        }
     }
 }))
 
@@ -39,9 +58,9 @@ export default React.memo(function Navbar() {
     return (
         <section className={classes.root}>
             <Scrim hsl='primaryDark'>
-                <Container className={classes.container}>
+                <Wrapper className={classes.container}>
                     <Grid container spacing={16} className={classes.gridContainer} alignItems='center'>
-                        <Grid item xs={8}>
+                        <Grid item sm={12} md={8}>
                             <Typography variant='h3' component='h2' className={classes.heading}>
                                 Your Happiness Guaranteed
                             </Typography>
@@ -49,11 +68,11 @@ export default React.memo(function Navbar() {
                                 If your cleaning isn’t up to the quality you expect, we’ll come back and re-clean for free. We expect quality and you should too.
                             </Typography>
                         </Grid>
-                        <Grid item xs={4} className={classes.center}>
+                        <Grid item sm={12} md={4} className={classes.iconContainer}>
                             <GuaranteeIcon className={classes.icon} />
                         </Grid>
                     </Grid>
-                </Container>
+                </Wrapper>
             </Scrim>
         </section>
 

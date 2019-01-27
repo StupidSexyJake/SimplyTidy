@@ -7,7 +7,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 // Custom components
-import { Container } from '../../components/Containers'
+import { Wrapper } from '../../components/Wrappers'
 // Icons
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import QuestionIcon from '@material-ui/icons/ContactSupport'
@@ -19,12 +19,6 @@ const useStyles = makeStyles(theme => ({
     subtitle: {
         paddingBottom: '3rem'
     },
-    gridContainer: {
-        margin: '0 auto'
-    },
-    leftGridItem: {
-        textAlign: 'center'
-    },
     questionIcon: {
         fontSize: '4rem',
         color: theme.palette.primary.main,
@@ -34,7 +28,8 @@ const useStyles = makeStyles(theme => ({
         marginBottom: '0.5rem'
     },
     button: {
-        margin: '0.5rem 0.5rem 0 0.5rem'
+        margin: '0.5rem 0.5rem 0 0.5rem',
+        background: theme.palette.primary.light
     },
     moreQuestions: {
         textAlign: 'center',
@@ -84,7 +79,7 @@ export default React.memo(function CommonQuestions() {
     const classes = useStyles()
     return (
         <section className={classes.root}>
-            <Container variant='section' className={classes.container}>
+            <Wrapper variant='section' className={classes.container}>
                 <Typography variant='h3' component='h2'>
                     Common Questions
                         </Typography>
@@ -95,7 +90,7 @@ export default React.memo(function CommonQuestions() {
                     {questionsArray().map((props, index) => (
                         <ExpansionPanel key={index}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}>
+                                <Typography>
                                     {props.question}
                                 </Typography>
                             </ExpansionPanelSummary>
@@ -119,7 +114,7 @@ export default React.memo(function CommonQuestions() {
                         Contact Us
                         </Button>
                 </div>
-            </Container>
+            </Wrapper>
         </section>
     )
 })

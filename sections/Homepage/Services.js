@@ -1,6 +1,7 @@
 import React from 'react'
 // Material components
 import { makeStyles } from '@material-ui/styles'
+import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
@@ -10,7 +11,7 @@ import CardActions from '@material-ui/core/CardActions'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 // Custom components
-import { Container } from '../../components/Containers'
+import { Wrapper } from '../../components/Wrappers'
 
 function getServices() {
     return [
@@ -103,6 +104,11 @@ const serviceStyles = makeStyles(theme => ({
     gridContainer: {
         padding: '2rem 0 1rem 0'
     },
+    heading: {
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '2.125rem',
+        }
+    },
     subtitle: {
         marginBottom: 4 * theme.spacing.unit
     },
@@ -119,13 +125,15 @@ export default React.memo(function Services() {
     const classes = serviceStyles()
     return (
         <section>
-            <Container variant='section'>
+            <Wrapper variant='section'>
                 <Typography variant='h3' component='h2' className={classes.heading}>
                     Services For Every Need
                 </Typography>
-                <Typography variant='h6' component='p' className={classes.subtitle} align='center'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
-                </Typography>
+                <Hidden smDown>
+                    <Typography variant='h6' component='p' className={classes.subtitle} align='center'>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+                    </Typography>
+                </Hidden>
                 <Grid container spacing={32} justify='center' alignItems='center' className={classes.gridContainer}>
                     <ServiceList />
                 </Grid>
@@ -134,7 +142,7 @@ export default React.memo(function Services() {
                         See What's Included
                     </Button>
                 </div>
-            </Container>
+            </Wrapper>
         </section>
     )
 })

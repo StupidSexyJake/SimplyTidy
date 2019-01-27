@@ -9,7 +9,7 @@ import {
     extrasMap,
     serviceMap,
     frequencyMap
-} from '../../../components/serviceDetails'
+} from '../../../data/serviceData'
 // Sections
 import {
     FormGroup,
@@ -41,7 +41,8 @@ import {
 // Material components
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
-import { Paper, Divider } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper'
+import Divider from '@material-ui/core/Divider'
 
 // Set styles
 const useStyles = makeStyles(theme => ({

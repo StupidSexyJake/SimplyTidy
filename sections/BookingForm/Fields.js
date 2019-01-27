@@ -8,7 +8,7 @@ import {
     clientMap,
     hourlyRateMap,
     extrasMap
-} from '../../components/serviceDetails'
+} from '../../data/serviceData'
 // InputField containers
 import {
     SelectInputContainer,

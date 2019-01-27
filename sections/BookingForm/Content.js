@@ -5,7 +5,7 @@ import {
     packageMap,
     frequencyMap,
     hourlyRateMap
-} from '../../components/serviceDetails'
+} from '../../data/serviceData'
 // Content field containers
 import {
     SummaryContainer,
@@ -13,7 +13,7 @@ import {
     IconContentContainer
 } from './Containers/ContentField'
 // Calculations
-import { totalPrice } from '../../components/pricingCalculator'
+import { totalPrice } from '../../utils/pricingCalculator'
 // Icons
 import LockIcon from '@material-ui/icons/EnhancedEncryption'
 // Components

@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 // Custom components
-import { Container } from '../components/Container'
+import { Wrapper } from '../components/Wrappers'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -38,7 +38,7 @@ export default React.memo(function ChooseUs() {
 
                 </Grid>
                 <Grid item xs={6} className={classes.gridContainer}>
-                    <Container className={classes.container}>
+                    <Wrapper className={classes.container}>
                         <Typography variant='h4' component='h2' className={classes.heading} align='left'>
                             Meet The Team
                         </Typography>
@@ -57,7 +57,7 @@ export default React.memo(function ChooseUs() {
                         <Typography>
                             Happy to Help
                         </Typography>
-                    </Container>
+                    </Wrapper>
                 </Grid>
             </Grid>
         </section>

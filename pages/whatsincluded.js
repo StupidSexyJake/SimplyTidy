@@ -15,7 +15,9 @@ import NavigationDrawer from '../sections/NavigationDrawer'
 
 // Index styles
 const useStyles = makeStyles(theme => ({
-
+    foldSubtitle: {
+        color: theme.palette.grey[300]
+    }
 }))
 
 export default function WhatsIncluded() {
@@ -26,15 +28,19 @@ export default function WhatsIncluded() {
             <Header title="What's included" />
             <Navbar />
             <Fold
-                hero='homepage-hero-woman-relaxing.jpg'
+                hero='hero-background-window-cleaning.jpg'
                 title="What's Included"
+                className={classes.foldSubtitle}
                 subtitle="Services to suit every need"
+                subtitleProps={{
+                    className: classes.foldSubtitle
+                }}
             >
             </Fold>
 
             <Footer />
             <BookingFormDrawer /> {/* Fix service image code */}
             <NavigationDrawer />
-        </React.Fragment>
+        </React.Fragment >
     )
 }

@@ -13,18 +13,19 @@ import {
 import { VariantInput } from '../utils/functions'
 // Material components
 import { makeStyles } from '@material-ui/styles'
-import { Typography } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 // Custom components
-import { Container } from '../components/Containers'
+import { Wrapper } from '../components/Wrappers'
 
 const useStyles = makeStyles((theme) => ({
     fullList: {
-        width: '256px',
+        width: 'calc(100vw - 56px)',
+        maxWidth: '320px'
     },
     header: {
         display: 'block',
@@ -37,10 +38,7 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     headerWrapper: {
-        paddingTop: 1 * theme.spacing.unit,
-        paddingBottom: 2 * theme.spacing.unit,
-        paddingLeft: 2 * theme.spacing.unit,
-        paddingRight: 2 * theme.spacing.unit,
+        padding: 2 * theme.spacing.unit,
         position: 'absolute',
         top: 0,
         left: 0,
@@ -52,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
         cursor: 'pointer'
     },
     subtitle: {
-        marginTop: 2 * theme.spacing.unit,
         color: theme.palette.primary.contrastText,
         lineHeight: 1.25
     },
@@ -69,21 +66,29 @@ export default function NavigationDrawerContent() {
     return (
         <div className={classes.fullList}>
             <div className={classes.header}>
-                <Container className={classes.headerWrapper}>
-                    <Link prefetch href='/'>
-                        <img
-                            src='./static/logos/logo-light.png'
-                            className={classes.logo}
-                            onClick={() => dispatch(toggleDrawer('navigation', false))}
-                        />
-                    </Link>
-                    <Typography
-                        variant='body2'
-                        className={classes.subtitle}
-                    >
-                        Gold Coast's Premier Home Cleaning Company
-                    </Typography>
-                </Container>
+                <Grid container
+                    direction='column'
+                    justify='space-between'
+                    className={classes.headerWrapper}
+                >
+                    <Grid item>
+                        <Link prefetch href='/'>
+                            <img
+                                src='./static/logos/logo-light.png'
+                                className={classes.logo}
+                                onClick={() => dispatch(toggleDrawer('navigation', false))}
+                            />
+                        </Link>
+                    </Grid>
+                    <Grid item>
+                        <Typography
+                            variant='body2'
+                            className={classes.subtitle}
+                        >
+                            Gold Coast's Premier Home Cleaning Company
+                        </Typography>
+                    </Grid>
+                </Grid>
             </div>
             <List>
                 {navPages.map((link, index) => (

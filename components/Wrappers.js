@@ -13,6 +13,10 @@ const containerStyles = makeStyles(theme => ({
         paddingRight: 2 * theme.spacing.unit,
         paddingTop: 7.5 * theme.spacing.unit,
         paddingBottom: 10 * theme.spacing.unit,
+        [theme.breakpoints.down('xs')]: {
+            paddingTop: 5 * theme.spacing.unit,
+            paddingBottom: 7.5 * theme.spacing.unit
+        }
     },
     base: {
     },
@@ -23,13 +27,20 @@ const containerStyles = makeStyles(theme => ({
         paddingLeft: 2 * theme.spacing.unit,
         paddingRight: 2 * theme.spacing.unit,
         paddingTop: 14 * theme.spacing.unit,
-        paddingBottom: 12 * theme.spacing.unit
+        paddingBottom: 12 * theme.spacing.unit,
+        [theme.breakpoints.down('xs')]: {
+            paddingLeft: 2 * theme.spacing.unit,
+            paddingRight: 2 * theme.spacing.unit,
+            paddingTop: 'calc(16vh - 56px)',
+            paddingBottom: 0,
+            height: 'calc(177.778vw - 56px)'
+        }
     },
     item: {
         width: '100%'
     }
 }))
-export function Container(props) {
+export function Wrapper(props) {
     // Define styles
     const classes = containerStyles()
     // Get variant
@@ -44,6 +55,7 @@ export function Container(props) {
                 item
                 sm={props.sm || 12}
                 md={props.md || 10}
+                xl={props.xl || 8}
                 className={classes.item}
                 {...props.innerProps}
             >

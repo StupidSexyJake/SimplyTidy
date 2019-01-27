@@ -4,17 +4,18 @@ import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 // Custom components
-import { Container } from '../../components/Containers'
+import { Wrapper } from '../../components/Wrappers'
 import Scrim from '../../components/Scrim'
-// Colors
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        background: theme.palette.primary.main,
-    },
-    container: {
-        padding: '3rem 2rem'
-    },
+// Fields array
+const fieldArray = [
+    { label: 'Bookings Completed', number: '2,452' },
+    { label: 'Happy Clients', number: '458' },
+    { label: 'Google Reviews', number: '5/5' },
+    { label: 'Teams Available', number: '7' },
+]
+
+const fieldStyles = makeStyles(theme => ({
     description: {
         color: theme.palette.primary.contrastText,
         textShadow: '0 1px 2px rgba(0,0,0,0.2)',
@@ -26,49 +27,61 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
+// Field styling
+function AllNumbers() {
+    // Define styles
+    const classes = fieldStyles()
+    return (
+        fieldArray.map((field) => (
+            <Grid item
+                xs={3}
+                key={field.label}
+            >
+                <Typography
+                    variant="h6"
+                    component="p"
+                    className={classes.description}
+                >
+                    {field.label}
+                </Typography>
+                <Typography
+                    variant="h3"
+                    component="p"
+                    className={classes.number}
+                >
+                    {field.number}
+                </Typography>
+            </Grid>
+        ))
+
+    )
+}
+
+const sectionStyles = makeStyles(theme => ({
+    root: {
+        background: theme.palette.primary.main,
+    },
+    container: {
+        padding: '3rem 2rem'
+    },
+}))
+
 export default React.memo(function Numbers() {
-    const classes = useStyles()
+    // Define styles
+    const classes = sectionStyles()
     return (
         <section className={classes.root}>
             <Scrim hsl='primaryLight'>
-                <Container className={classes.container}>
-                    <Grid container justify='center' alignItems='center'>
-                        <Grid item xs={3}>
-                            <Typography variant="h6" component="p" className={classes.description}>
-                                Bookings Completed
-                            </Typography>
-                            <Typography variant="h3" component="p" className={classes.number}>
-                                2,452
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Typography variant="h6" component="p" className={classes.description}>
-                                Happy Clients
-                            </Typography>
-                            <Typography variant="h3" component="p" className={classes.number}>
-                                184
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Typography variant="h6" component="p" className={classes.description}>
-                                Google Reviews
-                            </Typography>
-                            <Typography variant="h3" component="p" className={classes.number}>
-                                5/5
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Typography variant="h6" component="p" className={classes.description}>
-                                Teams Available
-                            </Typography>
-                            <Typography variant="h3" component="p" className={classes.number}>
-                                28
-                            </Typography>
-                        </Grid>
+                <Wrapper className={classes.container}>
+                    <Grid
+                        container
+                        justify='center'
+                        alignItems='center'
+                    >
+                        <AllNumbers />
                     </Grid>
-                </Container>
+                </Wrapper>
             </Scrim>
-
         </section>
     )
 })

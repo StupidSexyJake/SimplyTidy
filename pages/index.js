@@ -4,6 +4,7 @@ import React, { useContext } from 'react'
 // Material components
 import { makeStyles } from '@material-ui/styles'
 import Hidden from '@material-ui/core/Hidden'
+import Button from '@material-ui/core/Button'
 // Page specific sections
 import Features from '../sections/Homepage/Features'
 import About from '../sections/Homepage/AboutUs'
@@ -15,19 +16,32 @@ import Numbers from '../sections/Homepage/Numbers'
 import CommonQuestions from '../sections/Homepage/CommonQuestions'
 // Common sections
 import Header from '../sections/Header'
+import { CallToActionButton } from '../components/Buttons'
+import Navbar from '../sections/Navbar'
 import Fold from '../sections/Fold'
-import PreBooking from '../sections/PreBooking'
+import { PreBooking, PreBooking_Mobile } from '../sections/PreBooking'
 import BookingFormDrawer from '../sections/BookingFormDrawer'
 import CTADivider from '../sections/CTADivider'
 import Footer from '../sections/Footer'
-import Navbar from '../sections/Navbar'
 import NavigationDrawer from '../sections/NavigationDrawer'
 
 // Index styles
 const useStyles = makeStyles(theme => ({
+    titleProps: {
+        [theme.breakpoints.down('xs')]: {
+            textAlign: 'right',
+            fontSize: '10vw'
+        },
+    },
     preBooking: {
         marginTop: 8 * theme.spacing.unit,
     },
+    foldMobileCTA: {
+        display: 'block',
+        marginTop: 3 * theme.spacing.unit,
+        marginLeft: 'auto',
+        minWidth: 'calc(66.67vw - 16px)'
+    }
 }))
 
 export default function Index() {
@@ -41,15 +55,29 @@ export default function Index() {
                 hero='homepage-hero-woman-relaxing.jpg'
                 scrim='white'
                 title='That Clean Home Feeling!'
+                className={classes.titleProps}
                 titleProps={{
                     component: 'p',
                 }}
                 subtitle="You click. We clean. It's that simple."
             >
-                <PreBooking className={classes.preBooking} />
+                <Hidden xsDown implementation='css'>
+                    <PreBooking className={classes.preBooking} />
+                </Hidden>
+                <Hidden smUp implementation='css'>
+                    <CallToActionButton
+                        size='large'
+                        className={classes.foldMobileCTA}
+                    >
+                        Book online now
+                    </CallToActionButton>
+                </Hidden>
             </Fold>
-            <Hidden smDown>
+            <Hidden smDown implementation='css'>
                 <Features /> {/* Formatting */}
+            </Hidden>
+            <Hidden smUp implementation='css'>
+                <PreBooking_Mobile />
             </Hidden>
             <About />  {/* Split typography */}
             <Benefits /> {/* Split into components, use grid instead of maxWidth */}
@@ -57,8 +85,10 @@ export default function Index() {
             <Services />
             <Guarantee /> {/* rem to px */}
             <Reviews />
-            <Numbers /> {/* Split into components */}
-            <CommonQuestions /> {/* rem to px */}
+            <Hidden smDown>
+                <Numbers /> {/* Split into components */}
+                <CommonQuestions /> {/* rem to px */}
+            </Hidden>
             <Footer />
             <BookingFormDrawer /> {/* Fix service image code */}
             <NavigationDrawer />

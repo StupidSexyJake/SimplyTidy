@@ -76,7 +76,7 @@ export function SidebarGroup(props) {
     // Define styles
     const classes = useStyles()
     return (
-        <Container md={12} className={classNames(classes.sidebarContainer, props.className)}>
+        <Wrapper md={12} className={classNames(classes.sidebarContainer, props.className)}>
             <div className={classes.sidebarTitleContainer}>
                 <Typography
                     variant={props.titleVariant || 'h6'}
@@ -90,6 +90,6 @@ export function SidebarGroup(props) {
             <div className={classes.sidebarContent}>
                 {props.children}
             </div>
-        </Container>
+        </Wrapper>
     )
 }

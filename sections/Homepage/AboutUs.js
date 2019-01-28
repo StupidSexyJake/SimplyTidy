@@ -13,6 +13,9 @@ const useStyles = makeStyles(theme => ({
     root: {
         background: `${theme.palette.primary.light} url('/static/backgrounds/cleaning-pattern-light.jpg') no-repeat 0 center / cover`,
     },
+    gridWidthFix: {
+        width: '100%'
+    },
     leftGrid: {
         textAlign: 'center'
     },
@@ -60,6 +63,7 @@ export default React.memo(function AboutUs() {
                     container
                     alignItems='center'
                     spacing={40}
+                    className={classes.gridWidthFix}
                 >
                     <Hidden smDown>
                         <Grid

@@ -78,23 +78,23 @@ export default function Index() {
                 </Hidden>
             </Fold>
             <Hidden smDown implementation='css'>
-                <Features /> {/* Formatting */}
+                <Features />
             </Hidden>
             <Hidden smUp implementation='css'>
                 <PreBooking_Mobile />
             </Hidden>
-            <About />  {/* Split typography */}
-            <Benefits /> {/* Split into components, use grid instead of maxWidth */}
-            <CTADivider /> {/* Change to grid instead of maxWidth */}
+            <About />
+            <Benefits />
+            <CTADivider />
             <Services />
-            <Guarantee /> {/* rem to px */}
+            <Guarantee />
             <Reviews />
             <Hidden smDown>
-                <Numbers /> {/* Split into components */}
-                <CommonQuestions /> {/* rem to px */}
+                <Numbers />
+                <CommonQuestions />
             </Hidden>
             <Footer />
-            <BookingFormDrawer /> {/* Fix service image code */}
+            <BookingFormDrawer />
             <NavigationDrawer />
         </React.Fragment>
     )

@@ -90,7 +90,6 @@ export function PreBooking_Mobile(props) {
     return (
         <Grid
             container
-            spacing={32}
             justify='center'
             className={props.className}>
             <Grid item xs={12}>

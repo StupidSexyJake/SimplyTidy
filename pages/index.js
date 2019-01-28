@@ -16,7 +16,7 @@ import Numbers from '../sections/Homepage/Numbers'
 import CommonQuestions from '../sections/Homepage/CommonQuestions'
 // Common sections
 import Header from '../sections/Header'
-import { CallToActionButton } from '../components/Buttons'
+import { CTAWithIcon } from '../components/Buttons'
 import Navbar from '../sections/Navbar'
 import Fold from '../sections/Fold'
 import { PreBooking, PreBooking_Mobile } from '../sections/PreBooking'
@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
         marginTop: 8 * theme.spacing.unit,
     },
     foldMobileCTA: {
-        display: 'block',
+        display: 'flex',
         marginTop: 3 * theme.spacing.unit,
         marginLeft: 'auto',
         minWidth: 'calc(66.67vw - 16px)'
@@ -49,28 +49,32 @@ export default function Index() {
     const classes = useStyles()
     return (
         <React.Fragment>
-            <Header title="House Cleaning Services" />
+            <Header
+                title="House Cleaning Services"
+                metaDescription="Gold Coast Maids is a premier house cleaning service provider in Gold Coast QLD. Book a house cleaning job in 60 seconds!"
+            />
             <Navbar />
             <Fold
+                title='That Clean Home Feeling!'
+                subtitle="You click. We clean. It's that simple."
                 hero='homepage-hero-woman-relaxing.jpg'
                 scrim='white'
-                title='That Clean Home Feeling!'
                 className={classes.titleProps}
                 titleProps={{
                     component: 'p',
                 }}
-                subtitle="You click. We clean. It's that simple."
             >
                 <Hidden xsDown implementation='css'>
                     <PreBooking className={classes.preBooking} />
                 </Hidden>
                 <Hidden smUp implementation='css'>
-                    <CallToActionButton
+                    <CTAWithIcon
+                        type='fab'
                         size='large'
                         className={classes.foldMobileCTA}
                     >
                         Book online now
-                    </CallToActionButton>
+                    </CTAWithIcon>
                 </Hidden>
             </Fold>
             <Hidden smDown implementation='css'>

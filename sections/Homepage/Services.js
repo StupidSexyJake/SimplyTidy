@@ -126,7 +126,7 @@ export default React.memo(function Services() {
     return (
         <section>
             <Wrapper variant='section'>
-                <Typography variant='h3' component='h2' className={classes.heading}>
+                <Typography variant='h2' component='h2' className={classes.heading}>
                     Services For Every Need
                 </Typography>
                 <Hidden smDown>

@@ -20,7 +20,7 @@ export default React.memo(function ContactForm() {
     return (
         <section className={classes.root}>
             <Wrapper>
-                <Typography variant='h3' component='h2'>
+                <Typography variant='h2' component='h2'>
                     Get In Touch
                 </Typography>
                 <Typography variant='h6' component='p' className={classes.subtitle} align='center'>

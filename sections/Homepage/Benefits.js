@@ -16,10 +16,6 @@ const useStyles = makeStyles(theme => ({
     wrapper: {
     },
     title: {
-        [theme.breakpoints.down('xs')]: {
-            fontSize: '2.125rem',
-            marginBottom: 1 * theme.spacing.unit
-        }
     },
     subtitle: {
         marginBottom: 8 * theme.spacing.unit
@@ -50,15 +46,14 @@ export default React.memo(function Benefits() {
                 className={classes.wrapper}
             >
                 <Typography
-                    variant='h3'
-                    component='h2'
+                    variant='h2'
                     className={classes.title}
                 >
                     Reasons to Love Us
                      </Typography>
                 <Hidden smDown>
                     <Typography
-                        variant='h6'
+                        variant='h5'
                         component='p'
                         className={classes.subtitle}
                         align='center'
@@ -73,7 +68,7 @@ export default React.memo(function Benefits() {
                 >
                     <Grid item sm={12} md={3} className={classes.items}>
                         <ConvenientIcon className={classes.icon} />
-                        <Typography variant='h6' component='p'>
+                        <Typography variant='h5' component='p'>
                             Convenience
                         </Typography>
                         <Typography>
@@ -82,7 +77,7 @@ export default React.memo(function Benefits() {
                     </Grid>
                     <Grid item sm={12} md={3} className={classes.items}>
                         <QualityIcon className={classes.icon} />
-                        <Typography variant='h6' component='p'>
+                        <Typography variant='h5' component='p'>
                             Quality
                         </Typography>
                         <Typography>
@@ -91,7 +86,7 @@ export default React.memo(function Benefits() {
                     </Grid>
                     <Grid item sm={12} md={3} className={classes.items}>
                         <CustomerServiceIcon className={classes.icon} />
-                        <Typography variant='h6' component='p'>
+                        <Typography variant='h5' component='p'>
                             Service
                         </Typography>
                         <Typography>

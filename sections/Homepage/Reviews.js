@@ -138,7 +138,7 @@ export default React.memo(function Reviews(props) {
     return (
         <section className={classes.root}>
             <Wrapper variant='section'>
-                <Typography variant='h3' component='h2' className={classes.heading}>
+                <Typography variant='h2' component='h2' className={classes.heading}>
                     Actual Customer Reviews
                 </Typography>
                 <Hidden xsDown>

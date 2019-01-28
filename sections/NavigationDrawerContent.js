@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
+// Next.js
 import Link from 'next/link'
+import { withRouter } from 'next/router'
 // State
 import { Store } from '../state/store'
 // Actions
@@ -9,18 +11,20 @@ import {
     navPages,
     navActions
 } from '../data/navigationData'
+import businessData from '../data/businessData'
 // Utils
 import { VariantInput } from '../utils/functions'
-// Material components
+// MUI components
 import { makeStyles } from '@material-ui/styles'
-import { Typography, Grid } from '@material-ui/core'
+import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 // Custom components
-import { Wrapper } from '../components/Wrappers'
+import Logo from '../components/Logo'
 
 const useStyles = makeStyles((theme) => ({
     fullList: {
@@ -51,16 +55,60 @@ const useStyles = makeStyles((theme) => ({
     },
     subtitle: {
         color: theme.palette.primary.contrastText,
+        textShadow: theme.custom.palette.textShadow,
         lineHeight: 1.25
     },
     bookNow: {
         color: theme.palette.secondary.main
-    }
+    },
+    activeLink: {
+        color: theme.palette.primary.dark,
+        background: theme.palette.primary.light,
+        opacity: 1
+    },
 }))
+
+// Create styles for active navigation link
+const ActiveLink = ({ router, href, link }) => {
+    // Get state contexts
+    const { dispatch } = useContext(Store)
+    // Define styles
+    const classes = useStyles()
+    const activeLinkClass = router.pathname === href ? classes.activeLink : undefined
+    const buttonState = router.pathname === href ? true : false
+    const handleClick = (e) => {
+        e.preventDefault()
+        router.push(href)
+        dispatch(toggleDrawer('navigation', false))
+    }
+    return (
+        <Link
+            prefetch
+            href={href}
+        >
+            <ListItem
+                button
+                disabled={buttonState}
+                classes={{ disabled: classes.activeLink }}
+                onClick={handleClick}
+            >
+                <ListItemIcon className={activeLinkClass}>
+                    <VariantInput inputVariant={link.icon} className={activeLinkClass} />
+                </ListItemIcon>
+                <ListItemText
+                    primaryTypographyProps={{ className: activeLinkClass }}
+                    primary={link.label}
+                />
+            </ListItem>
+        </Link>
+
+    )
+}
+const NavLink = withRouter(ActiveLink)
 
 export default function NavigationDrawerContent() {
     // Get state contexts
-    const { state, dispatch } = useContext(Store)
+    const { dispatch } = useContext(Store)
     // Define styles
     const classes = useStyles()
     return (
@@ -72,39 +120,30 @@ export default function NavigationDrawerContent() {
                     className={classes.headerWrapper}
                 >
                     <Grid item>
-                        <Link prefetch href='/'>
-                            <img
-                                src='./static/logos/logo-light.png'
-                                className={classes.logo}
-                                onClick={() => dispatch(toggleDrawer('navigation', false))}
-                            />
-                        </Link>
+                        <Logo
+                            variant='sideMenu'
+                            background='primary'
+                            onClick={() => dispatch(toggleDrawer('navigation', false))}
+                        />
                     </Grid>
                     <Grid item>
                         <Typography
-                            variant='body2'
+                            variant='body1'
                             className={classes.subtitle}
                         >
-                            Gold Coast's Premier Home Cleaning Company
+                            {businessData.location}'s Premier Home Cleaning Company
                         </Typography>
                     </Grid>
                 </Grid>
             </div>
             <List>
-                {navPages.map((link, index) => (
-                    <Link
-                        prefetch
-                        href={link.href}
+                {navPages.map((link) => (
+                    <NavLink
                         key={link.label}
+                        href={link.href}
+                        link={link}
                     >
-                        <ListItem
-                            button
-                            onClick={() => dispatch(toggleDrawer('navigation', false))}
-                        >
-                            <ListItemIcon><VariantInput inputVariant={link.icon} /></ListItemIcon>
-                            <ListItemText primary={link.label} />
-                        </ListItem>
-                    </Link>
+                    </NavLink>
                 ))}
             </List>
             <Divider />

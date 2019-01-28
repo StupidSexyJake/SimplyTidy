@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 // Data
-import { operatingHoursData } from '../data/businessData'
+import businessData from '../data/businessData'
 // Material components
 import { makeStyles } from '@material-ui/styles'
 import Hidden from '@material-ui/core/Hidden'
@@ -19,6 +19,7 @@ import { Wrapper } from '../components/Wrappers'
 import PhoneIcon from '@material-ui/icons/Phone'
 import EmailIcon from '@material-ui/icons/Email'
 import AddressIcon from '@material-ui/icons/LocationOn'
+import { FacebookIcon } from '../components/Icons'
 import blueGrey from '@material-ui/core/colors/blueGrey'
 
 const useStyles = makeStyles(theme => ({
@@ -209,6 +210,7 @@ export default React.memo(function Footer() {
                             >
                                 STAY CONNECTED
                             </Typography>
+                            <FacebookIcon />
                         </Grid>
                     </Hidden>
                     <Grid item
@@ -230,7 +232,7 @@ export default React.memo(function Footer() {
                             padding='none'
                         >
                             <TableBody>
-                                {operatingHoursData.map(day => (
+                                {businessData.operatingHours.map(day => (
                                     <TableRow key={day.day} className={classes.tableRow}>
                                         <TableCell
                                             component="th"

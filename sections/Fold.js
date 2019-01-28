@@ -5,7 +5,6 @@ import classNames from 'classnames'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 // Custom components
-import Navbar from '../sections/Navbar'
 import Scrim from '../components/Scrim'
 import { Wrapper } from '../components/Wrappers'
 
@@ -28,15 +27,18 @@ export default function Fold(props) {
                 className={classes.scrim}>
                 <Wrapper variant='fold'>
                     <Typography
-                        variant={props.titleProps && props.titleProps.variant || 'h2'}
-                        component={props.titleProps && props.titleProps.component || 'h1'}
+                        variant={props.titleProps && props.titleProps.variant || 'h1'}
+                        component={props.titleProps && props.titleProps.component}
                         color={props.titleProps && props.titleProps.color}
                         className={classNames(classes.title, props.className)}
                         {...props.titleProps}
                     >
                         {props.title}
                     </Typography>
-                    <Hidden smDown>
+                    <Hidden
+                        smDown
+                        implementation='css'
+                    >
                         <Typography
                             variant='h4'
                             component='p'

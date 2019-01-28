@@ -5,46 +5,91 @@ import classNames from 'classnames'
 import { Store } from '../state/store'
 // Actions
 import { toggleDrawer } from '../state/actions'
+// Utils
+import { VariantInput } from '../utils/functions'
 // Material components
 import Button from '@material-ui/core/Button'
 import Fab from '@material-ui/core/Fab'
+// Icons
+import BookIcon from '@material-ui/icons/Launch'
 
-// CallToActionButton styles
-const callToActionButtonStyles = makeStyles(theme => ({
-    root: {
-        borderRadius: `${theme.shape.borderRadius}px !important`,
-        textShadow: theme.custom.textShadow
-    }
-}))
-
-export function CallToActionButton(props) {
-    // Get state contexts
-    const { dispatch } = useContext(Store)
-    // Define styles
-    const classes = callToActionButtonStyles()
-    // Set button component
-    function ButtonType(props) {
+// Set CTA component type
+function ButtonType(props) {
+    let ButtonVariant
+    let variant
+    if (props.cta) {
         const buttonTypes = {
             button: Button,
-            fab: Fab
+            fab: Fab,
         }
-        const ButtonVariant = buttonTypes[props.type]
+        ButtonVariant = buttonTypes[props.type]
         const variantType = {
             button: 'contained',
             fab: 'extended'
         }
-        const variant = variantType[props.type]
-        return <ButtonVariant variant={variant} {...props} />
+        variant = variantType[props.type]
+    } else {
+        ButtonVariant = Button
+        variant = props.variant
     }
+    return <ButtonVariant variant={variant} {...props} />
+}
+export function CallToActionButton(props) {
+    // Get state contexts
+    const { dispatch } = useContext(Store)
+    return (
+        <Button
+            variant='contained'
+            color='secondary'
+            onClick={() => dispatch(toggleDrawer('bookingForm', true))}
+            {...props}
+        >
+            {props.children}
+        </Button>
+    )
+}
+
+export function CTAWithIcon(props) {
+    // Get state contexts
+    const { dispatch } = useContext(Store)
+    return (
+        <ButtonWithIcon
+            cta='true'
+            icon={BookIcon}
+            buttonStyles={{
+                color: 'secondary',
+                onClick: () => dispatch(toggleDrawer('bookingForm', true)),
+                type: props.type || 'button',
+                size: props.size || 'medium',
+                ...props
+            }}
+        >
+            {props.children}
+        </ButtonWithIcon>
+    )
+}
+
+const buttonWithIconsStyles = makeStyles((theme) => ({
+    icon: {
+        fontSize: '18px',
+        marginRight: 1 * theme.spacing.unit,
+    },
+
+}))
+export function ButtonWithIcon(props) {
+    // Define styles
+    const classes = buttonWithIconsStyles()
     return (
         <ButtonType
-            type={props.type || 'button'}
-            color='secondary'
-            className={classNames(props.className, classes.root)}
-            size={props.size || 'medium'}
-            {...props}
-            onClick={() => dispatch(toggleDrawer('bookingForm', true))}
+            cta={props.cta}
+            type={props.buttonStyles.type || 'button'}
+            className={props.buttonStyles.className}
+            {...props.buttonStyles}
         >
+            <VariantInput
+                inputVariant={props.icon}
+                className={classNames(props.iconStyles, classes.icon)}
+            />
             {props.children}
         </ButtonType>
     )

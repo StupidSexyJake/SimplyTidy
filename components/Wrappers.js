@@ -53,6 +53,7 @@ export function Wrapper(props) {
         >
             <Grid
                 item
+                xs={props.xs || 12}
                 sm={props.sm || 12}
                 md={props.md || 10}
                 xl={props.xl || 8}

@@ -66,7 +66,7 @@ export function ExpandGroup(props) {
     // Define styles
     const classes = useStyles()
     return (
-        <Collapse in={props.expandState} timeout={props.timeout || 300} className={props.className}>
+        <Collapse in={props.expandState} timeout={props.timeout || 400} className={props.className}>
             {props.children}
         </ Collapse>
     )

@@ -41,10 +41,20 @@ export function IconContent(props) {
     // Define styles
     const classes = useStyles(props)
     return (
-        <Grid container spacing={8} alignItems='center' justify='flex-start'>
+        <Grid container
+            spacing={8}
+            alignItems='center'
+            justify='flex-start'
+        >
             {props.icons.map((icon, index) => (
-                <Grid item key={index}>
-                    <VariantInput inputVariant={icon.inputVariant} src={icon.src} className={classes.iconContentIcon} />
+                <Grid item 
+                    key={index}
+                >
+                    <VariantInput
+                        inputVariant={icon.inputVariant}
+                        src={icon.src}
+                        className={classes.iconContentIcon}
+                    />
                 </Grid>
             ))}
         </Grid>

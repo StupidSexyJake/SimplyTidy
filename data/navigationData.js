@@ -12,41 +12,42 @@ import BookIcon from '@material-ui/icons/ExitToApp'
 
 export const navPages = [
     {
+        key: 1,
         label: "How To Book",
         href: "/howtobook",
         id: 'howToBook',
         icon: HowToBookIcon
     },
     {
+        key: 2,
         label: "What's Included",
         href: "/whatsincluded",
         id: 'whatsincluded',
         icon: WhatsIncludedIcon
     },
     {
+        key: 3,
         label: "Meet The Team",
         href: "/meettheteam",
         id: 'meettheteam',
         icon: MeetTheTeamIcon
     },
-    // {
-    //     label: "Hot Deals",
-    //     href: "/offers",
-    //     icon: HotDealsIcon
-    // },
     {
+        key: 4,
         label: "Reviews",
         href: "/reviews",
         id: 'reviews',
         icon: ReviewsIcon
     },
     {
+        key: 5,
         label: "FAQs",
         href: "/faq",
         id: 'faq',
         icon: FAQIcon
     },
     {
+        key: 6,
         label: "Contact Us",
         href: "/contact",
         id: 'contact',

@@ -40,6 +40,7 @@ import {
 } from '../Content'
 // Material components
 import { makeStyles } from '@material-ui/styles'
+import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Divider from '@material-ui/core/Divider'
@@ -51,13 +52,18 @@ const useStyles = makeStyles(theme => ({
     },
     border: {
         marginTop: 2 * theme.spacing.unit,
-        paddingRight: 3 * theme.spacing.unit,
-        // borderRight: '1px solid rgba(0, 0, 0, 0.12)',
+        paddingRight: 2 * theme.spacing.unit,
+        [theme.breakpoints.down('xs')]: {
+            paddingRight: 0,
+        },
     },
     sectionContainer: {
     },
     sidebarContainer: {
-        paddingLeft: 3 * theme.spacing.unit,
+        paddingLeft: 2 * theme.spacing.unit,
+        [theme.breakpoints.down('xs')]: {
+            paddingLeft: 0,
+        },
     },
     stripeImage: {
         height: '32px'
@@ -99,9 +105,13 @@ export default function Step1() {
             >
                 <Frequency />
             </ExpandGroup>
-            <Grid container className={classes.container}>
-                <Grid
-                    item xs={9}
+            <Grid container
+                className={classes.container}
+                justify='center'
+            >
+                <Grid item
+                    xs={12}
+                    sm={9}
                     className={classes.sectionContainer}
                 >
                     <div className={classes.border}>
@@ -161,18 +171,20 @@ export default function Step1() {
                         </ExpandGroup>
                     </div>
                 </Grid>
-                <Grid
-                    item xs={3}
+                <Grid item
+                    xs={12}
+                    sm={3}
                     className={classes.sidebarContainer}
                 >
-
-                    <SidebarGroup
-                        title='Need Help?'
-                    >
-                        <StaticGroup
-                            content={NeedHelp}
-                        />
-                    </SidebarGroup>
+                    <Hidden xsDown>
+                        <SidebarGroup
+                            title='Need Help?'
+                        >
+                            <StaticGroup
+                                content={NeedHelp}
+                            />
+                        </SidebarGroup>
+                    </Hidden>
                     <Paper elevation={0} className={classes.paper}>
                         <SidebarGroup
                             title='Booking Summary'

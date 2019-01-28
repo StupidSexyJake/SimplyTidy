@@ -80,7 +80,7 @@ export default React.memo(function CommonQuestions() {
     return (
         <section className={classes.root}>
             <Wrapper variant='section' className={classes.container}>
-                <Typography variant='h3' component='h2'>
+                <Typography variant='h2' component='h2'>
                     Common Questions
                         </Typography>
                 <Typography variant='h6' component='p' className={classes.subtitle}>

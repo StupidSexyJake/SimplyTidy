@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles(theme => ({
     container: {
+        paddingBottom: 0.5 * theme.spacing.unit
     },
     iconContainer: {
         height: '20px'
@@ -67,14 +68,21 @@ export function ContentGroup_ParentValue(props) {
         >
             {props.data.map((data, index) => (
                 <React.Fragment key={index}>
-                    <Grid item xs={2} className={classes.iconContainer}>
+                    <Grid item
+                        xs={2}
+                        className={classes.iconContainer}
+                    >
                         <VariantInput
                             inputVariant={data.values[state[data.stateType][data.stateValue]].icon}
                             fontSize='small'
                             className={classes.icon}
                         />
                     </Grid>
-                    <Grid item md={10 / cols} sm={6} xs={12}>
+                    <Grid item
+                        xs={10}
+                        sm={4}
+                        md={10 / cols}
+                    >
                         <VariantInput inputVariant={data.summary} />
                     </Grid>
                 </React.Fragment>
@@ -89,8 +97,7 @@ export function ContentGroup_ChildValues(props) {
     // Definte styles
     const classes = useStyles()
     return (
-        <Grid
-            container
+        <Grid container
             className={classes.container}
             spacing={8}
             alignItems='flex-start'
@@ -98,15 +105,14 @@ export function ContentGroup_ChildValues(props) {
         >
             {props.data.map((data) => {
                 const childData = data.values[state[data.stateType][data.stateValue]]
-
                 let output = []
                 for (const key in childData.values) {
                     let value = childData.values[key]
                     let iconGrid, summaryGrid, summaryLabel
                     switch (state[data.stateType][data.stateValue]) {
                         case ('fixedPrice'):
-                            iconGrid = 3,
-                                summaryGrid = 3
+                            iconGrid = 3
+                            summaryGrid = 3
                             break
                         case ('hourlyRate'):
                             iconGrid = 2
@@ -114,18 +120,23 @@ export function ContentGroup_ChildValues(props) {
                             summaryLabel = value.suffix
                             break
                         default:
-                            console.log('missed it')
+                            console.log('error with package selection')
                     }
                     output.push(
                         <React.Fragment key={key}>
-                            <Grid item xs={iconGrid} className={classes.iconContainer}>
+                            <Grid item
+                                xs={iconGrid}
+                                className={classes.iconContainer}
+                            >
                                 <VariantInput
                                     inputVariant={value.icon}
                                     fontSize='small'
                                     className={classes.icon}
                                 />
                             </Grid>
-                            <Grid item md={summaryGrid} sm={6} xs={12}>
+                            <Grid item
+                                xs={summaryGrid}
+                            >
                                 <Typography>
                                     {value.values[state[value.stateType][value.stateValue]].label} {summaryLabel}
                                 </Typography>

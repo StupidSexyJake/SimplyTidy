@@ -1,15 +1,17 @@
 import React from 'react'
 import Head from 'next/head'
+// Business data
+import businessData from '../data/businessData'
 
 export default React.memo(function (props) {
     return (
         <React.Fragment>
             <Head>
-                <meta name="viewport" content="width=device-width, initial-scale=1" key="viewport" />
                 <meta charSet="utf-8" />
-                <title>{props.title} | Gold Coast Maids</title>
-                <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" />
-                <link href="https://fonts.googleapis.com/css?family=Montserrat:400" rel="stylesheet" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" key="viewport" />
+                <meta name="description" content={props.metaDescription}></meta>
+                <title>{props.title} | {businessData.companyName} </title>
+                <link href="https://fonts.googleapis.com/css?family=Montserrat|Oswald:400" rel="stylesheet" />
                 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500" rel="stylesheet" />
                 <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
             </Head>

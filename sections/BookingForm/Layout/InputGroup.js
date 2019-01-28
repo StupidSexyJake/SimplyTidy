@@ -1,4 +1,6 @@
 import React from 'react'
+// Utils
+import { VariantInput } from '../../../utils/functions'
 // Material components
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
@@ -17,29 +19,24 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-// Create field input component from data
-function VariantInput(inputProps) {
-    const { inputVariant, ...other } = inputProps
-    const InputVariant = inputVariant
-    return (
-        <InputVariant {...other} />
-    )
-}
-
 export function InputGroup(props) {
     // Get number of columns
     const cols = props.cols || 1
     // Define styles
     const classes = useStyles()
     return (
-        <Grid
-            container
+        <Grid container
             spacing={16}
             className={classes.container}
             alignItems='center'
         >
             {props.data.map((data, index) => (
-                <Grid item md={12 / cols} sm={6} xs={12} key={index}>
+                <Grid item
+                    xs={12}
+                    sm={6}
+                    md={12 / cols}
+                    key={index}
+                >
                     <VariantInput filled={props.filled} inputVariant={data.inputField} />
                 </Grid>
             ))}
@@ -61,15 +58,25 @@ export function InputGroup_WithIcons(props) {
         >
             {props.data.map((data, index) => (
                 <React.Fragment key={index}>
-                    <Grid item xs={1} className={classes.iconContainer}>
+                    <Grid item
+                        xs={2}
+                        sm={1}
+                        className={classes.iconContainer}
+                    >
                         <VariantInput
                             inputVariant={data.icon}
                             fontSize='large'
                             className={classes.icon}
                         />
                     </Grid>
-                    <Grid item xs={(12 / cols) - 1}>
-                        <VariantInput filled={props.filled} inputVariant={data.inputField} />
+                    <Grid item
+                        xs={10}
+                        sm={(12 / cols) - 1}
+                    >
+                        <VariantInput
+                            filled={props.filled}
+                            inputVariant={data.inputField}
+                        />
                     </Grid>
                 </React.Fragment>
             ))}

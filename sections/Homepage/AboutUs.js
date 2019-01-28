@@ -25,9 +25,6 @@ const useStyles = makeStyles(theme => ({
     },
     heading: {
         color: theme.palette.primary.main,
-        [theme.breakpoints.down('xs')]: {
-            fontSize: '2.125rem',
-        }
     },
     content: {
         marginLeft: 2 * theme.spacing.unit,

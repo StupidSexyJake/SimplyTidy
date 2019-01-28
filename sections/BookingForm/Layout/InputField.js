@@ -1,4 +1,6 @@
 import React from 'react'
+// Utils
+import { VariantInput } from '../../../utils/functions'
 // Autocomplete
 import Downshift from 'downshift'
 // Material components
@@ -60,7 +62,11 @@ const useStyles = makeStyles(theme => ({
         margin: '0 auto',
         marginTop: 2 * theme.spacing.unit,
         fontSize: `${16 * theme.spacing.unit / 16}rem`,
-        color: theme.palette.primary.dark
+        color: theme.palette.primary.dark,
+        [theme.breakpoints.down('xs')]: {
+            marginTop: 0,
+            fontSize: `${12 * theme.spacing.unit / 16}rem`,
+        }
     },
     selectedIconTitle: {
         paddingBottom: 0,
@@ -73,7 +79,6 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.text.disabled
     },
     buttonSelect: {
-        marginRight: 2 * theme.spacing.unit,
         transition: 'all 0.1s cubic-bezier(0.4, 0.0, 0.2, 1)',
     },
     buttonSelectIcon: {
@@ -97,15 +102,6 @@ const useStyles = makeStyles(theme => ({
         marginRight: 0
     }
 }))
-
-// Create input component based on prop variant
-function VariantInput(inputProps) {
-    const { inputVariant, ...other } = inputProps
-    const InputVariant = inputVariant
-    return (
-        <InputVariant {...other} />
-    )
-}
 
 export function TextInput(props) {
     // Define styles
@@ -287,24 +283,36 @@ export function ButtonSelect(props) {
         false: 'default'
     }
     return (
-        props.options.map((item, index) => (
-            <Button
-                key={index}
-                size={item.value === props.value ? 'large' : 'medium'}
-                disabled={item.value === props.value}
-                variant='contained'
-                color={selectedColor[item.value === props.value]}
-                onClick={() => props.onClick(item.value)}
-                classes={{ disabled: classes.buttonSeletDisabled }}
-                className={classes.buttonSelect}
-            >
-                {item.icon &&
-                    <span className={classes.buttonSelectIcon}>
-                        {item.icon}
-                    </span>}
-                {item.label}
-            </Button>
-        ))
+        <Grid container
+            spacing={16}
+            alignItems='center'
+        >
+            {props.options.map((item, index) => (
+                <Grid item
+                    key={item.key}
+                    xs={12}
+                    md={5}
+                >
+                    <Button
+                        fullWidth
+                        size={item.value === props.value ? 'large' : 'medium'}
+                        disabled={item.value === props.value}
+                        variant='contained'
+                        color={selectedColor[item.value === props.value]}
+                        onClick={() => props.onClick(item.value)}
+                        classes={{ disabled: classes.buttonSeletDisabled }}
+                        className={classes.buttonSelect}
+                    >
+                        {item.icon &&
+                            <span className={classes.buttonSelectIcon}>
+                                {item.icon}
+                            </span>}
+                        {item.label}
+                    </Button>
+                </Grid>
+            ))}
+        </Grid>
+
     )
 }
 

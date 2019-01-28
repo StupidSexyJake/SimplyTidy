@@ -15,7 +15,6 @@ const useStyles = makeStyles(theme => ({
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         [theme.breakpoints.down('xs')]: {
-            fontSize: '2.125rem',
             backgroundPosition: '15% top',
         }
     },
@@ -26,17 +25,11 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.secondary.contrastText,
         marginBottom: 3 * theme.spacing.unit,
         textShadow: theme.custom.textShadow,
-        [theme.breakpoints.down('xs')]: {
-            fontSize: '2.125rem',
-        },
     },
     description: {
         color: theme.palette.secondary.contrastText,
         padding: 0,
         textShadow: theme.custom.textShadow,
-        [theme.breakpoints.down('xs')]: {
-            fontSize: '1rem',
-        }
     },
     iconContainer: {
         textAlign: 'center',
@@ -61,10 +54,10 @@ export default React.memo(function Navbar() {
                 <Wrapper className={classes.container}>
                     <Grid container spacing={16} className={classes.gridContainer} alignItems='center'>
                         <Grid item sm={12} md={8}>
-                            <Typography variant='h3' component='h2' className={classes.heading}>
+                            <Typography variant='h2' className={classes.heading}>
                                 Your Happiness Guaranteed
                             </Typography>
-                            <Typography variant='h6' component='p' className={classes.description}>
+                            <Typography variant='h5' component='p' className={classes.description}>
                                 If your cleaning isn’t up to the quality you expect, we’ll come back and re-clean for free. We expect quality and you should too.
                             </Typography>
                         </Grid>

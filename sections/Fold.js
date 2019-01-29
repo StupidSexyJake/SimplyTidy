@@ -42,7 +42,10 @@ const useStyles = makeStyles(theme => ({
         }
     },
     titleSection: {
-        marginBottom: props => props.children ? 8 * theme.spacing.unit : undefined
+        marginBottom: props => props.children ? 8 * theme.spacing.unit : undefined,
+        [theme.breakpoints.down('sm')]: {
+            marginBottom: props => props.children ? 3 * theme.spacing.unit : undefined,
+        }
     }
 }))
 

@@ -71,7 +71,7 @@ export default React.memo(function Numbers() {
     // Define styles
     const classes = sectionStyles()
     return (
-        <section className={classes.root}>
+        <div className={classes.root}>
             <Scrim hsl='primaryLight'>
                 <Wrapper className={classes.container}>
                     <Grid
@@ -83,6 +83,6 @@ export default React.memo(function Numbers() {
                     </Grid>
                 </Wrapper>
             </Scrim>
-        </section>
+        </div>
     )
 })

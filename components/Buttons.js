@@ -32,7 +32,7 @@ function ButtonType(props) {
         ButtonVariant = Button
         variant = props.variant
     }
-    return <ButtonVariant variant={variant} {...props} />
+    return <ButtonVariant variant={variant} {...props.buttonStyles} children={props.children} />
 }
 export function CallToActionButton(props) {
     // Get state contexts
@@ -42,7 +42,8 @@ export function CallToActionButton(props) {
             variant='contained'
             color='secondary'
             onClick={() => dispatch(toggleDrawer('bookingForm', true))}
-            {...props}
+            className={props.className}
+            fullWidth={props.fullWidth}
         >
             {props.children}
         </Button>
@@ -83,8 +84,7 @@ export function ButtonWithIcon(props) {
         <ButtonType
             cta={props.cta}
             type={props.buttonStyles.type || 'button'}
-            className={props.buttonStyles.className}
-            {...props.buttonStyles}
+            buttonStyles={props.buttonStyles}
         >
             <VariantInput
                 inputVariant={props.icon}

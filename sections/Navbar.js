@@ -146,7 +146,7 @@ export default function Navbar() {
                                 className={classes.ctaBtn}
                             >
                                 Book online now
-                        </CTAWithIcon>
+                            </CTAWithIcon>
                         </Hidden>
                         <Hidden
                             smUp

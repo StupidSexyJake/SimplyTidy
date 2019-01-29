@@ -136,7 +136,7 @@ const useStyles = makeStyles(theme => ({
         // paddingLeft: 12 * theme.spacing.unit,
         // paddingRight: 12 * theme.spacing.unit,
         // marginRight: 2 * theme.spacing.unit,
-        width: '100%'
+        // width: '100%'
     },
     buttonIcon: {
         marginLeft: 1.5 * theme.spacing.unit

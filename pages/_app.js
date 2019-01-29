@@ -8,9 +8,6 @@ import { Provider } from '../state/store'
 // Material UI
 import { StylesProvider, ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
-// Media queries
-import mediaQuery from 'css-mediaquery'
-import useMediaQueryTheme from '@material-ui/core/useMediaQuery/unstable_useMediaQueryTheme'
 
 class MyApp extends App {
   constructor() {

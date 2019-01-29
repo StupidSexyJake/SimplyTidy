@@ -41,6 +41,7 @@ function AllNumbers() {
                     variant="h6"
                     component="p"
                     className={classes.description}
+                    align='center'
                 >
                     {field.label}
                 </Typography>

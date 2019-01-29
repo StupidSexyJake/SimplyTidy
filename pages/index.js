@@ -33,9 +33,6 @@ const useStyles = makeStyles(theme => ({
             fontSize: '10vw'
         },
     },
-    preBooking: {
-        marginTop: 8 * theme.spacing.unit,
-    },
     foldMobileCTA: {
         display: 'flex',
         marginTop: 3 * theme.spacing.unit,
@@ -57,7 +54,7 @@ export default function Index() {
             <Fold
                 title='That Clean Home Feeling!'
                 subtitle="You click. We clean. It's that simple."
-                hero='homepage-hero-woman-relaxing.jpg'
+                hero='homepage-hero-woman-relaxing'
                 scrim='white'
                 className={classes.titleProps}
                 titleProps={{
@@ -65,7 +62,7 @@ export default function Index() {
                 }}
             >
                 <Hidden xsDown implementation='css'>
-                    <PreBooking className={classes.preBooking} />
+                    <PreBooking />
                 </Hidden>
                 <Hidden smUp implementation='css'>
                     <CTAWithIcon
@@ -77,11 +74,11 @@ export default function Index() {
                     </CTAWithIcon>
                 </Hidden>
             </Fold>
-            <Hidden smDown implementation='css'>
-                <Features />
-            </Hidden>
             <Hidden smUp implementation='css'>
                 <PreBooking_Mobile />
+            </Hidden>
+            <Hidden smDown implementation='css'>
+                <Features />
             </Hidden>
             <About />
             <Benefits />

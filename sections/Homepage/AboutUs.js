@@ -7,6 +7,7 @@ import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
 // Custom components
 import { Wrapper } from '../../components/Wrappers'
+import Logo from '../../components/Logo'
 
 // Create styles
 const useStyles = makeStyles(theme => ({
@@ -14,44 +15,46 @@ const useStyles = makeStyles(theme => ({
         background: `${theme.palette.primary.light} url('/static/backgrounds/cleaning-pattern-light.jpg') no-repeat 0 center / cover`,
     },
     gridWidthFix: {
-        width: '100%'
+        width: '100%',
+        [theme.breakpoints.down('md')]: {
+            width: 'calc(100% + 40px)'
+        }
     },
     leftGrid: {
-        textAlign: 'center'
-    },
-    quote: {
-        color: theme.palette.primary.main
+        textAlign: 'center',
+        [theme.breakpoints.down('sm')]: {
+            order: 3
+        }
     },
     divider: {
         marginTop: 2 * theme.spacing.unit,
         marginBottom: 2 * theme.spacing.unit
     },
     heading: {
-        color: theme.palette.primary.main,
+        marginBottom: 2 * theme.spacing.unit,
+        [theme.breakpoints.down('sm')]: {
+            textAlign: 'center'
+        }
     },
     content: {
         marginLeft: 2 * theme.spacing.unit,
         marginRight: 2 * theme.spacing.unit,
         paddingBottom: 2 * theme.spacing.unit,
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
             marginLeft: 0,
-            marginRight: 0
+            marginRight: 0,
+            textAlign: 'justify'
         }
     },
     contentEnd: {
         marginLeft: 2 * theme.spacing.unit,
         marginRight: 2 * theme.spacing.unit,
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
             marginLeft: 0,
-            marginRight: 0
+            marginRight: 0,
+            textAlign: 'justify'
         }
     },
-    button: {
-        marginTop: 2.5 * theme.spacing.unit,
-        marginLeft: 2 * theme.spacing.unit,
-        color: theme.palette.text.secondary,
-        minWidth: 20 * theme.spacing.unit
-    }
 }))
 
 export default React.memo(function AboutUs() {
@@ -59,41 +62,42 @@ export default React.memo(function AboutUs() {
     return (
         <section className={classes.root}>
             <Wrapper variant='section'>
-                <Grid
-                    container
+                <Grid container
                     alignItems='center'
+                    justify='center'
                     spacing={40}
                     className={classes.gridWidthFix}
                 >
-                    <Hidden smDown>
-                        <Grid
-                            item xs={4}
-                            className={classes.leftGrid}
+                    <Grid item
+                        xs={12}
+                        sm={10}
+                        md={4}
+                        className={classes.leftGrid}
+                    >
+                        <Logo
+                            variant='section'
+                            background='primaryLight'
+                            align='center'
+                        />
+                        <Divider className={classes.divider} />
+                        <Typography
+                            variant='h6'
+                            component='p'
                         >
-                            <img
-                                src='./static/logos/logo-primary.png'
-                                className={classes.image}
-                            />
-                            <Divider className={classes.divider} />
-                            <Typography
-                                variant='h6'
-                                component='p'
-                                className={classes.quote}
-                            >
-                                <em>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.
-                                </em>
-                            </Typography>
-                            <Divider className={classes.divider} />
-                        </Grid>
-                    </Hidden>
-                    <Grid
-                        item
+                            <em>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.
+                            </em>
+                        </Typography>
+                        <Divider className={classes.divider} />
+                    </Grid>
+                    <Grid item
+                        xs={12}
+                        sm={10}
                         md={8}
                         className={classes.rightGrid}
                     >
                         <Typography
-                            variant='h4'
+                            variant='h3'
                             component='h1'
                             className={classes.heading}
                             align='left'

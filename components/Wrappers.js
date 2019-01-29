@@ -7,6 +7,10 @@ import Grid from '@material-ui/core/Grid'
 // Container styles
 const containerStyles = makeStyles(theme => ({
     allVariants: {
+        maxWidth: theme.breakpoints.values.xl,
+        margin: '0 auto',
+        height: '100%',
+        width: '100%'
     },
     section: {
         paddingLeft: 2 * theme.spacing.unit,
@@ -17,8 +21,6 @@ const containerStyles = makeStyles(theme => ({
             paddingTop: 5 * theme.spacing.unit,
             paddingBottom: 7.5 * theme.spacing.unit
         }
-    },
-    base: {
     },
     content: {
         padding: 2 * theme.spacing.unit
@@ -40,6 +42,17 @@ const containerStyles = makeStyles(theme => ({
         width: '100%'
     }
 }))
+
+export function Contained(props) {
+    // Define styles
+    const classes = containerStyles()
+    return (
+        <div className={classes.allVariants}>
+            {props.children}
+        </div>
+    )
+}
+
 export function Wrapper(props) {
     // Define styles
     const classes = containerStyles()

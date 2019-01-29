@@ -15,10 +15,10 @@ import TableRow from '@material-ui/core/TableRow'
 import Anchor from '@material-ui/core/Link'
 // Custom components
 import { Wrapper } from '../components/Wrappers'
+import Logo from '../components/Logo'
 // Icons
 import PhoneIcon from '@material-ui/icons/Phone'
 import EmailIcon from '@material-ui/icons/Email'
-import AddressIcon from '@material-ui/icons/LocationOn'
 import { FacebookIcon } from '../components/Icons'
 import blueGrey from '@material-ui/core/colors/blueGrey'
 
@@ -149,11 +149,9 @@ export default React.memo(function Footer() {
                                 className={classes.centerMobile}
                             >
                                 <Link prefetch href="/">
-                                    <a>
-                                        <img
-                                            src='./static/logos/logo-primary.png'
-                                            className={classes.logo} />
-                                    </a>
+                                    <Logo
+                                        variant='section'
+                                    />
                                 </Link>
                             </Grid>
                             <Grid item

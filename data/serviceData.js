@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
-// State
-import { Store } from '../state/store'
 // Fields
 import {
+    Name,
+    Email,
+    Suburb,
     Bedrooms,
     Bathrooms,
     LivingAreas,
@@ -11,7 +11,8 @@ import {
     NumberOfHours,
     Package,
     Extras,
-    Frequency
+    Frequency,
+    Service
 } from '../sections/BookingForm/Fields'
 // Field summaries
 import {
@@ -19,7 +20,7 @@ import {
     PackageSummary
 } from '../sections/BookingForm/Content'
 // Icons
-import ServiceIcon from '@material-ui/icons/Hotel'
+import ServiceIcon from '@material-ui/icons/CardGiftcard'
 import RoutineIcon from '@material-ui/icons/Hotel'
 import OneTimeIcon from '@material-ui/icons/Wc'
 import BondIcon from '@material-ui/icons/Weekend'
@@ -34,6 +35,7 @@ import FixedPriceIcon from '@material-ui/icons/CardGiftcard' // Gem
 import HourlyRateIcon from '@material-ui/icons/Schedule' // Hourglass
 import PackageIcon from '@material-ui/icons/CardGiftcard'
 import ExtrasIcon from '@material-ui/icons/AddCircle'
+import SuburbIcon from '@material-ui/icons/LocationOn'
 
 export const clientMap = {
     values: {
@@ -43,6 +45,7 @@ export const clientMap = {
             stateValue: 'name',
             id: 'name',
             icon: BedroomsIcon,
+            inputField: Name,
         },
         email: {
             label: 'Email',
@@ -50,13 +53,15 @@ export const clientMap = {
             stateValue: 'email',
             id: 'email',
             icon: BathroomsIcon,
+            inputField: Email,
         },
         suburb: {
             label: 'Suburb',
             stateType: 'client',
             stateValue: 'suburb',
             id: 'suburb',
-            icon: KitchensIcon,
+            icon: SuburbIcon,
+            inputField: Suburb,
             values: [
                 { label: 'Advancetown' },
                 { label: 'Arundel' },
@@ -270,34 +275,7 @@ export const packageMap = {
     }
 }
 
-export const extrasMap = {
-    stateType: 'service',
-    stateValue: 'extras',
-    unselectedStateType: 'bookingForm',
-    unselectedValue: 'unselectedExtras',
-    icon: ExtrasIcon,
 
-    summary: PackageSummary,
-    inputField: Extras,
-    values: {
-        ovenCleaning: {
-            label: 'Oven Cleaning',
-            icon: ExtrasIcon,
-        },
-        windowCleaning: {
-            label: 'Window Cleaning',
-            icon: ExtrasIcon,
-        },
-        insideCupboards: {
-            label: 'Inside Cupboards',
-            icon: ExtrasIcon,
-        },
-        insideFridge: {
-            label: 'Inside Fridge',
-            icon: ExtrasIcon,
-        }
-    }
-}
 
 export const serviceMap = {
     label: 'Service',
@@ -305,27 +283,48 @@ export const serviceMap = {
     stateType: 'service',
     stateValue: 'service',
     icon: ServiceIcon,
+    inputField: Service,
     summary: ServiceSummary,
     values: {
         10: {
             label: 'Routine Cleaning',
             id: 'routineCleaning',
+            href: '/',
+            description: {
+                short: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica'
+            },
             icon: RoutineIcon,
+            image: 'home-cleaning'
         },
         20: {
             label: 'One Time Cleaning',
             id: 'oneTimeCleaning',
+            href: '/',
+            description: {
+                short: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica'
+            },
             icon: OneTimeIcon,
+            image: 'home-cleaning'
         },
         30: {
             label: 'Bond Cleaning',
             id: 'bondCleaning',
+            href: '/',
+            description: {
+                short: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica'
+            },
             icon: BondIcon,
+            image: 'home-cleaning'
         },
         40: {
             label: 'Spring Cleaning',
             id: 'springCleaning',
+            href: '/',
+            description: {
+                short: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica'
+            },
             icon: SpringIcon,
+            image: 'home-cleaning'
         }
     }
 }

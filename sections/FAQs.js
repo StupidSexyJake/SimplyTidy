@@ -62,13 +62,13 @@ export default function FAQs(props) {
             <Wrapper variant='section'>
                 <Grid container>
                     <Grid item xs={12} lg={6} className={classes.gridItem}>
-                        {props.categoriesArray_First.map((category) => (
-                            <Category category={category} />
+                        {props.categoriesArray_First.map((category, index) => (
+                            <Category category={category} key={index} />
                         ))}
                     </Grid>
                     <Grid item xs={12} lg={6} className={classes.gridItem}>
-                        {props.categoriesArray_Second.map((category) => (
-                            <Category category={category} />
+                        {props.categoriesArray_Second.map((category, index) => (
+                            <Category category={category} key={index} />
                         ))}
                     </Grid>
                 </Grid>

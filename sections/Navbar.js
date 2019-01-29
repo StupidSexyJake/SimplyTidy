@@ -25,6 +25,10 @@ import {
     CTAWithIcon,
     ButtonWithIcon
 } from '../components/Buttons'
+import {
+    Contained,
+    Wrapper
+} from '../components/Wrappers'
 
 // Create styles
 const useStyles = makeStyles((theme) => ({
@@ -93,69 +97,71 @@ export default function Navbar() {
             elevation={0}
             color='default'
         >
-            <Toolbar
-                disableGutters // Can't figure out how to change theme.mixins.gutters so manually setting here under className
-                className={classes.toolbar}
-            >
-                <Hidden
-                    implementation='css'
-                    lgUp
+            <Contained>
+                <Toolbar
+                    disableGutters // Can't figure out how to change theme.mixins.gutters so manually setting here under className
+                    className={classes.toolbar}
                 >
-                    <IconButton onClick={() => dispatch(toggleDrawer('navigation', true))}>
-                        <MenuIcon />
-                    </IconButton>
-                </Hidden>
-                <Logo
-                    variant='navbar'
-                    anchorStyles={classes.logo}
-                />
-                <div className={classes.navGroup}>
                     <Hidden
                         implementation='css'
-                        mdDown
+                        lgUp
                     >
-                        {navPages.map((link) => (
-                            <NavLink key={link.key} href={link.href}>
-                                {link.label}
-                            </NavLink>
-                        ))}
+                        <IconButton onClick={() => dispatch(toggleDrawer('navigation', true))}>
+                            <MenuIcon />
+                        </IconButton>
                     </Hidden>
-                </div>
-                <div>
-                    <Hidden
-                        xsDown
-                        implementation='css'
-                    >
-                        <ButtonWithIcon
-                            icon={PhoneIcon}
-                            buttonStyles={{
-                                color: 'primary',
-                                component: 'a',
-                                href: 'tel:+61756465290',
-                            }}
+                    <Logo
+                        variant='navbar'
+                        anchorStyles={classes.logo}
+                    />
+                    <div className={classes.navGroup}>
+                        <Hidden
+                            implementation='css'
+                            mdDown
                         >
-                            07 5646 5290
+                            {navPages.map((link) => (
+                                <NavLink key={link.key} href={link.href}>
+                                    {link.label}
+                                </NavLink>
+                            ))}
+                        </Hidden>
+                    </div>
+                    <div>
+                        <Hidden
+                            xsDown
+                            implementation='css'
+                        >
+                            <ButtonWithIcon
+                                icon={PhoneIcon}
+                                buttonStyles={{
+                                    color: 'primary',
+                                    component: 'a',
+                                    href: 'tel:+61756465290',
+                                }}
+                            >
+                                07 5646 5290
                         </ButtonWithIcon>
-                        <CTAWithIcon
-                            type='fab'
-                            className={classes.ctaBtn}
-                        >
-                            Book online now
+                            <CTAWithIcon
+                                type='fab'
+                                className={classes.ctaBtn}
+                            >
+                                Book online now
                         </CTAWithIcon>
-                    </Hidden>
-                    <Hidden
-                        smUp
-                        implementation='css'
-                    >
-                        <IconButton>
-                            <PhoneIcon />
-                        </IconButton>
-                        <IconButton>
-                            <ChatIcon />
-                        </IconButton>
-                    </Hidden>
-                </div>
-            </Toolbar>
+                        </Hidden>
+                        <Hidden
+                            smUp
+                            implementation='css'
+                        >
+                            <IconButton>
+                                <PhoneIcon />
+                            </IconButton>
+                            <IconButton>
+                                <ChatIcon />
+                            </IconButton>
+                        </Hidden>
+                    </div>
+                </Toolbar>
+            </Contained>
         </AppBar>
     )
 }

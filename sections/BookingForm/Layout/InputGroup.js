@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 // Utils
 import { VariantInput } from '../../../utils/functions'
 // Material components
@@ -54,24 +55,25 @@ export function InputGroup_WithIcons(props) {
             container
             spacing={16}
             className={classes.container}
-            alignItems='center'
+            alignItems={props.alignIcons || 'center'}
         >
             {props.data.map((data, index) => (
                 <React.Fragment key={index}>
                     <Grid item
                         xs={2}
                         sm={1}
-                        className={classes.iconContainer}
+                        className={classNames(props.iconClass, classes.iconContainer)}
                     >
                         <VariantInput
                             inputVariant={data.icon}
-                            fontSize='large'
+                            fontSize={props.iconSize || 'large'}
                             className={classes.icon}
                         />
                     </Grid>
                     <Grid item
                         xs={10}
                         sm={(12 / cols) - 1}
+                        className={props.inputClass}
                     >
                         <VariantInput
                             filled={props.filled}

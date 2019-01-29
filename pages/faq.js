@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/styles'
 import Hidden from '@material-ui/core/Hidden'
 // Page specific sections
 import SearchBarContainer from '../sections/SearchBarContainer'
-import FAQsLogic from '../sections/FAQsLogic'
+import FAQs from '../sections/FAQsLogic'
 // Common sections
 import Header from '../sections/Header'
 import Navbar from '../sections/Navbar'
@@ -17,9 +17,6 @@ import NavigationDrawer from '../sections/NavigationDrawer'
 
 // Index styles
 const useStyles = makeStyles(theme => ({
-    searchBar: {
-        marginTop: 8 * theme.spacing.unit,
-    },
 }))
 
 export default function FAQ() {
@@ -35,9 +32,9 @@ export default function FAQ() {
                 title="Frequently Asked Questions"
                 subtitle="Have questions? We've got answers"
             >
-                <SearchBarContainer className={classes.searchBar} />
+                <SearchBarContainer />
             </Fold>
-            <FAQsLogic />
+            <FAQs />
             <Footer />
             <BookingFormDrawer /> {/* Fix service image code */}
             <NavigationDrawer />

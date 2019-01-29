@@ -6,10 +6,11 @@ import {
     roomsMap,
     hourlyRateMap,
     packageMap,
-    extrasMap,
     serviceMap,
-    frequencyMap
 } from '../../../data/serviceData'
+import {
+    extrasMap
+} from '../../../data/extrasData'
 // Sections
 import {
     FormGroup,

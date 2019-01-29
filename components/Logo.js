@@ -4,22 +4,25 @@ import classNames from 'classnames'
 // MUI components
 import { makeStyles } from '@material-ui/styles'
 import Typography from '@material-ui/core/Typography'
-import yellow from '@material-ui/core/colors/yellow'
 
-function Logo(props) {
+function LogoLogic(props) {
     // Set typography types
     const variant = {
         navbar: 'h6',
-        sideMenu: 'h3'
+        sideMenu: 'h4',
+        section: 'h4'
     }
     return (
         <LogoLayout
+            logoStart='GOLDCOAST'
+            logoEnd='MAIDS'
+            noResize={props.noResize || undefined}
+            align={props.align}
             variant={variant[props.variant]}
             background={props.background}
             anchorStyles={props.anchorStyles}
             typographyStyles={props.typographyStyles}
-            logoStart='GOLDCOAST'
-            logoEnd='MAIDS'
+            onClick={props.onClick}
         />
     )
 }
@@ -29,9 +32,8 @@ const logoStyles = makeStyles((theme) => ({
         textDecoration: 'none',
     },
     allStyles: {
-        textAlign: 'left',
         fontFamily: "'Oswald', sans-serif",
-        fontWeight: 400
+        fontWeight: 400,
     },
     logoText: {
         color: theme.palette.primary.main,
@@ -46,12 +48,16 @@ const logoStyles = makeStyles((theme) => ({
         color: theme.palette.primary.contrastText,
         textShadow: theme.custom.palette.textShadow
     },
-
+    noResize: {
+        [theme.breakpoints.down('md')]: {
+            fontSize: props => theme.typography[props.variant].fontSize
+        }
+    }
 }))
 
 function LogoLayout(props) {
     // Define styles
-    const classes = logoStyles()
+    const classes = logoStyles(props)
     // Switch style based on props.background
     let classLogoText
     let classLogoText_End
@@ -66,18 +72,32 @@ function LogoLayout(props) {
             classLogoText_End = classes.logoText_End__light
             break
         }
+        case 'primaryLight':
         default: {
             classLogoText = classes.logoText
             classLogoText_End = classes.logoText_End
         }
     }
+    // If noResize === true, add noResize class
+    const variantStyles = props.noResize ? classes.noResize : undefined
     return (
         <Link href='/'>
-            <a className={classNames(classes.anchor, props.anchorStyles)}>
+            <a
+                className={classNames(classes.anchor, props.anchorStyles)}
+                onClick={props.onClick}
+            >
                 <Typography
                     variant={props.variant}
                     component='span'
-                    className={classNames(classes.allStyles, classLogoText, props.typographyStyles)}
+                    align={props.align || 'left'}
+                    className={
+                        classNames(
+                            classes.allStyles,
+                            classLogoText,
+                            props.typographyStyles,
+                            variantStyles
+                        )
+                    }
                 >
                     {props.logoStart}
                     <span className={classNames(classLogoText_End, props.typographyStyles)}>
@@ -89,4 +109,4 @@ function LogoLayout(props) {
     )
 }
 
-export default Logo
+export default LogoLogic

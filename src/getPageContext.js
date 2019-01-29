@@ -1,7 +1,6 @@
 import { SheetsRegistry } from 'jss'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { createGenerateClassName } from '@material-ui/styles'
-import { fade } from '@material-ui/core/styles/colorManipulator'
 import orange from '@material-ui/core/colors/orange'
 import cyan from '@material-ui/core/colors/cyan'
 import blueGrey from '@material-ui/core/colors/blueGrey'
@@ -70,7 +69,8 @@ const myTheme = createMuiTheme({
                 paddingLeft: 2 * defaultTheme.spacing.unit,
                 paddingRight: 2 * defaultTheme.spacing.unit,
                 '&:hover': {
-                    color: defaultTheme.palette.primary.dark
+                    color: defaultTheme.palette.primary.dark,
+                    marginTop: '-2px'
                 }
             },
             containedPrimary: {
@@ -136,12 +136,12 @@ const myTheme = createMuiTheme({
         h5: {
             fontFamily: defaultTheme.custom.typography.allHeadings.fontFamily,
             textAlign: defaultTheme.custom.typography.allHeadings.textAlign,
-            color: hexToRGB(defaultTheme.palette.primary.dark, 0.95),
+            color: hexToRGB(defaultTheme.palette.primary.main, 0.95),
         },
         h6: {
             fontFamily: defaultTheme.custom.typography.allHeadings.fontFamily,
             textAlign: defaultTheme.custom.typography.allHeadings.textAlign,
-            color: hexToRGB(defaultTheme.palette.primary.dark, 0.95),
+            color: hexToRGB(defaultTheme.palette.primary.main, 0.95),
         },
     },
 })
@@ -160,7 +160,8 @@ const theme = createMuiTheme({
         h2: {
             ...myTheme.typography.h2,
             [myTheme.breakpoints.down('sm')]: {
-                ...myTheme.typography.h3
+                ...myTheme.typography.h4,
+                marginBottom: 2 * myTheme.spacing.unit,
             }
         },
         h3: {
@@ -172,7 +173,8 @@ const theme = createMuiTheme({
         h4: {
             ...myTheme.typography.h4,
             [myTheme.breakpoints.down('sm')]: {
-                ...myTheme.typography.h5
+                ...myTheme.typography.h5,
+                color: hexToRGB(defaultTheme.palette.primary.dark, 0.95),
             }
         },
         h5: {
@@ -182,8 +184,11 @@ const theme = createMuiTheme({
             }
         },
         h6: {
-            ...myTheme.typography.h6,
-        },
+            [myTheme.breakpoints.down('sm')]: {
+                ...myTheme.typography.subtitle1,
+                color: myTheme.typography.h6.color
+            }
+        }
     }
 })
 

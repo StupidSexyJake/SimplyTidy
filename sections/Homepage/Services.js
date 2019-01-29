@@ -1,94 +1,80 @@
 import React from 'react'
-// Material components
+// Data
+import { serviceMap } from '../../data/serviceData'
+// MUI components
 import { makeStyles } from '@material-ui/styles'
 import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
-import CardActionArea from '@material-ui/core/CardActionArea'
 import CardActions from '@material-ui/core/CardActions'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 // Custom components
 import { Wrapper } from '../../components/Wrappers'
 
-function getServices() {
-    return [
+// Create service array
+let serviceArray = []
+for (const key in serviceMap.values) {
+    let value = serviceMap.values[key]
+    serviceArray.push(
         {
-            value: 1,
-            href: '/how',
-            image: '/static/cards/home-cleaning.jpg',
-            title: 'Routine Cleaning',
-            description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica'
-        },
-        {
-            value: 2,
-            href: '/how',
-            image: '/static/cards/contemplative-reptile.jpg',
-            title: 'One Time Cleaning',
-            description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica'
-        },
-        {
-            value: 3,
-            href: '/how',
-            image: '/static/cards/spring-cleaning.jpg',
-            title: 'Deep Cleaning',
-            description: 'Nulla posuere sollicitudin aliquam ultrices sagittis. Nisi porta lorem mollis aliquam ut porttitor leo a diam. Turpis egestas maecenas.'
-        },
-        {
-            value: 4,
-            href: '/how',
-            image: '/static/cards/bond-cleaning.jpg',
-            title: 'Bond Cleaning',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet.'
-        },
-    ]
-}
-
-// Split title into 2 lines
-function splitTitle(title) {
-    const titleArray = title.split(' ')
-    const line2 = titleArray[titleArray.length - 1]
-    const line1 = title.split(` ${line2}`)[0]
-    return { line1, line2 }
+            key: key,
+            label: value.label,
+            image: `/static/cards/${value.image}.jpg`,
+            href: value.href,
+            description: value.description.short
+        }
+    )
 }
 
 // Create styles
-const serviceListStyles = makeStyles({
+const serviceListStyles = makeStyles(theme => ({
     media: {
-        height: '8rem'
+        height: 16 * theme.spacing.unit,
     },
-    title: {
-        padding: 0
-    }
-})
+}))
 
 // Create service list presentational component
 function ServiceList() {
     const classes = serviceListStyles()
     return (
         <React.Fragment>
-            {getServices().map((service) => (
-                <Grid item md={6} lg={3} className={classes.gridItem} key={service.value}>
+            {serviceArray.map((service) => (
+                <Grid item
+                    key={service.key}
+                    sm={6}
+                    lg={3}
+                    className={classes.gridItem}
+                >
                     <Card>
-                        <CardActionArea>
-                            <CardMedia
-                                className={classes.media}
-                                image={service.image}
+                        <CardMedia
+                            className={classes.media}
+                            image={service.image}
+                        >
+                        </CardMedia>
+                        <CardContent>
+                            <Typography
+                                gutterBottom
+                                variant='h5'
+                                component='p'
+                                color='primary'
+                                align='left'
                             >
-                            </CardMedia>
-                            <CardContent className={classes.content}>
-                                <Typography gutterBottom variant='h5' component='p' color='primary' className={classes.title} align='left'>
-                                    {splitTitle(service.title).line1} {splitTitle(service.title).line2}
-                                </Typography>
-                                <Typography color='textSecondary' component="p" className={classes.subtitle}>
-                                    {service.description}
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
+                                {service.label}
+                            </Typography>
+                            <Typography color='textSecondary'>
+                                {service.description}
+                            </Typography>
+                        </CardContent>
                         <CardActions>
-                            <Button size="small" color="primary">
+                            <Button
+                                component='a'
+                                href={service.href}
+                                size="small"
+                                color="primary"
+                            >
                                 Learn More
                             </Button>
                         </CardActions>
@@ -102,47 +88,66 @@ function ServiceList() {
 // Services styles
 const serviceStyles = makeStyles(theme => ({
     gridContainer: {
-        padding: '2rem 0 1rem 0'
+        paddingTop: 4 * theme.spacing.unit,
+        paddingBottom: 2 * theme.spacing.unit,
     },
-    heading: {
+    title: {
         [theme.breakpoints.down('xs')]: {
-            fontSize: '2.125rem',
+            paddingBottom: 0,
+            marginBottom: theme.spacing.unit
         }
     },
     subtitle: {
         marginBottom: 4 * theme.spacing.unit
     },
     CTAContainer: {
-        width: '100%',
+        maxWidth: 60 * theme.spacing.unit,
         margin: '0 auto',
-        paddingTop: '3rem',
-        maxWidth: '20rem'
+        paddingTop: 6 * theme.spacing.unit,
+        paddingLeft: 2 * theme.spacing.unit,
+        paddingRight: 2 * theme.spacing.unit,
     }
 }))
 
-export default React.memo(function Services() {
+export default function Services() {
     // Define styles
     const classes = serviceStyles()
     return (
         <section>
             <Wrapper variant='section'>
-                <Typography variant='h2' component='h2' className={classes.heading}>
+                <Typography
+                    variant='h2'
+                    className={classes.title}
+                >
                     Services For Every Need
                 </Typography>
                 <Hidden smDown>
-                    <Typography variant='h6' component='p' className={classes.subtitle} align='center'>
+                    <Typography
+                        variant='h5'
+                        component='p'
+                        className={classes.subtitle}
+                    >
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
                     </Typography>
                 </Hidden>
-                <Grid container spacing={32} justify='center' alignItems='center' className={classes.gridContainer}>
+                <Grid container
+                    spacing={32}
+                    justify='center'
+                    className={classes.gridContainer}
+                >
                     <ServiceList />
                 </Grid>
                 <div className={classes.CTAContainer}>
-                    <Button fullWidth variant='outlined' size='large' color='primary'>
+                    <Button
+                        fullWidth
+                        variant='outlined'
+                        size='large'
+                        color='primary'
+                    >
                         See What's Included
                     </Button>
                 </div>
             </Wrapper>
         </section>
     )
-})
+}

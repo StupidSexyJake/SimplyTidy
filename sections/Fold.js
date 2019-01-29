@@ -1,6 +1,5 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles'
-import classNames from 'classnames'
 // Material components
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
@@ -8,46 +7,77 @@ import Typography from '@material-ui/core/Typography'
 import Scrim from '../components/Scrim'
 import { Wrapper } from '../components/Wrappers'
 
+// Create styles
+const useStyles = makeStyles(theme => ({
+    scrim: {
+        '@media only screen and (max-width: 319px)': {
+            background: props => `url('/static/backgrounds/${props.hero}-319.jpg') no-repeat 0 center/cover`
+        },
+        '@media only screen and (min-width: 320px)': {
+            background: props => `url('/static/backgrounds/${props.hero}-640.jpg') no-repeat 0 center/cover`
+        },
+        '@media only screen and (min-width: 641px)': {
+            background: props => `url('/static/backgrounds/${props.hero}-768.jpg') no-repeat 0 center/cover`
+        },
+        '@media only screen and (min-width: 768px)': {
+            background: props => `url('/static/backgrounds/${props.hero}-1024.jpg') no-repeat 0 center/cover`
+        },
+        '@media only screen and (min-width: 1025px)': {
+            background: props => `url('/static/backgrounds/${props.hero}-1280.jpg') no-repeat 0 center/cover`
+        },
+        '@media only screen and (min-width: 1281px)': {
+            background: props => `url('/static/backgrounds/${props.hero}-1366.jpg') no-repeat 0 center/cover`
+        },
+        '@media only screen and (min-width: 1367px)': {
+            background: props => `url('/static/backgrounds/${props.hero}-1440.jpg') no-repeat 0 center/cover`
+        },
+        '@media only screen and (min-width: 1441px)': {
+            background: props => `url('/static/backgrounds/${props.hero}-1600.jpg') no-repeat 0 center/cover`
+        },
+        '@media only screen and (min-width: 1601px)': {
+            background: props => `url('/static/backgrounds/${props.hero}-1920.jpg') no-repeat 0 center/cover`
+        },
+        '@media only screen and (min-width: 1921px)': {
+            background: props => `url('/static/backgrounds/${props.hero}-1921.jpg') no-repeat 0 center/cover`
+        }
+    },
+    titleSection: {
+        marginBottom: props => props.children ? 8 * theme.spacing.unit : undefined
+    }
+}))
+
 export default function Fold(props) {
-    // Create styles
-    const useStyles = makeStyles(theme => ({
-        section: {
-            height: props => props.height || 'auto'
-        },
-        scrim: {
-            background: props => `url('/static/backgrounds/${props.hero}') no-repeat 0 center/cover`,
-        },
-    }))
     // Define styles
     const classes = useStyles(props)
     return (
-        <section className={classes.section}>
+        <section>
             <Scrim
                 hsl={props.scrim}
                 className={classes.scrim}>
                 <Wrapper variant='fold'>
-                    <Typography
-                        variant={props.titleProps && props.titleProps.variant || 'h1'}
-                        component={props.titleProps && props.titleProps.component}
-                        color={props.titleProps && props.titleProps.color}
-                        className={classNames(classes.title, props.className)}
-                        {...props.titleProps}
-                    >
-                        {props.title}
-                    </Typography>
-                    <Hidden
-                        smDown
-                        implementation='css'
-                    >
+                    <div className={classes.titleSection}>
                         <Typography
-                            variant='h4'
-                            component='p'
-                            color={props.subtitleProps && props.subtitleProps.color}
-                            {...props.subtitleProps}
+                            variant={props.titleProps && props.titleProps.variant || 'h1'}
+                            component={props.titleProps && props.titleProps.component}
+                            color={props.titleProps && props.titleProps.color}
+                            className={props.className}
+                            {...props.titleProps}
                         >
-                            {props.subtitle}
+                            {props.title}
                         </Typography>
-                    </Hidden>
+                        <Hidden
+                            smDown
+                            implementation='css'
+                        >
+                            <Typography
+                                variant='h4'
+                                component='p'
+                                {...props.subtitleProps}
+                            >
+                                {props.subtitle}
+                            </Typography>
+                        </Hidden>
+                    </div>
                     {props.children}
                 </Wrapper>
             </Scrim>

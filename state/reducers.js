@@ -10,10 +10,6 @@ import {
     PREVIOUS_BOOKING_STEP,
     TOGGLE_PAGE_SLIDE,
 } from './actions'
-// Data
-import {
-    extrasMap
-} from '../data/serviceData'
 
 // Set initial state values
 export const initialState = {
@@ -49,7 +45,7 @@ export const initialState = {
     bookingForm: {
         page: 0,
         fadeService: false,
-        unselectedExtras: initialUnselectedExtrasArray()
+        unselectedExtras: ['ovenCleaning', 'windowCleaning', 'insideCupboards', 'insideFridge']
     },
     page: {
         home: true,
@@ -62,13 +58,6 @@ export const initialState = {
     }
 }
 
-function initialUnselectedExtrasArray() {
-    let unselectedExtrasArray = []
-    for (const key in extrasMap.values) {
-        unselectedExtrasArray.push(key)
-    }
-    return unselectedExtrasArray
-}
 
 // Create reducer
 const reducer = (state, action) => {

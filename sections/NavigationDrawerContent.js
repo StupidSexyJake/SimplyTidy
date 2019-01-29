@@ -49,10 +49,6 @@ const useStyles = makeStyles((theme) => ({
         right: 0,
         bottom: 0
     },
-    logo: {
-        height: 8 * theme.spacing.unit,
-        cursor: 'pointer'
-    },
     subtitle: {
         color: theme.palette.primary.contrastText,
         textShadow: theme.custom.palette.textShadow,
@@ -77,7 +73,6 @@ const ActiveLink = ({ router, href, link }) => {
     const activeLinkClass = router.pathname === href ? classes.activeLink : undefined
     const buttonState = router.pathname === href ? true : false
     const handleClick = (e) => {
-        e.preventDefault()
         router.push(href)
         dispatch(toggleDrawer('navigation', false))
     }
@@ -106,9 +101,16 @@ const ActiveLink = ({ router, href, link }) => {
 }
 const NavLink = withRouter(ActiveLink)
 
+
+
 export default function NavigationDrawerContent() {
     // Get state contexts
     const { dispatch } = useContext(Store)
+    // Handle booking link click
+    const handleClick_Booking = () => {
+        dispatch(toggleDrawer('navigation', false))
+        setTimeout(() => dispatch(toggleDrawer('bookingForm', true)), 450)
+    }
     // Define styles
     const classes = useStyles()
     return (
@@ -121,6 +123,7 @@ export default function NavigationDrawerContent() {
                 >
                     <Grid item>
                         <Logo
+                            noResize
                             variant='sideMenu'
                             background='primary'
                             onClick={() => dispatch(toggleDrawer('navigation', false))}
@@ -128,7 +131,7 @@ export default function NavigationDrawerContent() {
                     </Grid>
                     <Grid item>
                         <Typography
-                            variant='body1'
+                            variant='subtitle1'
                             className={classes.subtitle}
                         >
                             {businessData.location}'s Premier Home Cleaning Company
@@ -142,8 +145,7 @@ export default function NavigationDrawerContent() {
                         key={link.label}
                         href={link.href}
                         link={link}
-                    >
-                    </NavLink>
+                    />
                 ))}
             </List>
             <Divider />
@@ -152,7 +154,7 @@ export default function NavigationDrawerContent() {
                     <ListItem
                         button
                         key={link.label}
-                        onClick={() => dispatch(toggleDrawer('navigation', false))}
+                        onClick={index === 0 ? handleClick_Booking : null}
                     >
                         <ListItemIcon>
                             <VariantInput

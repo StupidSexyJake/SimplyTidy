@@ -57,10 +57,16 @@ export const navPages = [
 
 export const navActions = [
     {
+        key: 1,
+        href: "/",
+        id: 'book',
         label: "BOOK ONLINE NOW",
         icon: BookIcon
     },
     {
+        key: 2,
+        href: "/",
+        id: 'login',
         label: "Login",
         icon: LoginIcon
     },

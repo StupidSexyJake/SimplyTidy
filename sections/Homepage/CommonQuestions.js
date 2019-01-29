@@ -17,24 +17,26 @@ const useStyles = makeStyles(theme => ({
         background: `${theme.palette.primary.light} url('/static/backgrounds/cleaning-pattern-light.jpg') no-repeat 0 center / cover`,
     },
     subtitle: {
-        paddingBottom: '3rem'
+        paddingBottom: 8 * theme.spacing.unit
     },
     questionIcon: {
         fontSize: '4rem',
         color: theme.palette.primary.main,
-        marginBottom: '0.5rem'
+        marginBottom: 1 * theme.spacing.unit
     },
     questionsSubtitle: {
-        marginBottom: '0.5rem'
+        marginBottom: 1 * theme.spacing.unit
     },
     button: {
-        margin: '0.5rem 0.5rem 0 0.5rem',
+        marginTop: theme.spacing.unit,
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
         background: theme.palette.primary.light
     },
     moreQuestions: {
         textAlign: 'center',
         width: 'fit-content',
-        margin: '3rem auto 0 auto'
+        margin: `${6 * theme.spacing.unit}px auto 0 auto`
     }
 }))
 
@@ -79,14 +81,18 @@ export default React.memo(function CommonQuestions() {
     const classes = useStyles()
     return (
         <section className={classes.root}>
-            <Wrapper variant='section' className={classes.container}>
-                <Typography variant='h2' component='h2'>
+            <Wrapper variant='section'>
+                <Typography variant='h2'>
                     Common Questions
-                        </Typography>
-                <Typography variant='h6' component='p' className={classes.subtitle}>
+                </Typography>
+                <Typography
+                    variant='h5'
+                    component='p'
+                    className={classes.subtitle}
+                >
                     Lorem ipsum dolor sit amet sed do eiusmod tempor.
-                        </Typography>
-                <div className={classes.questionList}>
+                </Typography>
+                <div>
                     {questionsArray().map((props, index) => (
                         <ExpansionPanel key={index}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -104,13 +110,23 @@ export default React.memo(function CommonQuestions() {
                 </div>
                 <div className={classes.moreQuestions}>
                     <QuestionIcon className={classes.questionIcon} />
-                    <Typography variant='h5' component='p'>
+                    <Typography
+                        variant='h5'
+                        component='p'
+                    >
                         Still Have Questions?
-                        </Typography>
-                    <Button variant='outlined' className={classes.button}>
+                    </Typography>
+                    <Button
+                        variant='outlined'
+                        className={classes.button}
+                    >
                         View our FAQ
-                        </Button>
-                    <Button variant='outlined' color='primary' className={classes.button}>
+                    </Button>
+                    <Button
+                        variant='outlined'
+                        color='primary'
+                        className={classes.button}
+                    >
                         Contact Us
                         </Button>
                 </div>

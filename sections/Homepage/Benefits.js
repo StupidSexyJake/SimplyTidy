@@ -13,20 +13,20 @@ import CustomerServiceIcon from '@material-ui/icons/SentimentSatisfiedAlt'
 
 // Create styles
 const useStyles = makeStyles(theme => ({
-    wrapper: {
-    },
-    title: {
-    },
     subtitle: {
         marginBottom: 8 * theme.spacing.unit
     },
     items: {
-        textAlign: 'center'
+        textAlign: 'center',
+    },
+    label: {
+        color: theme.palette.primary.dark,
+        marginBottom: 2 * theme.spacing.unit
     },
     icon: {
         fontSize: '5rem',
         color: theme.palette.primary.main,
-        marginBottom: 2 * theme.spacing.unit
+        marginBottom: 1 * theme.spacing.unit
     },
     CTAWrapper: {
         width: '100%',
@@ -41,52 +41,71 @@ export default React.memo(function Benefits() {
     const classes = useStyles()
     return (
         <section>
-            <Wrapper
-                variant='section'
-                className={classes.wrapper}
-            >
-                <Typography
-                    variant='h2'
-                    className={classes.title}
-                >
+            <Wrapper variant='section'>
+                <Typography variant='h2'>
                     Reasons to Love Us
-                     </Typography>
+                </Typography>
                 <Hidden smDown>
                     <Typography
                         variant='h5'
                         component='p'
                         className={classes.subtitle}
-                        align='center'
                     >
                         Lorem ipsum dolor sit amet sed do eiusmod tempor.
                     </Typography>
                 </Hidden>
-                <Grid
-                    container
+                <Grid container
                     justify='center'
                     spacing={32}
                 >
-                    <Grid item sm={12} md={3} className={classes.items}>
+                    <Grid item
+                        xs={12}
+                        sm={10}
+                        md={3}
+                        className={classes.items}
+                    >
                         <ConvenientIcon className={classes.icon} />
-                        <Typography variant='h5' component='p'>
+                        <Typography
+                            variant='h5'
+                            component='p'
+                            className={classes.label}
+                        >
                             Convenience
                         </Typography>
                         <Typography>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet consectetur.
                         </Typography>
                     </Grid>
-                    <Grid item sm={12} md={3} className={classes.items}>
+                    <Grid item
+                        xs={12}
+                        sm={10}
+                        md={3}
+                        className={classes.items}
+                    >
                         <QualityIcon className={classes.icon} />
-                        <Typography variant='h5' component='p'>
+                        <Typography
+                            variant='h5'
+                            component='p'
+                            className={classes.label}
+                        >
                             Quality
                         </Typography>
                         <Typography>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet consectetur.
                         </Typography>
                     </Grid>
-                    <Grid item sm={12} md={3} className={classes.items}>
+                    <Grid item
+                        xs={12}
+                        sm={10}
+                        md={3}
+                        className={classes.items}
+                    >
                         <CustomerServiceIcon className={classes.icon} />
-                        <Typography variant='h5' component='p'>
+                        <Typography
+                            variant='h5'
+                            component='p'
+                            className={classes.label}
+                        >
                             Service
                         </Typography>
                         <Typography>

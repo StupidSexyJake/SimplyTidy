@@ -7,10 +7,8 @@ import {
     hourlyRateMap,
     packageMap,
     serviceMap,
-} from '../../../data/serviceData'
-import {
     extrasMap
-} from '../../../data/extrasData'
+} from '../../../data/serviceData'
 // Sections
 import {
     FormGroup,
@@ -36,7 +34,6 @@ import {
 // Static content
 import {
     NeedHelp,
-    TrustIcons,
     PriceSummary,
 } from '../Content'
 // Material components
@@ -204,12 +201,6 @@ export default function Step1() {
                             />
                         </SidebarGroup>
                     </Paper>
-                    {/* <SidebarGroup>
-                        <StaticGroup
-                            content={TrustIcons}
-                            height={4}
-                        />
-                    </SidebarGroup> */}
                 </Grid>
             </Grid>
         </React.Fragment>

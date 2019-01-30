@@ -275,6 +275,33 @@ export const packageMap = {
     }
 }
 
+export const extrasMap = {
+    stateType: 'service',
+    stateValue: 'extras',
+    unselectedStateType: 'bookingForm',
+    unselectedValue: 'unselectedExtras',
+    icon: ExtrasIcon,
+    summary: PackageSummary,
+    inputField: Extras,
+    values: {
+        ovenCleaning: {
+            label: 'Oven Cleaning',
+            icon: ExtrasIcon,
+        },
+        windowCleaning: {
+            label: 'Window Cleaning',
+            icon: ExtrasIcon,
+        },
+        insideCupboards: {
+            label: 'Inside Cupboards',
+            icon: ExtrasIcon,
+        },
+        insideFridge: {
+            label: 'Inside Fridge',
+            icon: ExtrasIcon,
+        }
+    }
+}
 
 
 export const serviceMap = {

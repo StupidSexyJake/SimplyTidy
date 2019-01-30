@@ -7,6 +7,7 @@ export default React.memo(function (props) {
     return (
         <React.Fragment>
             <Head>
+                <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" key="viewport" />
                 <meta name="description" content={props.metaDescription}></meta>
                 <title>{props.title} | {businessData.companyName} </title>

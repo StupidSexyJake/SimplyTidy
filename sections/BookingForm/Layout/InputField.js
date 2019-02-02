@@ -19,6 +19,7 @@ import Radio from '@material-ui/core/Radio'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import Chip from '@material-ui/core/Chip'
+import { ButtonWithIcon } from '../../../components/Buttons';
 
 // Create styles
 const useStyles = makeStyles(theme => ({
@@ -70,7 +71,8 @@ const useStyles = makeStyles(theme => ({
     },
     selectedIconTitle: {
         paddingBottom: 0,
-        marginBottom: 0.5 * theme.spacing.unit
+        marginBottom: 0.5 * theme.spacing.unit,
+        color: theme.palette.primary.dark
     },
     selectedIconChange: {
         marginBottom: 2 * theme.spacing.unit
@@ -80,6 +82,7 @@ const useStyles = makeStyles(theme => ({
     },
     buttonSelect: {
         transition: 'all 0.1s cubic-bezier(0.4, 0.0, 0.2, 1)',
+        width: '100%'
     },
     buttonSelectIcon: {
         marginRight: theme.spacing.unit,
@@ -287,28 +290,29 @@ export function ButtonSelect(props) {
             spacing={16}
             alignItems='center'
         >
-            {props.options.map((item, index) => (
+            {props.options.map((item) => (
                 <Grid item
                     key={item.key}
                     xs={12}
-                    md={5}
+                    sm={12}
+                    md={6}
                 >
-                    <Button
-                        fullWidth
-                        size={item.value === props.value ? 'large' : 'medium'}
-                        disabled={item.value === props.value}
-                        variant='contained'
-                        color={selectedColor[item.value === props.value]}
-                        onClick={() => props.onClick(item.value)}
-                        classes={{ disabled: classes.buttonSeletDisabled }}
-                        className={classes.buttonSelect}
+                    <ButtonWithIcon
+                        icon={item.icon}
+                        buttonStyles={
+                            {
+                                size: 'large',
+                                disabled: item.value === props.value,
+                                variant: 'contained',
+                                color: selectedColor[item.value === props.value],
+                                onClick: () => props.onClick(item.value),
+                                classes: { disabled: classes.buttonSeletDisabled },
+                                className: classes.buttonSelect
+                            }
+                        }
                     >
-                        {item.icon &&
-                            <span className={classes.buttonSelectIcon}>
-                                {item.icon}
-                            </span>}
                         {item.label}
-                    </Button>
+                    </ButtonWithIcon>
                 </Grid>
             ))}
         </Grid>
@@ -318,9 +322,11 @@ export function ButtonSelect(props) {
 
 export function ChipSelect(props) {
     return (
-        <Grid container spacing={16}>
+        <Grid container
+            spacing={16}
+        >
             {props.selected.map((chip, index) => (
-                <Grid item key={index}>
+                <Grid item key={chip.label}>
                     <Chip
                         label={chip.label}
                         onDelete={() => props.onDelete(chip)}
@@ -329,7 +335,7 @@ export function ChipSelect(props) {
                 </Grid>
             ))}
             {props.unselected.map((chip, index) => (
-                <Grid item key={index}>
+                <Grid item key={chip.label}>
                     <Chip
                         label={chip.label}
                         onClick={() => props.onClick(chip)}

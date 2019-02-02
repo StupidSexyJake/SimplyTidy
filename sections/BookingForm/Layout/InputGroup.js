@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import { VariantInput } from '../../../utils/functions'
 // Material components
 import { makeStyles } from '@material-ui/styles'
+import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
 
 const useStyles = makeStyles(theme => ({
@@ -34,7 +35,6 @@ export function InputGroup(props) {
             {props.data.map((data, index) => (
                 <Grid item
                     xs={12}
-                    sm={6}
                     md={12 / cols}
                     key={index}
                 >
@@ -66,7 +66,7 @@ export function InputGroup_WithIcons(props) {
                     >
                         <VariantInput
                             inputVariant={data.icon}
-                            fontSize={props.iconSize || 'large'}
+                            fontSize={props.iconSize || 'default'}
                             className={classes.icon}
                         />
                     </Grid>
@@ -82,6 +82,43 @@ export function InputGroup_WithIcons(props) {
                     </Grid>
                 </React.Fragment>
             ))}
+        </Grid>
+    )
+}
+
+export function InputGroup_FieldIcon(props) {
+    // Definte styles
+    const classes = useStyles()
+    return (
+        <Grid
+            container
+            spacing={16}
+            className={classes.container}
+            alignItems={props.alignIcons || 'center'}
+        >
+            <Hidden smDown>
+                <Grid item
+                    xs={1}
+                    className={classNames(props.iconClass, classes.iconContainer)}
+                >
+                    <VariantInput
+                        inputVariant={props.data.icon}
+                        fontSize={props.iconSize || 'default'}
+                        className={classes.icon}
+                    />
+                </Grid>
+            </Hidden>
+            <Grid item
+                xs={12}
+                sm={12}
+                md={11}
+                className={props.inputClass}
+            >
+                <VariantInput
+                    filled={props.filled}
+                    inputVariant={props.data.inputField}
+                />
+            </Grid>
         </Grid>
     )
 }

@@ -200,14 +200,26 @@ export const frequencyMap = {
     values: {
         weekly: {
             label: 'Weekly',
+            id: 'weekly',
+            stateType: 'service',
+            stateValue: 'frequency',
+            icon: BedroomsIcon,
             discountAmount: 0.25
         },
         fortnightly: {
             label: 'Fortnightly',
+            id: 'fortnightly',
+            stateType: 'service',
+            stateValue: 'frequency',
+            icon: BedroomsIcon,
             discountAmount: 0.15
         },
         monthly: {
             label: 'Monthly',
+            id: 'monthly',
+            stateType: 'service',
+            stateValue: 'frequency',
+            icon: BedroomsIcon,
             discountAmount: 0.05
         }
     }

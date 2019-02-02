@@ -212,7 +212,8 @@ export function ButtonSelectContainer(props) {
             {
                 key: key,
                 value: key,
-                label: value.label
+                label: value.label,
+                icon: value.icon
             }
         )
     }

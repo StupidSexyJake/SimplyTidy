@@ -180,6 +180,7 @@ export default React.memo(function BookingForm(props) {
                 </Hidden>
             </Wrapper>
             <Wrapper
+                sm={10}
                 md={8}
                 className={classes.cardContainer}
             >

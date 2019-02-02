@@ -63,10 +63,12 @@ export function FormGroup(props) {
 }
 
 export function ExpandGroup(props) {
-    // Define styles
-    const classes = useStyles()
     return (
-        <Collapse in={props.expandState} timeout={props.timeout || 400} className={props.className}>
+        <Collapse
+            in={props.expandState}
+            timeout={props.timeout || 400}
+            className={props.className}
+        >
             {props.children}
         </ Collapse>
     )
@@ -76,7 +78,10 @@ export function SidebarGroup(props) {
     // Define styles
     const classes = useStyles()
     return (
-        <Wrapper md={12} className={classNames(classes.sidebarContainer, props.className)}>
+        <Wrapper
+            md={12}
+            className={classNames(classes.sidebarContainer, props.className)}
+        >
             <div className={classes.sidebarTitleContainer}>
                 <Typography
                     variant={props.titleVariant || 'h6'}

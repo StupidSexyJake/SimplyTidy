@@ -19,6 +19,7 @@ import {
 import {
     InputGroup,
     InputGroup_WithIcons,
+    InputGroup_FieldIcon,
 } from '../Layout/InputGroup'
 // Input fields
 import {
@@ -51,7 +52,7 @@ const useStyles = makeStyles(theme => ({
     border: {
         marginTop: 2 * theme.spacing.unit,
         paddingRight: 2 * theme.spacing.unit,
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
             paddingRight: 0,
         },
     },
@@ -59,7 +60,7 @@ const useStyles = makeStyles(theme => ({
     },
     sidebarContainer: {
         paddingLeft: 2 * theme.spacing.unit,
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('md')]: {
             paddingLeft: 0,
         },
     },
@@ -109,7 +110,9 @@ export default function Step1() {
             >
                 <Grid item
                     xs={12}
-                    sm={9}
+                    sm={11}
+                    md={10}
+                    lg={9}
                     className={classes.sectionContainer}
                 >
                     <div className={classes.border}>
@@ -132,8 +135,8 @@ export default function Step1() {
                             title='Service Type'
                             description="Fixed prices or hourly rates. It's your choice."
                         >
-                            <InputGroup
-                                data={[packageMap]}
+                            <InputGroup_FieldIcon
+                                data={packageMap}
                             />
                         </FormGroup>
                         <ExpandGroup
@@ -171,10 +174,12 @@ export default function Step1() {
                 </Grid>
                 <Grid item
                     xs={12}
-                    sm={3}
+                    sm={11}
+                    md={10}
+                    lg={3}
                     className={classes.sidebarContainer}
                 >
-                    <Hidden xsDown>
+                    <Hidden smDown>
                         <SidebarGroup
                             title='Need Help?'
                         >
@@ -183,7 +188,10 @@ export default function Step1() {
                             />
                         </SidebarGroup>
                     </Hidden>
-                    <Paper elevation={0} className={classes.paper}>
+                    <Paper
+                        elevation={0}
+                        className={classes.paper}
+                    >
                         <SidebarGroup
                             title='Booking Summary'
                             className={classes.bookingSummaryGroup}

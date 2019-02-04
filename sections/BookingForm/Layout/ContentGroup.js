@@ -35,9 +35,7 @@ export function StaticGroup(props) {
     // Get number of columns
     const cols = props.cols || 1
     return (
-        <Grid
-            container
-            spacing={8}
+        <Grid container
             className={classes.container}
             alignItems='center'
         >
@@ -80,7 +78,6 @@ export function ContentGroup_ParentValue(props) {
                     </Grid>
                     <Grid item
                         xs={10}
-                        sm={4}
                         md={10 / cols}
                     >
                         <VariantInput inputVariant={data.summary} />
@@ -96,6 +93,49 @@ export function ContentGroup_ChildValues(props) {
     const { state } = useContext(Store)
     // Definte styles
     const classes = useStyles()
+    // Create output
+    let output = []
+    props.data.map((data) => {
+        const childData = data.values[state[data.stateType][data.stateValue]]
+        for (const key in childData.values) {
+            let value = childData.values[key]
+            let iconGrid, summaryGrid, summaryLabel
+            switch (state[data.stateType][data.stateValue]) {
+                case ('fixedPrice'):
+                    iconGrid = 3
+                    summaryGrid = 3
+                    break
+                case ('hourlyRate'):
+                    iconGrid = 2
+                    summaryGrid = 10
+                    summaryLabel = value.suffix
+                    break
+                default:
+                    console.log('error with package selection')
+            }
+            output.push(
+                <React.Fragment key={key}>
+                    <Grid item
+                        xs={iconGrid}
+                        className={classes.iconContainer}
+                    >
+                        <VariantInput
+                            inputVariant={value.icon}
+                            fontSize='small'
+                            className={classes.icon}
+                        />
+                    </Grid>
+                    <Grid item
+                        xs={summaryGrid}
+                    >
+                        <Typography>
+                            {value.values[state[value.stateType][value.stateValue]].label} {summaryLabel}
+                        </Typography>
+                    </Grid>
+                </React.Fragment>
+            )
+        }
+    })
     return (
         <Grid container
             className={classes.container}
@@ -103,49 +143,7 @@ export function ContentGroup_ChildValues(props) {
             alignItems='flex-start'
             justify='flex-end'
         >
-            {props.data.map((data) => {
-                const childData = data.values[state[data.stateType][data.stateValue]]
-                let output = []
-                for (const key in childData.values) {
-                    let value = childData.values[key]
-                    let iconGrid, summaryGrid, summaryLabel
-                    switch (state[data.stateType][data.stateValue]) {
-                        case ('fixedPrice'):
-                            iconGrid = 3
-                            summaryGrid = 3
-                            break
-                        case ('hourlyRate'):
-                            iconGrid = 2
-                            summaryGrid = 10
-                            summaryLabel = value.suffix
-                            break
-                        default:
-                            console.log('error with package selection')
-                    }
-                    output.push(
-                        <React.Fragment key={key}>
-                            <Grid item
-                                xs={iconGrid}
-                                className={classes.iconContainer}
-                            >
-                                <VariantInput
-                                    inputVariant={value.icon}
-                                    fontSize='small'
-                                    className={classes.icon}
-                                />
-                            </Grid>
-                            <Grid item
-                                xs={summaryGrid}
-                            >
-                                <Typography>
-                                    {value.values[state[value.stateType][value.stateValue]].label} {summaryLabel}
-                                </Typography>
-                            </Grid>
-                        </React.Fragment>
-                    )
-                }
-                return output
-            })}
+            {output}
         </Grid>
     )
 }

@@ -31,7 +31,7 @@ export function Summary(props) {
 
 export function StaticText(props) {
     return (
-        <Typography variant={props.variant || 'caption'} align={props.align} className={props.className}>
+        <Typography variant={props.variant || 'body2'} align={props.align} className={props.className}>
             {props.children}
         </Typography>
     )
@@ -47,7 +47,7 @@ export function IconContent(props) {
             justify='flex-start'
         >
             {props.icons.map((icon, index) => (
-                <Grid item 
+                <Grid item
                     key={index}
                 >
                     <VariantInput

@@ -118,7 +118,7 @@ const useStyles = makeStyles(theme => ({
         }
     },
     title: {
-        marginTop: 6 * theme.spacing.unit,
+        marginTop: 4 * theme.spacing.unit,
         paddingBottom: theme.spacing.unit,
         [theme.breakpoints.down('xs')]: {
             marginTop: 2 * theme.spacing.unit,

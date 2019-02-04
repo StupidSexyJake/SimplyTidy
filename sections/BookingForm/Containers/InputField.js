@@ -141,7 +141,8 @@ export function SelectedIconContainer(props) {
             {
                 key: key,
                 value: key,
-                label: value.label
+                label: value.label,
+                disabled: state[category.stateType][category.stateValue] === key
             }
         )
     }
@@ -153,14 +154,14 @@ export function SelectedIconContainer(props) {
     function localClose(event) {
         setAnchorEl(null)
         if (event.target.value) {
-            dispatch(handleClick(category.stateType, category.stateValue, event.target.value))
+            dispatch(handleClick(category.stateType, category.stateValue, event.target.value.toString()))
         }
     }
     return (
         <SelectedIcon
             title={category.values[state[category.stateType][category.stateValue]].label}
             icon={category.values[state[category.stateType][category.stateValue]].icon}
-            changeLabel={`Change ${category.label}`}
+            changeLabel={category.label}
             options={options}
             onClose={localClose}
             onClick={localClick}

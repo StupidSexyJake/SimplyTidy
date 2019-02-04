@@ -15,14 +15,14 @@ const useStyles = makeStyles(theme => ({
         height: 'auto',
     },
     fieldGrouptitle: {
-        paddingBottom: 0
+        paddingBottom: 0,
+        color: theme.palette.primary.dark
     },
     fieldGroupsubtitle: {
         paddingBottom: theme.spacing.unit
     },
     sidebarContainer: {
-        marginTop: 2 * theme.spacing.unit,
-        marginBottom: 2 * theme.spacing.unit,
+        marginBottom: 4 * theme.spacing.unit,
         height: 'fit-content'
     },
     sidebarTitleContainer: {
@@ -30,7 +30,8 @@ const useStyles = makeStyles(theme => ({
     },
     sidebarTitle: {
         lineHeight: 1.25,
-        paddingBottom: theme.spacing.unit
+        paddingBottom: theme.spacing.unit,
+        color: theme.palette.primary.dark
     }
 }))
 
@@ -43,7 +44,7 @@ export function FormGroup(props) {
             className={classes.fieldGroupContainer}
         >
             <Typography
-                variant='h6'
+                variant='h5'
                 component='h3'
                 align='left'
                 className={classes.fieldGrouptitle}
@@ -51,8 +52,7 @@ export function FormGroup(props) {
                 {props.title}
             </Typography>
             <Typography
-                variant='caption'
-                align='left'
+                variant='body2'
                 className={classes.fieldGroupsubtitle}
             >
                 {props.description}
@@ -84,7 +84,7 @@ export function SidebarGroup(props) {
         >
             <div className={classes.sidebarTitleContainer}>
                 <Typography
-                    variant={props.titleVariant || 'h6'}
+                    variant={props.titleVariant || 'h5'}
                     component={props.component || 'p'}
                     align={props.align || 'left'}
                     className={classes.sidebarTitle}

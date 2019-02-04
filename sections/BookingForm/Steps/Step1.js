@@ -46,23 +46,22 @@ import Divider from '@material-ui/core/Divider'
 
 // Set styles
 const useStyles = makeStyles(theme => ({
-    container: {
-        marginTop: theme.spacing.unit
+    serviceImageContainer: {
+        marginTop: 4 * theme.spacing.unit,
+        [theme.breakpoints.down('xs')]: {
+            marginTop: 2 * theme.spacing.unit
+        }
     },
-    border: {
+    frequencyContainer: {
         marginTop: 2 * theme.spacing.unit,
-        paddingRight: 2 * theme.spacing.unit,
-        [theme.breakpoints.down('sm')]: {
-            paddingRight: 0,
-        },
+        marginBottom: 1 * theme.spacing.unit
     },
-    sectionContainer: {
+    container: {
+        marginTop: 2 * theme.spacing.unit,
     },
-    sidebarContainer: {
-        paddingLeft: 2 * theme.spacing.unit,
-        [theme.breakpoints.down('md')]: {
-            paddingLeft: 0,
-        },
+    gridItem: {
+        paddingBottom: '0 !important',
+        paddingTop: '0 !important'
     },
     stripeImage: {
         height: '32px'
@@ -74,7 +73,6 @@ const useStyles = makeStyles(theme => ({
         padding: 2 * theme.spacing.unit,
         paddingBottom: theme.spacing.unit,
         background: theme.palette.primary.light,
-        marginTop: 3 * theme.spacing.unit,
         marginBottom: 1 * theme.spacing.unit,
     },
     bookingSummaryGroup: {
@@ -97,91 +95,94 @@ export default function Step1() {
     const classes = useStyles()
     return (
         <React.Fragment>
-            <ServiceImage />
+            <div className={classes.serviceImageContainer}>
+                <ServiceImage />
+            </div>
             <ExpandGroup
-                expandState={state.service.service === 10}
+                expandState={state.service.service === '10'}
                 timeout='auto'
             >
-                <Frequency />
+                <div className={classes.frequencyContainer}>
+                    <Frequency />
+                </div>
             </ExpandGroup>
             <Grid container
                 className={classes.container}
                 justify='center'
+                spacing={32}
             >
                 <Grid item
+                    className={classes.gridItem}
                     xs={12}
                     sm={11}
                     md={10}
                     lg={9}
-                    className={classes.sectionContainer}
                 >
-                    <div className={classes.border}>
+                    <FormGroup
+                        title='Your home'
+                        description='Tell us about your home'
+                    >
+                        <InputGroup_WithIcons
+                            cols={2}
+                            filled
+                            data={[
+                                roomsMap.values[10],
+                                roomsMap.values[20],
+                                roomsMap.values[30],
+                                roomsMap.values[40]
+                            ]}
+                        />
+                    </FormGroup>
+                    <FormGroup
+                        title='Service Type'
+                        description="Fixed prices or hourly rates. It's your choice."
+                    >
+                        <InputGroup_FieldIcon
+                            data={packageMap}
+                        />
+                    </FormGroup>
+                    <ExpandGroup
+
+                        expandState={state.service.package === 'fixedPrice' && state.service.service === '10'}
+                    >
                         <FormGroup
-                            title='Your home'
-                            description='Tell us about your home'
+                            title='Add Extras'
+                            description='Add some optional extras for that extra shine'
+                        >
+                            <InputGroup
+                                data={[extrasMap]}
+                            />
+                        </FormGroup>
+                    </ExpandGroup>
+                    <ExpandGroup
+                        expandState={state.service.package === 'hourlyRate'}
+                    >
+                        <FormGroup
+                            title='Hours Required'
+                            description='Select how many cleaners and hours you expect your service to take'
                         >
                             <InputGroup_WithIcons
                                 cols={2}
                                 filled
                                 data={[
-                                    roomsMap.values[10],
-                                    roomsMap.values[20],
-                                    roomsMap.values[30],
-                                    roomsMap.values[40]
+                                    hourlyRateMap.values.cleaners,
+                                    hourlyRateMap.values.hours,
                                 ]}
                             />
                         </FormGroup>
-                        <FormGroup
-                            title='Service Type'
-                            description="Fixed prices or hourly rates. It's your choice."
-                        >
-                            <InputGroup_FieldIcon
-                                data={packageMap}
-                            />
-                        </FormGroup>
-                        <ExpandGroup
-
-                            expandState={state.service.package === 'fixedPrice' && state.service.service === 10}
-                        >
-                            <FormGroup
-                                title='Add Extras'
-                                description='Add some optional extras for that extra shine'
-                            >
-                                <InputGroup
-                                    data={[extrasMap]}
-                                />
-                            </FormGroup>
-                        </ExpandGroup>
-                        <ExpandGroup
-                            expandState={state.service.package === 'hourlyRate'}
-                        >
-                            <FormGroup
-                                title='Hours Required'
-                                description='Select how many cleaners and hours you expect your service to take'
-                            >
-                                <InputGroup_WithIcons
-                                    cols={2}
-                                    filled
-                                    data={[
-                                        hourlyRateMap.values.cleaners,
-                                        hourlyRateMap.values.hours,
-                                    ]}
-                                />
-                            </FormGroup>
-
-                        </ExpandGroup>
-                    </div>
+                    </ExpandGroup>
                 </Grid>
                 <Grid item
+                    className={classes.gridItem}
                     xs={12}
                     sm={11}
                     md={10}
                     lg={3}
-                    className={classes.sidebarContainer}
                 >
-                    <Hidden smDown>
+                    <Hidden mdDown>
                         <SidebarGroup
                             title='Need Help?'
+                            titleVariant='h6'
                         >
                             <StaticGroup
                                 content={NeedHelp}

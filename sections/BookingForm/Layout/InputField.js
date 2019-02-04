@@ -75,7 +75,7 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.primary.dark
     },
     selectedIconChange: {
-        marginBottom: 2 * theme.spacing.unit
+        // marginBottom: 2 * theme.spacing.unit
     },
     selectedIconChangeSelected: {
         color: theme.palette.text.disabled
@@ -227,13 +227,23 @@ export function SelectedIcon(props) {
                 className={classes.selectedIconChange}
                 onClick={props.onClick}
             >
-                {props.changeLabel}
+                Change {props.changeLabel}
             </Button>
-            <Menu id="selectServiceMenu" anchorEl={props.anchorEl} open={Boolean(props.anchorEl)} onClose={props.onClose}>
+            <Menu id="selectServiceMenu"
+                anchorEl={props.anchorEl}
+                open={Boolean(props.anchorEl)}
+                onClose={props.onClose}
+            >
                 {props.options.map((option) => (
-                    <MenuItem onClick={props.onClose} value={option.value} key={option.key}>
+                    <MenuItem
+                        onClick={props.onClose}
+                        value={option.value}
+                        key={option.key}
+                    >
                         {option.disabled === true ?
-                            <span className={classes.selectedIconChangeSelected}>{option.label}</span>
+                            <span className={classes.selectedIconChangeSelected}>
+                                {option.label}
+                            </span>
                             :
                             option.label
                         }

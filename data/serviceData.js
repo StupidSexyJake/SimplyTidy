@@ -325,7 +325,7 @@ export const serviceMap = {
     inputField: Service,
     summary: ServiceSummary,
     values: {
-        10: {
+        '10': {
             label: 'Routine Cleaning',
             id: 'routineCleaning',
             href: '/',
@@ -335,7 +335,7 @@ export const serviceMap = {
             icon: RoutineIcon,
             image: 'home-cleaning'
         },
-        20: {
+        '20': {
             label: 'One Time Cleaning',
             id: 'oneTimeCleaning',
             href: '/',
@@ -345,7 +345,7 @@ export const serviceMap = {
             icon: OneTimeIcon,
             image: 'home-cleaning'
         },
-        30: {
+        '30': {
             label: 'Bond Cleaning',
             id: 'bondCleaning',
             href: '/',
@@ -355,7 +355,7 @@ export const serviceMap = {
             icon: BondIcon,
             image: 'home-cleaning'
         },
-        40: {
+        '40': {
             label: 'Spring Cleaning',
             id: 'springCleaning',
             href: '/',

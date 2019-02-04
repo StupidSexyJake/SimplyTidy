@@ -24,7 +24,7 @@ export const initialState = {
         reminders: true,
     },
     service: {
-        service: 10,
+        service: '10',
         package: 'fixedPrice',
         bedrooms: 1,
         bathrooms: 1,

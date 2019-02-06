@@ -17,13 +17,18 @@ const useStyles = makeStyles(theme => ({
     gridWidthFix: {
         width: '100%',
         [theme.breakpoints.down('md')]: {
-            width: 'calc(100% + 40px)'
+            margin: '0 !important'
         }
     },
     leftGrid: {
         textAlign: 'center',
         [theme.breakpoints.down('sm')]: {
-            order: 3
+            order: 3,
+        }
+    },
+    rightGrid: {
+        [theme.breakpoints.down('sm')]: {
+            padding: '0 !important'
         }
     },
     divider: {

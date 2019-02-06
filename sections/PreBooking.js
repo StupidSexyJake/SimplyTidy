@@ -43,7 +43,6 @@ const useStyles = makeStyles(theme => ({
         marginTop: 3 * theme.spacing.unit
     },
     mobileTitle: {
-        paddingBottom: 0,
         [theme.breakpoints.down('xs')]: {
             fontSize: 'calc(28px + (34 - 28) * (100vw - 320px) / (380 - 320))'
         }

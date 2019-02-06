@@ -53,6 +53,25 @@ export function TextInputContainer(props) {
     )
 }
 
+function createServicesArray(category) {
+    // Get state
+    const { state } = useContext(Store)
+    // Create options array for menu
+    let servicesArray = []
+    for (const key in category.values) {
+        let value = category.values[key]
+        servicesArray.push(
+            {
+                key: key,
+                value: key,
+                label: value.label,
+                selected: state[category.stateType][category.stateValue] === key
+            }
+        )
+    }
+    return servicesArray
+}
+
 export function SelectInputContainer(props) {
     // Get state
     const { state, dispatch } = useContext(Store)
@@ -69,18 +88,6 @@ export function SelectInputContainer(props) {
                 return Select
         }
     }
-    // Create options array for menu
-    let options = []
-    for (const key in category.values) {
-        let value = category.values[key]
-        options.push(
-            {
-                key: key,
-                value: key,
-                label: value.label
-            }
-        )
-    }
     return (
         <SelectInput
             label={category.label}
@@ -89,7 +96,7 @@ export function SelectInputContainer(props) {
             onChange={(event) => dispatch(handleClick(category.stateType, category.stateValue, event.target.value))}
             variant={variant || 'standard'}
             inputVariant={inputVariant(props.variant)}
-            options={options}
+            options={createServicesArray(category)}
         />
     )
 }
@@ -133,19 +140,6 @@ export function SelectedIconContainer(props) {
     const { state, dispatch } = useContext(Store)
     // Define props
     const { category } = props
-    // Create options array for menu
-    let options = []
-    for (const key in category.values) {
-        let value = category.values[key]
-        options.push(
-            {
-                key: key,
-                value: key,
-                label: value.label,
-                disabled: state[category.stateType][category.stateValue] === key
-            }
-        )
-    }
     // Create menu state
     const [anchorEl, setAnchorEl] = React.useState(null)
     function localClick(event) {
@@ -162,7 +156,7 @@ export function SelectedIconContainer(props) {
             title={category.values[state[category.stateType][category.stateValue]].label}
             icon={category.values[state[category.stateType][category.stateValue]].icon}
             changeLabel={category.label}
-            options={options}
+            options={createServicesArray(category)}
             onClose={localClose}
             onClick={localClick}
             anchorEl={anchorEl}

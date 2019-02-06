@@ -119,6 +119,7 @@ export function NumberOfCleaners(props) {
         <SelectInputContainer
             category={hourlyRateMap.values.cleaners}
             variant={props.filled && 'filled'}
+            data={hourlyRateMap.values.hours.values}
         />
     )
 }
@@ -128,6 +129,7 @@ export function NumberOfHours(props) {
         <SelectInputContainer
             category={hourlyRateMap.values.hours}
             variant={props.filled && 'filled'}
+            type='SelectInput_Hours'
         />
     )
 }
@@ -142,7 +144,7 @@ export function Extras() {
 
 export function Frequency() {
     return (
-        <RadioSelectContainer
+        <ButtonSelectContainer
             category={frequencyMap}
         />
     )

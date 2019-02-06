@@ -62,9 +62,13 @@ export function TrustIcons(props) {
 }
 
 export function PriceSummary(props) {
+    const totalPriceObject = totalPrice()
     return (
         <StaticTextContainer {...props}>
-            ${totalPrice()}
+            {parseInt(totalPriceObject.maxTotalPrice) === 0 && <span>From </span>}
+            {parseInt(totalPriceObject.minTotalPrice) > 0 && `$${totalPriceObject.minTotalPrice}`}
+            {parseInt(totalPriceObject.minTotalPrice) > 0 && parseInt(totalPriceObject.maxTotalPrice) > 0 && ' - '}
+            {parseInt(totalPriceObject.maxTotalPrice) > 0 && `$${totalPriceObject.maxTotalPrice}`}
         </StaticTextContainer>
     )
 }

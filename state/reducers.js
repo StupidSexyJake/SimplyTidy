@@ -30,8 +30,8 @@ export const initialState = {
         bathrooms: 1,
         livingAreas: 1,
         kitchens: 1,
-        cleaners: 1,
-        hours: 2,
+        cleaners: '1',
+        hours: '1',
         frequency: 'weekly',
         extras: []
     },

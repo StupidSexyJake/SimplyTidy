@@ -45,16 +45,6 @@ const useStyles = makeStyles(theme => ({
     content: {
         marginLeft: 2 * theme.spacing.unit,
         marginRight: 2 * theme.spacing.unit,
-        paddingBottom: 2 * theme.spacing.unit,
-        [theme.breakpoints.down('sm')]: {
-            marginLeft: 0,
-            marginRight: 0,
-            textAlign: 'justify'
-        }
-    },
-    contentEnd: {
-        marginLeft: 2 * theme.spacing.unit,
-        marginRight: 2 * theme.spacing.unit,
         [theme.breakpoints.down('sm')]: {
             marginLeft: 0,
             marginRight: 0,
@@ -112,18 +102,21 @@ export default React.memo(function AboutUs() {
                         <Typography
                             variant='body1'
                             className={classes.content}
+                            paragraph
                         >
                             You bought your home to live in it, not spend every hour cleaning it. You want to spend time with your family – you want to play games, watch movies, laugh, love, live. You shouldn’t have to live life from behind some cleaner and a rag. Let Gold Coast Maids take care of the work of cleaning your home so that you and your family can enjoy life.
                         </Typography>
                         <Typography
                             variant='body1'
                             className={classes.content}
+                            paragraph
                         >
                             Across the Gold Coast customers rave about our customer services and affordable prices. We work with each customer to fit their needs specifically so that you never have to worry about “getting out of the house for the cleaning people.” The entire Gold Coast can’t be wrong – Gold Coast Maids are the number one cleaning service around!
                         </Typography>
                         <Typography
                             variant='body1'
-                            className={classes.contentEnd}
+                            className={classes.content}
+                            paragraph
                         >
                             You bought your home to live in it, not spend every hour cleaning it. You want to spend time with your family – you want to play games, watch movies, laugh, love, live. You shouldn’t have to live life from behind some cleaner and a rag. Let Gold Coast Maids take care of the work of cleaning your home so that you and your family can enjoy life.
                         </Typography>

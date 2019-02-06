@@ -196,6 +196,7 @@ export const frequencyMap = {
     id: 'frequency',
     stateType: 'service',
     stateValue: 'frequency',
+    icon: ExtrasIcon,
     inputField: Frequency,
     values: {
         weekly: {
@@ -236,8 +237,18 @@ export const hourlyRateMap = {
             inputField: NumberOfCleaners,
             suffix: 'Cleaner/s',
             values: {
-                1: { label: '1' },
-                2: { label: '2' },
+                '1': {
+                    label: '1',
+                    value: 1
+                },
+                '2': {
+                    label: '2',
+                    value: 2
+                },
+                '3': {
+                    label: '3',
+                    value: 3
+                },
             }
         },
         hours: {
@@ -245,15 +256,48 @@ export const hourlyRateMap = {
             id: 'hours',
             stateType: 'service',
             stateValue: 'hours',
+            price: 50,
             icon: HoursIcon,
             inputField: NumberOfHours,
             suffix: '',
             values: {
-                2: { label: '2 to 2.5 Hours' },
-                2.5: { label: '2.5 to 3 Hours' },
-                3: { label: '3 to 4 Hours' },
-                4: { label: '4 to 6 Hours' },
-                6: { label: 'More than 6 Hours' },
+                '1': {
+                    label: 'Up to 2 Hours',
+                    minValue: null,
+                    maxValue: 2,
+                    skipCleaners: ['2', '3']
+                },
+                '2': {
+                    label: '2 to 2.5 Hours',
+                    minValue: 2,
+                    maxValue: 2.5,
+                    skipCleaners: ['2', '3']
+                },
+                '3': {
+                    label: '2.5 to 3 Hours',
+                    minValue: 2.5,
+                    maxValue: 3,
+                    skipCleaners: ['3']
+                },
+                '4': {
+                    label: '3 to 4 Hours',
+                    minValue: 3,
+                    maxValue: 4,
+                    skipCleaners: []
+                },
+                '5': {
+                    label: '4 to 6 Hours',
+                    minValue: 4,
+                    maxValue: 6,
+                    skipCleaners: []
+                },
+                '6': {
+                    label: 'More than 6 Hours',
+                    minValue: 6,
+                    maxValue: null,
+                    skipCleaners: [],
+                    isMax: 'true',
+                },
             }
         },
     }
@@ -314,7 +358,6 @@ export const extrasMap = {
         }
     }
 }
-
 
 export const serviceMap = {
     label: 'Service',

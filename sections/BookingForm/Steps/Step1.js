@@ -7,7 +7,8 @@ import {
     hourlyRateMap,
     packageMap,
     serviceMap,
-    extrasMap
+    extrasMap,
+    frequencyMap
 } from '../../../data/serviceData'
 // Sections
 import {
@@ -43,6 +44,7 @@ import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Divider from '@material-ui/core/Divider'
+import { Typography } from '@material-ui/core';
 
 // Set styles
 const useStyles = makeStyles(theme => ({
@@ -80,11 +82,11 @@ const useStyles = makeStyles(theme => ({
         marginBottom: 0,
     },
     bookingSummaryDivider: {
-        marginTop: 3 * theme.spacing.unit,
-        marginBottom: 1 * theme.spacing.unit
+        marginTop: 2 * theme.spacing.unit,
+        marginBottom: 2 * theme.spacing.unit
     },
-    price: {
-        fontSize: '2rem'
+    totalPrice: {
+        paddingBottom: 0
     }
 }))
 
@@ -98,14 +100,6 @@ export default function Step1() {
             <div className={classes.serviceImageContainer}>
                 <ServiceImage />
             </div>
-            <ExpandGroup
-                expandState={state.service.service === '10'}
-                timeout='auto'
-            >
-                <div className={classes.frequencyContainer}>
-                    <Frequency />
-                </div>
-            </ExpandGroup>
             <Grid container
                 className={classes.container}
                 justify='center'
@@ -142,19 +136,6 @@ export default function Step1() {
                         />
                     </FormGroup>
                     <ExpandGroup
-
-                        expandState={state.service.package === 'fixedPrice' && state.service.service === '10'}
-                    >
-                        <FormGroup
-                            title='Add Extras'
-                            description='Add some optional extras for that extra shine'
-                        >
-                            <InputGroup
-                                data={[extrasMap]}
-                            />
-                        </FormGroup>
-                    </ExpandGroup>
-                    <ExpandGroup
                         expandState={state.service.package === 'hourlyRate'}
                     >
                         <FormGroup
@@ -168,6 +149,33 @@ export default function Step1() {
                                     hourlyRateMap.values.cleaners,
                                     hourlyRateMap.values.hours,
                                 ]}
+                            />
+                        </FormGroup>
+                    </ExpandGroup>
+                    <ExpandGroup
+                        expandState={state.service.service === '10'}
+                    >
+                        <FormGroup
+                            title='Service Frequency'
+                            description='How often would you like us to come?'
+                        >
+                            <InputGroup_FieldIcon
+                                data={frequencyMap}
+                            />
+                        </FormGroup>
+                    </ExpandGroup>
+                    <ExpandGroup
+                        expandState={
+                            state.service.package === 'fixedPrice' &&
+                            (state.service.service === '10' || state.service.service === '20')
+                        }
+                    >
+                        <FormGroup
+                            title='Add Extras'
+                            description='Add some optional extras for that extra shine'
+                        >
+                            <InputGroup
+                                data={[extrasMap]}
                             />
                         </FormGroup>
                     </ExpandGroup>
@@ -204,9 +212,14 @@ export default function Step1() {
                                 data={[packageMap]}
                             />
                             <Divider className={classes.bookingSummaryDivider} />
+                            <Typography>
+                                Your Price
+                            </Typography>
                             <StaticGroup
-                                className={classes.price}
+                                variant='h4'
+                                align='left'
                                 content={PriceSummary}
+                                className={classes.totalPrice}
                             />
                         </SidebarGroup>
                     </Paper>

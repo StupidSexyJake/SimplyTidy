@@ -14,11 +14,12 @@ import {
 import {
     TextInput,
     SelectInput,
+    SelectInput_Hours,
     Autocomplete,
     SelectedIcon,
     ButtonSelect,
     ChipSelect,
-    RadioSelect
+    RadioSelect,
 } from '../Layout/InputField'
 // Material component variants
 import FilledInput from '@material-ui/core/FilledInput'
@@ -53,23 +54,25 @@ export function TextInputContainer(props) {
     )
 }
 
-function createServicesArray(category) {
+function createInputArray(category) {
     // Get state
     const { state } = useContext(Store)
     // Create options array for menu
-    let servicesArray = []
+    let inputArray = []
     for (const key in category.values) {
         let value = category.values[key]
-        servicesArray.push(
+        inputArray.push(
             {
                 key: key,
                 value: key,
                 label: value.label,
-                selected: state[category.stateType][category.stateValue] === key
+                selected: state[category.stateType][category.stateValue] === key,
+                isMax: value.isMax ? true : false,
+                skipCleaners: value.skipCleaners
             }
         )
     }
-    return servicesArray
+    return inputArray
 }
 
 export function SelectInputContainer(props) {
@@ -77,6 +80,8 @@ export function SelectInputContainer(props) {
     const { state, dispatch } = useContext(Store)
     // Define props
     const { category, variant } = props
+    // Define input array
+    const options = createInputArray(category)
     // Set input component
     function inputVariant(variant) {
         switch (variant) {
@@ -88,15 +93,53 @@ export function SelectInputContainer(props) {
                 return Select
         }
     }
+    // Set layout component
+    function SelectVariant(props) {
+        const { type, ...other } = props
+        let InputVariant
+        switch (type) {
+            case 'SelectInput':
+                InputVariant = SelectInput
+                break
+            case 'SelectInput_Hours':
+                InputVariant = SelectInput_Hours
+                break
+            default:
+                InputVariant = SelectInput
+        }
+        return (
+            <InputVariant {...other} />
+        )
+    }
+    // Onchange event to handle hourly rate menu options displayed
+    function onChange(data, event) {
+        if (!data || (state.service.hours !== Object.keys(data).length.toString() && !data[state.service.hours].skipCleaners.includes(event.target.value))) {
+            dispatch(handleClick(category.stateType, category.stateValue, event.target.value))
+        } else if (state.service.hours === Object.keys(data).length.toString()) {
+            dispatch(handleClick(category.stateType, category.stateValue, event.target.value))
+            dispatch(handleClick('service', 'hours', (Object.keys(data).length - 1).toString()))
+        } else if (data[state.service.hours].skipCleaners.includes(event.target.value)) {
+            dispatch(handleClick(category.stateType, category.stateValue, event.target.value))
+            let i = parseInt(state.service.hours) + 1
+            while (i <= Object.keys(data).length) {
+                if (!data[i.toString()].skipCleaners.includes(event.target.value)) {
+                    dispatch(handleClick('service', 'hours', i.toString()))
+                    break
+                }
+                i++
+            }
+        }
+    }
     return (
-        <SelectInput
+        <SelectVariant
             label={category.label}
             id={category.id}
             value={state[category.stateType][category.stateValue]}
-            onChange={(event) => dispatch(handleClick(category.stateType, category.stateValue, event.target.value))}
+            onChange={(event) => onChange(props.data, event)}
             variant={variant || 'standard'}
             inputVariant={inputVariant(props.variant)}
-            options={createServicesArray(category)}
+            options={createInputArray(category)}
+            type={props.type || 'SelectInput'}
         />
     )
 }
@@ -147,6 +190,7 @@ export function SelectedIconContainer(props) {
     }
     function localClose(event) {
         setAnchorEl(null)
+        console.log(typeof event.target.value)
         if (event.target.value) {
             dispatch(handleClick(category.stateType, category.stateValue, event.target.value.toString()))
         }
@@ -156,7 +200,7 @@ export function SelectedIconContainer(props) {
             title={category.values[state[category.stateType][category.stateValue]].label}
             icon={category.values[state[category.stateType][category.stateValue]].icon}
             changeLabel={category.label}
-            options={createServicesArray(category)}
+            options={createInputArray(category)}
             onClose={localClose}
             onClick={localClick}
             anchorEl={anchorEl}
@@ -173,12 +217,17 @@ export function RadioSelectContainer(props) {
     let options = []
     for (const key in category.values) {
         let value = category.values[key]
+        // Add discount amount for fixed-price packages
+        let line2 = ''
+        if (state.service.package === 'fixedPrice') {
+            line2 = `${value.discountAmount * 100}% off`
+        }
         options.push(
             {
                 key: key,
                 value: key,
                 label: value.label,
-                line2: `${value.discountAmount * 100}% off`
+                line2: line2
             }
         )
 

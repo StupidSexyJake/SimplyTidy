@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
+// State
+import { Store } from '../../../state/store'
 // Utils
 import { VariantInput } from '../../../utils/functions'
 // Autocomplete
@@ -20,6 +22,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import Chip from '@material-ui/core/Chip'
 import { ButtonWithIcon } from '../../../components/Buttons';
+import { hourlyRateMap } from '../../../data/serviceData';
 
 // Create styles
 const useStyles = makeStyles(theme => ({
@@ -74,8 +77,10 @@ const useStyles = makeStyles(theme => ({
         marginBottom: 0.5 * theme.spacing.unit,
         color: theme.palette.primary.dark
     },
-    selectedIconChangeSelected: {
-        color: theme.palette.text.disabled
+    selectedIconChange: {
+        '&:hover': {
+            marginTop: 0
+        }
     },
     buttonSelect: {
         transition: 'all 0.1s cubic-bezier(0.4, 0.0, 0.2, 1)',
@@ -128,11 +133,14 @@ export function TextInput(props) {
     )
 }
 
-export function SelectInput(props) {
+function SelectInputWrapper(props) {
     // Define styles
     const classes = useStyles()
     return (
-        <FormControl className={classes.formControl} variant={props.variant || 'standard'} >
+        <FormControl
+            className={classes.formControl}
+            variant={props.variant || 'standard'}
+        >
             <InputLabel htmlFor={props.id}>
                 {props.label}
             </InputLabel>
@@ -144,17 +152,51 @@ export function SelectInput(props) {
                 onChange={props.onChange}
                 input={<VariantInput inputVariant={props.inputVariant} />}
             >
-                {props.options.map((option) => (
-                    <MenuItem
-                        selected={option.selected}
-                        value={option.value}
-                        key={option.key}
-                    >
-                        {option.label}
-                    </MenuItem>
-                ))}
+                {props.children}
             </Select>
         </FormControl>
+    )
+}
+
+export function SelectInput(props) {
+    return (
+        <SelectInputWrapper {...props}>
+            {props.options.map((option) => (
+                <MenuItem
+                    selected={option.selected}
+                    value={option.value}
+                    key={option.key}
+                >
+                    {option.label}
+                </MenuItem>
+            ))}
+        </SelectInputWrapper>
+    )
+}
+
+export function SelectInput_Hours(props) {
+    // Get state
+    const { state } = useContext(Store)
+    const output = props.options.map((option) => {
+        if (
+            (option.isMax !== true || state.service.cleaners === Object.keys(hourlyRateMap.values.cleaners.values).length.toString()) &&
+            !option.skipCleaners.includes(state.service.cleaners)
+        ) {
+            return (
+                <MenuItem
+                    selected={option.selected}
+                    value={option.value}
+                    key={option.key}
+                >
+                    {option.label}
+                </MenuItem>
+            )
+        }
+    })
+    return (
+        <SelectInputWrapper {...props}>
+            {output}
+        </SelectInputWrapper>
     )
 }
 
@@ -226,6 +268,7 @@ export function SelectedIcon(props) {
                 size='small'
                 color='primary'
                 onClick={props.onClick}
+                className={classes.selectedIconChange}
             >
                 Change {props.changeLabel}
             </Button>
@@ -300,7 +343,7 @@ export function ButtonSelect(props) {
                     key={item.key}
                     xs={12}
                     sm={12}
-                    md={6}
+                    md={12 / props.options.length}
                 >
                     <ButtonWithIcon
                         icon={item.icon}

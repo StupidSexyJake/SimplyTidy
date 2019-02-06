@@ -23,7 +23,10 @@ function VariantInput(inputProps) {
 
 export function Summary(props) {
     return (
-        <Typography variant={props.variant || 'body2'} align={props.align}>
+        <Typography
+            variant={props.variant || 'body2'}
+            align={props.align}
+        >
             {props.summary}
         </Typography>
     )
@@ -31,7 +34,11 @@ export function Summary(props) {
 
 export function StaticText(props) {
     return (
-        <Typography variant={props.variant || 'body2'} align={props.align} className={props.className}>
+        <Typography
+            variant={props.variant || 'body2'}
+            align={props.align}
+            className={props.className}
+        >
             {props.children}
         </Typography>
     )

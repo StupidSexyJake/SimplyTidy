@@ -31,6 +31,7 @@ const useStyles = makeStyles(theme => ({
         marginBottom: 2 * theme.spacing.unit
     },
     heading: {
+        textAlign: 'left',
         marginBottom: 2 * theme.spacing.unit,
         [theme.breakpoints.down('sm')]: {
             textAlign: 'center'
@@ -100,7 +101,6 @@ export default React.memo(function AboutUs() {
                             variant='h3'
                             component='h1'
                             className={classes.heading}
-                            align='left'
                         >
                             Gold Coast's Best Cleaners
                         </Typography>
